@@ -1,0 +1,156 @@
+2006-11-13  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.am (ACLOCAL_AMFLAGS): New variable.
+	(EXTRA_DIST): Add config.rpath, m4/ChangeLog.
+	* configure.in (AC_OUTPUT): Add po/Makefile.in.
+
+
+2006/11/13 15:00:08 CET
+	update files from .glade file
+
+2006/11/13 17:45:20 CET
+	update files from .glade file
+
+2006/11/13 18:12:32 CET
+	update files from .glade file
+
+2006/11/13 18:13:07 CET
+	update files from .glade file
+
+2006/11/13 18:15:07 CET
+	update files from .glade file
+
+2006/11/13 18:15:17 CET
+	update files from .glade file
+
+2006/11/13 18:39:02 CET
+	update files from .glade file
+
+2006/11/13 19:36:06 CET
+	update files from .glade file
+
+2006/11/13 19:36:50 CET
+	update files from .glade file
+
+2006/11/13 19:37:26 CET
+	update files from .glade file
+
+2006/11/13 19:40:18 CET
+	update files from .glade file
+
+2006/11/13 19:44:59 CET
+	update files from .glade file
+
+2006/11/14 0:06:33 CET
+	update files from .glade file
+
+2006/11/14 0:15:47 CET
+	update files from .glade file
+
+2006/11/14 0:28:06 CET
+	update files from .glade file
+
+2006/11/14 0:47:20 CET
+	update files from .glade file
+
+2006/11/14 0:50:19 CET
+	update files from .glade file
+
+2006/11/14 0:51:08 CET
+	update files from .glade file
+
+2006/11/14 1:01:33 CET
+	update files from .glade file
+
+2006/11/14 1:42:05 CET
+	update files from .glade file
+
+2006/11/14 1:47:03 CET
+	update files from .glade file
+
+2006/11/14 1:57:55 CET
+	update files from .glade file
+
+2006/11/14 1:59:26 CET
+	update files from .glade file
+
+2006/11/14 2:00:20 CET
+	update files from .glade file
+
+2006/11/14 3:49:07 CET
+	update files from .glade file
+
+2006/11/14 3:49:24 CET
+	update files from .glade file
+
+2006/11/14 3:49:37 CET
+	update files from .glade file
+
+2006/11/14 3:52:48 CET
+	update files from .glade file
+
+2006/11/14 3:53:16 CET
+	update files from .glade file
+
+2006/11/14 3:54:11 CET
+	update files from .glade file
+
+2006/11/14 4:04:48 CET
+	update files from .glade file
+
+2006/11/14 5:18:15 CET
+	update files from .glade file
+
+2006/11/14 5:18:25 CET
+	update files from .glade file
+
+2006/11/14 5:29:52 CET
+	update files from .glade file
+
+2006/11/14 16:41:11 CET
+	update files from .glade file
+
+2006/11/14 16:48:55 CET
+	update files from .glade file
+
+2006/11/14 19:19:25 CET
+	update files from .glade file
+
+2006/11/14 19:37:51 CET
+	update files from .glade file
+
+2006/11/14 19:39:14 CET
+	update files from .glade file
+
+2006/11/14 19:47:21 CET
+	update files from .glade file
+
+2006/11/14 19:47:48 CET
+	update files from .glade file
+
+2006/11/14 19:48:03 CET
+	update files from .glade file
+
+2006/11/14 20:01:54 CET
+	update files from .glade file
+
+2006/11/14 20:18:50 CET
+	update files from .glade file
+
+2006/11/14 20:19:36 CET
+	update files from .glade file
+
+2006/11/14 20:21:12 CET
+	update files from .glade file
+
+2006/11/14 20:21:45 CET
+	update files from .glade file
+
+2006/11/14 20:36:49 CET
+	update files from .glade file
+
+2006/11/14 21:10:50 CET
+	update files from .glade file
+
+2006/11/14 21:26:25 CET
+	update files from .glade file
