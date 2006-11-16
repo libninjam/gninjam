@@ -8,22 +8,40 @@ gninjam_SOURCES = \
 	gninjam.cc\
 	gNinjamClient_glade.cc \
 	gNinjamClient.cc \
+	vbox_local_glade.cc \
+	vbox_local.cc \
+	vbox_remote_glade.cc \
+	vbox_remote.cc \
+	vbox_local_channel_glade.cc \
+	vbox_local_channel.cc \
+	vbox_remote_channel_glade.cc \
+	vbox_remote_channel.cc \
 	dialog_license_glade.cc \
 	dialog_license.cc \
 	window_preferences_glade.cc \
 	window_preferences.cc \
 	dialog_connect_glade.cc \
-	dialog_connect.cc 
+	dialog_connect.cc \
+	common.cc
 
 noinst_HEADERS = \
 	gNinjamClient_glade.hh \
 	gNinjamClient.hh \
+	vbox_local_glade.hh \
+	vbox_local.hh \
+	vbox_remote_glade.hh \
+	vbox_remote.hh \
+	vbox_local_channel_glade.hh \
+	vbox_local_channel.hh \
+	vbox_remote_channel_glade.hh \
+	vbox_remote_channel.hh \
 	dialog_license_glade.hh \
 	dialog_license.hh \
 	window_preferences_glade.hh \
 	window_preferences.hh \
 	dialog_connect_glade.hh \
-	dialog_connect.hh 
+	dialog_connect.hh \
+	common.hh
 
 AM_CXXFLAGS = @GTKMM_CFLAGS@ -I/usr/include/libninjam -s -malign-double -lpthread
 
