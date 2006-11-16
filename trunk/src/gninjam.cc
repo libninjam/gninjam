@@ -95,30 +95,6 @@ void chatmsg_cb(int user32, NJClient *inst, const char **parms, int nparms)
   } 
 }
 
-void drawstatusbar()
-{
-  if (g_ui_state) return;
-  int l,p;
-  g_client->GetPosition(&p,&l);
-  if (!l) return;
-
-  /*
-	bkgdset(COLORMAP(6));
-	attrset(COLORMAP(6));
-
-  move(LINES-2,0);
-  p*=(COLS);
-  p/=l;
-  int x;
-  for (x = 0; x < COLS; x ++) addch(x <= p ? '#' : ' ');
-
-	bkgdset(COLORMAP(0));
-	attrset(COLORMAP(0));
-
-  move(curs_ypos,curs_xpos); 
-  */
-}
-
 int licensecallback(int user32, char *licensetext)
 {
   printf("license\n");
@@ -167,7 +143,7 @@ int main(int argc, char **argv)
   g_client=new NJClient;
   g_client->config_savelocalaudio=1;
   g_client->LicenseAgreementCallback=licensecallback;
-  g_client->ChatMessage_Callback=chatmsg_cb;
+  //g_client->ChatMessage_Callback=chatmsg_cb;
 
   {
     char *dev_name_in = NULL;
@@ -358,9 +334,98 @@ int main(int argc, char **argv)
   
   g_audio_enable=1;
 
-  window = new class gNinjamClient(g_client);
+  window = new class gNinjamClient();
   m.run(*window);
   delete window;
   delete d_license;
+  delete g_audio;
+
+
+  delete g_client->waveWrite;
+  g_client->waveWrite=0;
+
+
+  // save local channel state
+  {
+    FILE *fp=fopen("ninjam.config","wt");
+    int x=0;
+    if (fp) {
+      fprintf(fp,"master mastervol %f masterpan %f metrovol %f metropan %f mastermute %d metromute %d\n",
+        g_client->config_mastervolume,g_client->config_masterpan,g_client->config_metronome,g_client->config_metronome_pan,
+        g_client->config_mastermute,g_client->config_metronome_mute);
+
+
+
+      for (x = 0;;x++) {
+        int a=g_client->EnumLocalChannels(x);
+        if (a<0) break;
+
+
+        int sch=0;
+        bool bc=0;
+        void *has_jesus=0;
+        char *lcn;
+        float v=0.0f,p=0.0f;
+        bool m=0,s=0;
+      
+        lcn=g_client->GetLocalChannelInfo(a,&sch,NULL,&bc);
+        g_client->GetLocalChannelMonitoring(a,&v,&p,&m,&s);
+        g_client->GetLocalChannelProcessor(a,NULL,&has_jesus);
+
+        char *ptr=lcn;
+        while (*ptr) {
+          if (*ptr == '`') *ptr='\'';
+          ptr++;
+        }
+        fprintf(fp,"local %d source %d bc %d mute %d solo %d volume %f pan %f jesus %d name `%s`\n",a,sch,bc,m,s,v,p,!!has_jesus,lcn);
+      }
+      fclose(fp);
+    }    
+  }
+
+
+  // delete all effects processors in g_client
+  {
+    int x=0;
+    for (x = 0;;x++) {
+      int a=g_client->EnumLocalChannels(x);
+      if (a<0) break;
+    }
+  }
+
+
+  delete g_client;
+
+
+  if (g_nssf) {
+    int n;
+    for (n = 0; n < 16; n ++) {
+      WDL_String s(sessiondir.Get());
+      char buf[32];
+      sprintf(buf,"%x",n);
+      s.Append(buf);
+
+      {
+        WDL_DirScan ds;
+        if (!ds.First(s.Get())) {
+          do {
+            if (ds.GetCurrentFN()[0] != '.') {
+              WDL_String t;
+              ds.GetCurrentFullFN(&t);
+              unlink(t.Get());          
+            }
+          }
+          while (!ds.Next());
+        }
+      }
+      rmdir(s.Get());
+    }
+  }
+  if (!sessionspec) {
+      rmdir(sessiondir.Get());
+  }
+
+  JNL::close_socketlib();
+
   return 0;
 }

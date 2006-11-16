@@ -1,0 +1,29 @@
+// generated 2006/11/15 21:05:02 CET by tobias@THINKPAD-T43.(none)
+// using glademm V2.6.0
+//
+// newer (non customized) versions of this file go to vbox_remote_channel.hh_new
+
+// you might replace
+//    class foo : public foo_glade { ... };
+// by
+//    typedef foo_glade foo;
+// if you didn't make any modifications to the widget
+
+#ifndef _VBOX_REMOTE_CHANNEL_HH
+#  include "vbox_remote_channel_glade.hh"
+#  define _VBOX_REMOTE_CHANNEL_HH
+class vbox_remote_channel : public vbox_remote_channel_glade
+{  
+public:
+  vbox_remote_channel(GlademmData *gmm_data);
+  void set_data(int useridx, int channelidx);
+private:   
+  void on_checkbutton_remote_receive_toggled();
+  void on_hscale_remote_volume_value_changed();
+  void on_hscale_remote_pan_value_changed();
+  void on_checkbutton_remote_mute_toggled();
+  void on_checkbutton_remote_solo_toggled();
+  int _useridx;
+  int _channelidx;
+};
+#endif
