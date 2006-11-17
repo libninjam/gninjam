@@ -1,9 +1,20 @@
-// generated 2006/11/13 18:15:07 CET by tobias@THINKPAD-T43.(none)
-// using glademm V2.6.0
-//
-// newer (non customized) versions of this file go to gNinjamClient.cc_new
+/*
+    Copyright (C) 2006 Tobias Gehrig <tobias@gehrignet.de>
+    
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-// This file is for your program, I won't touch it again!
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+*/
 
 #include "config.h"
 #include "gNinjamClient.hh"
@@ -31,8 +42,10 @@
 
 #define TIMEOUT_VALUE 50
 
+#include <ninjam/audiostream.h>
 #include <ninjam/njclient.h>
 
+extern audioStreamer *g_audio;
 extern NJClient *g_client;
 
 gNinjamClient::gNinjamClient()
@@ -51,10 +64,12 @@ gNinjamClient::gNinjamClient()
   hscale_metronome_pan->set_value(g_client->config_metronome_pan);
   checkbutton_metronome_mute->set_active(g_client->config_metronome_mute);
 
+  vbox_local->update();
+
   sigc::slot<bool> my_slot = sigc::mem_fun(*this, &gNinjamClient::on_timeout);
   sigc::connection conn = Glib::signal_timeout().connect(my_slot, TIMEOUT_VALUE);
   sigc::slot<bool> my_slot2 = sigc::mem_fun(*this, &gNinjamClient::on_timeout_gui);
-  sigc::connection conn2 = Glib::signal_timeout().connect(my_slot2, 1000);
+  sigc::connection conn2 = Glib::signal_timeout().connect(my_slot2, 100);
   //vbox_local->remove(vbox_local_channel);
   /*
   vbox_local_channel* vlc = Gtk::manage(new class vbox_local_channel(NULL));
@@ -64,9 +79,14 @@ gNinjamClient::gNinjamClient()
   vlc2->show();
   vbox_local->pack_start(*vlc2);
   */
-  d_connect->entry_hostname->set_text("localhost");
+  /*
+    d_connect->entry_hostname->set_text("localhost");
   d_connect->entry_username->set_text("tobias");
   d_connect->entry_password->set_text("gehrig");
+  */
+  d_connect->entry_hostname->set_text("test.ninjam.com:2049");
+  d_connect->entry_username->set_text("anonymous:test");
+  d_connect->entry_password->set_text("");
 }
 
 gNinjamClient::~gNinjamClient()
@@ -80,9 +100,6 @@ bool gNinjamClient::on_timeout()
   int status = g_client->GetStatus();
   if (status >= 0) {
     if (g_client->Run()) {}
-    int l,p;
-    g_client->GetPosition(&p,&l);
-    progressbar1->set_fraction(1.0*p/l);
   }
   return true;
 }
@@ -90,24 +107,6 @@ bool gNinjamClient::on_timeout()
 bool gNinjamClient::on_timeout_gui()
 {
   int status = g_client->GetStatus();
-  if (status >= 0) {
-    int l,p;
-    g_client->GetPosition(&p,&l);
-    /*
-    printf("%f, %d, %d %d %d %d\n",g_client->GetActualBPM(),
-	   g_client->GetBPI(),
-	   g_client->GetLoopCount(),
-	   g_client->GetSessionPosition(),
-	   p, l);
-    */
-    progressbar1->set_text("BPM");
-    float value = VAL2DB(g_client->GetOutputPeak());
-    progressbar_master->set_fraction((value+120)/140);
-    char output[11];
-    snprintf(output, sizeof(output), "%.2f dB", value);
-    progressbar_master->set_text(output);
-    vbox_remote->update();
-  }
   Glib::ustring statusmsg = "Status: ";
   switch (status) {
   case NJClient::NJC_STATUS_OK:
@@ -140,8 +139,59 @@ bool gNinjamClient::on_timeout_gui()
     statusmsg += ". Server gave explanation: ";
     statusmsg += g_client->GetErrorStr();
   }
+  if (status >= 0) {
+    int pos, len;
+    g_client->GetPosition(&pos,&len);
+    progressbar1->set_fraction(1.0*pos/len);
+    int bpi = g_client->GetBPI();
+    char output[11];
+    snprintf(output, sizeof(output), "%d", (pos*bpi)/len);
+    Glib::ustring beatmsg = output;
+    beatmsg += "/";
+    snprintf(output, sizeof(output), "%d", bpi);
+    beatmsg += output;
+    beatmsg += " @ ";
+    snprintf(output, sizeof(output), "%.1f", g_client->GetActualBPM());
+    beatmsg += output;
+    beatmsg += " BPM ";
+    progressbar1->set_text(beatmsg);
+    float value = VAL2DB(g_client->GetOutputPeak());
+    progressbar_master->set_fraction((value+120)/140);
+    snprintf(output, sizeof(output), "%.2f dB", value);
+    progressbar_master->set_text(output);
+    vbox_local->update_VUmeters();
+    vbox_remote->update();
+  }
+  if (g_audio) {
+    statusmsg += " : ";
+    char output[16];
+    snprintf(output, sizeof(output), "%d", g_audio->m_srate);
+    statusmsg += output;
+    statusmsg += " Hz ";
+    snprintf(output, sizeof(output), "%d", g_audio->m_innch);
+    statusmsg += output;
+    statusmsg += "ch->";
+    snprintf(output, sizeof(output), "%d", g_audio->m_outnch);
+    statusmsg += output;
+    statusmsg += "ch ";
+    snprintf(output, sizeof(output), "%d", g_audio->m_bps);
+    statusmsg += output;
+    statusmsg += "bps";
+  }
   statusbar1->push(statusmsg);
   return true;
+}
+
+void gNinjamClient::on_neu1_activate()
+{
+  int idx, maxchannels = g_client->GetMaxLocalChannels();
+  for (idx = 0; (idx < maxchannels) && g_client->GetLocalChannelInfo(idx,NULL,NULL,NULL); idx++);
+  if (idx < maxchannels) {
+    g_client->SetLocalChannelInfo(idx,"new channel",true,0,false,0,true,true);
+    // g_client->SetLocalChannelMonitoring(idx,false,0.0f,false,0.0f,false,false,false,false);
+    g_client->NotifyServerOfChannelChange();
+    vbox_local->add_channel(idx);
+  }
 }
 
 void gNinjamClient::on_verbinden1_activate()

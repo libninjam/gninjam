@@ -1,9 +1,20 @@
-// generated 2006/11/13 15:00:08 CET by tobias@THINKPAD-T43.(none)
-// using glademm V2.6.0
-//
-// newer (non customized) versions of this file go to gninjam.cc_new
+/*
+    Copyright (C) 2006 Tobias Gehrig <tobias@gehrignet.de>
+    
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-// This file is for your program, I won't touch it again!
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+*/
 
 #include <config.h>
 #include <gtkmm/main.h>
@@ -97,12 +108,10 @@ void chatmsg_cb(int user32, NJClient *inst, const char **parms, int nparms)
 
 int licensecallback(int user32, char *licensetext)
 {
-  printf("license\n");
   d_license->set_text(licensetext);
   d_license->show();
   int response_id = d_license->run();
   d_license->hide();
-  printf("here i am\n");
   if (response_id == Gtk::RESPONSE_ACCEPT)
     return true;
   else
@@ -123,7 +132,6 @@ void audiostream_onsamples(float **inbuf, int innch, float **outbuf, int outnch,
 
 void sigfunc(int sig)
 {
-  printf("Got Ctrl+C\n");
   Gtk::Main::quit();
 }
 
@@ -141,9 +149,9 @@ int main(int argc, char **argv)
   g_ui_state = 0;
   g_audio_enable = 0;
   g_client=new NJClient;
-  g_client->config_savelocalaudio=1;
+  g_client->config_savelocalaudio=0;
   g_client->LicenseAgreementCallback=licensecallback;
-  //g_client->ChatMessage_Callback=chatmsg_cb;
+  g_client->ChatMessage_Callback=chatmsg_cb;
 
   {
     char *dev_name_in = NULL;
@@ -154,8 +162,6 @@ int main(int argc, char **argv)
     printf("Error opening audio!\n");
     return 0;
   }
-  printf("Opened at %dHz %d->%dch %dbps\n",
-    g_audio->m_srate, g_audio->m_innch, g_audio->m_outnch, g_audio->m_bps);
 
   signal(SIGINT,sigfunc);
 
