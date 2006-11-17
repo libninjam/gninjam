@@ -1,8 +1,8 @@
-# generated 2006/11/13 17:45:20 CET by tobias@THINKPAD-T43.(none)
+# generated 2006/11/13 17:45:20 CET by tobias@gehrignet.de
 # using glademm V2.6.0
 
 AC_PREREQ(2.50)
-AC_INIT(gninjam, 0.0,[tobias@THINKPAD-T43.(none)])
+AC_INIT(gninjam, 0.01a,[tobias@gehrignet.de])
 AM_INIT_AUTOMAKE
 AC_CONFIG_HEADERS(config.h)
 
