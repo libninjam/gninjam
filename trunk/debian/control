@@ -7,6 +7,6 @@ Standards-Version: 3.7.2
 
 Package: gninjam
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, libninjam-client (>= 0.02-2)
 Description: Gtk NINJAM client
  Gtk Client for the Realtime Music Collaboration Software NINJAM
