@@ -1,3 +1,9 @@
+gninjam (0.01a-3) unstable; urgency=low
+
+  * added preference dialog
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Sat, 18 Nov 2006 04:01:27 +0100
+
 gninjam (0.01a-2) unstable; urgency=low
 
   * added dependency for libninjam-client

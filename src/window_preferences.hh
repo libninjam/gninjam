@@ -19,11 +19,19 @@
 #ifndef _WINDOW_PREFERENCES_HH
 #  include "window_preferences_glade.hh"
 #  define _WINDOW_PREFERENCES_HH
+
+#include <gconfmm.h>
+
 class window_preferences : public window_preferences_glade
-{  
-        
-        void on_button_abort_clicked();
-        void on_button_apply_clicked();
-        void on_button_ok_clicked();
+{
+public:
+  window_preferences();
+private:
+  void on_button_abort_clicked();
+  void on_button_apply_clicked();
+  void on_button_ok_clicked();
+  void on_window_preferences_show();
+  Glib::RefPtr<Gnome::Conf::Client> _gconf_client;
+  Glib::ustring _gconf_dir;
 };
 #endif

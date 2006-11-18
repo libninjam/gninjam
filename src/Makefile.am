@@ -43,6 +43,6 @@ noinst_HEADERS = \
 	dialog_connect.hh \
 	common.hh
 
-AM_CXXFLAGS = @GTKMM_CFLAGS@ -I/usr/include/libninjam -s -malign-double -lpthread
+AM_CXXFLAGS = @GTKMM_CFLAGS@ @GCONF_CFLAGS@ -I/usr/include/libninjam -s -malign-double -lpthread
 
-gninjam_LDADD = @LIBS@ @GTKMM_LIBS@ -lninjam-client
+gninjam_LDADD = @LIBS@ @GTKMM_LIBS@ @GCONF_LIBS@ -lninjam-client
