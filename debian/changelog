@@ -1,3 +1,9 @@
+gninjam (0.01a-4) unstable; urgency=low
+
+  * use gconf for saving channel parameters
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Sat, 18 Nov 2006 13:41:04 +0100
+
 gninjam (0.01a-3) unstable; urgency=low
 
   * added preference dialog

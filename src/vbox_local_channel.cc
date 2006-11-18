@@ -77,13 +77,13 @@ void vbox_local_channel::init(int idx)
   float volume, pan;
   bool mute, solo;
   g_client->GetLocalChannelMonitoring(_idx, &volume, &pan, &mute, &solo);
-  hscale_local_volume->set_value(volume);
+  hscale_local_volume->set_value(VAL2DB(volume));
   hscale_local_pan->set_value(pan);
   checkbutton_local_mute->set_active(mute);
   checkbutton_local_solo->set_active(solo);
 }
 
-void vbox_local_channel::on_entry_local_channelname_activate()
+void vbox_local_channel::on_entry_local_channelname_changed()
 {  
   g_client->SetLocalChannelInfo(_idx,
 				entry_local_channelname->get_text().c_str(), // name

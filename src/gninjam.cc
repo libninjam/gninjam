@@ -155,6 +155,7 @@ int main(int argc, char **argv)
 
   Gnome::Conf::init();
   Glib::RefPtr<Gnome::Conf::Client> gconf_client = Gnome::Conf::Client::get_default_client();
+  gconf_client->set_error_handling(Gnome::Conf::CLIENT_HANDLE_ALL);
   Glib::ustring gconf_dir = "/apps/gninjam";
   Glib::ustring gconf_prefdir = gconf_dir+"/preferences";
   gconf_client->add_dir(gconf_dir);
@@ -182,113 +183,39 @@ int main(int argc, char **argv)
   JNL::open_socketlib();
 
   {
-    FILE *fp=fopen("ninjam.config","rt");
-    int x=0;
-    if (fp) 
-    {
-      bool comment_state=false;
-      while (!feof(fp))
-      {
-        char buf[4096];
-        buf[0]=0;
-        fgets(buf,sizeof(buf),fp);
-        if (!buf[0]) continue;
-        if (buf[strlen(buf)-1] == '\n')
-          buf[strlen(buf)-1]=0;
-        if (!buf[0]) continue;
-
-        LineParser lp(comment_state);
-
-        lp.parse(buf);
-
-        switch (lp.gettoken_enum(0,"local\0master\0"))
-        {
-          case 0:
-            // process local line
-            if (lp.getnumtokens()>2)
-            {
-              int ch=lp.gettoken_int(1);
-              int n;
-              for (n = 2; n < lp.getnumtokens()-1; n += 2)
-              {
-                switch (lp.gettoken_enum(n,"source\0bc\0mute\0solo\0volume\0pan\0jesus\0name\0"))
-                {
-                  case 0: // source 
-                    g_client->SetLocalChannelInfo(ch,NULL,true,lp.gettoken_int(n+1),false,0,false,false);
-                  break;
-                  case 1: //broadcast
-                    g_client->SetLocalChannelInfo(ch,NULL,false,false,false,0,true,!!lp.gettoken_int(n+1));
-                  break;
-                  case 2: //mute
-                    g_client->SetLocalChannelMonitoring(ch,false,false,false,false,true,!!lp.gettoken_int(n+1),false,false);
-                  break;
-                  case 3: //solo
-                    g_client->SetLocalChannelMonitoring(ch,false,false,false,false,false,false,true,!!lp.gettoken_int(n+1));
-                  break;
-                  case 4: //volume
-                    g_client->SetLocalChannelMonitoring(ch,true,(float)lp.gettoken_float(n+1),false,false,false,false,false,false);
-                  break;
-                  case 5: //pan
-                    g_client->SetLocalChannelMonitoring(ch,false,false,true,(float)lp.gettoken_float(n+1),false,false,false,false);
-                  break;
-                  case 6: //jesus
-                    if (lp.gettoken_int(n+1))
-                    {
-                    }
-                  break;
-                  case 7: //name
-                    g_client->SetLocalChannelInfo(ch,lp.gettoken_str(n+1),false,false,false,0,false,false);
-                  break;
-                  default:
-                  break;
-                }
-              }
-            }
-
-          break;
-          case 1:
-            if (lp.getnumtokens()>2)
-            {
-              int n;
-              for (n = 1; n < lp.getnumtokens()-1; n += 2)
-              {
-                switch (lp.gettoken_enum(n,"mastervol\0masterpan\0metrovol\0metropan\0mastermute\0metromute\0"))
-                {
-                  case 0: // mastervol
-                    g_client->config_mastervolume = (float)lp.gettoken_float(n+1);
-                  break;
-                  case 1: // masterpan
-                    g_client->config_masterpan = (float)lp.gettoken_float(n+1);
-                  break;
-                  case 2:
-                    g_client->config_metronome = (float)lp.gettoken_float(n+1);
-                  break;
-                  case 3:
-                    g_client->config_metronome_pan = (float)lp.gettoken_float(n+1);
-                  break;
-                  case 4:
-                    g_client->config_mastermute = !!lp.gettoken_int(n+1);
-                  break;
-                  case 5:
-                    g_client->config_metronome_mute = !!lp.gettoken_int(n+1);
-                  break;
-                  default:
-                  break;
-                }
-              }
-            }
-          break;
-          default:
-          break;
-        }       
-
-
+    if (gconf_client->dir_exists(gconf_dir+"/master")) {
+      g_client->config_mastervolume = gconf_client->get_float(gconf_dir+"/master/master_volume");
+      g_client->config_masterpan = gconf_client->get_float(gconf_dir+"/master/master_pan");
+      g_client->config_metronome = gconf_client->get_float(gconf_dir+"/master/metronome_volume");
+      g_client->config_metronome_pan = gconf_client->get_float(gconf_dir+"/master/metronome_pan");
+      g_client->config_mastermute = gconf_client->get_bool(gconf_dir+"/master/master_mute");
+      g_client->config_metronome_mute = gconf_client->get_bool(gconf_dir+"/master/metronome_mute");
+    }
+    unsigned localchannel = 0;
+    int a = 0;
+    for (localchannel = 0; localchannel<g_client->GetMaxLocalChannels(); localchannel++) {
+      char localdir[20];
+      snprintf(localdir, sizeof(localdir), "/local%d", localchannel);
+      Glib::ustring localpath = gconf_dir+localdir;
+      if (gconf_client->dir_exists(localpath) &&
+	  gconf_client->get_bool(localpath+"/active")) {
+	g_client->SetLocalChannelMonitoring(a,
+					    true, gconf_client->get_float(localpath+"/volume"),
+					    true, gconf_client->get_float(localpath+"/pan"),
+					    true, gconf_client->get_bool(localpath+"/mute"),
+					    true, gconf_client->get_bool(localpath+"/solo"));
+	g_client->SetLocalChannelInfo(a,
+				      gconf_client->get_string(localpath+"/name").c_str(),
+				      true, gconf_client->get_int(localpath+"/source"),
+				      false, gconf_client->get_int(localpath+"/bitrate"),
+				      true, gconf_client->get_bool(localpath+"/broadcast"));
+	a++;
+      } else {
+	break;
       }
-      fclose(fp);
-    }    
-    else // set up defaults
-    {
-      g_client->SetLocalChannelInfo(0,"channel0",true,0,false,0,true,true);
+    }
+    if (localchannel == 0) {
+      g_client->SetLocalChannelInfo(0,"new channel",true,0,false,0,true,true);
       g_client->SetLocalChannelMonitoring(0,false,0.0f,false,0.0f,false,false,false,false);
     }
   }
@@ -372,52 +299,55 @@ int main(int argc, char **argv)
 
   // save local channel state
   {
-    FILE *fp=fopen("ninjam.config","wt");
-    int x=0;
-    if (fp) {
-      fprintf(fp,"master mastervol %f masterpan %f metrovol %f metropan %f mastermute %d metromute %d\n",
-        g_client->config_mastervolume,g_client->config_masterpan,g_client->config_metronome,g_client->config_metronome_pan,
-        g_client->config_mastermute,g_client->config_metronome_mute);
+    gconf_client->set(gconf_dir+"/master/master_volume", g_client->config_mastervolume);
+    gconf_client->set(gconf_dir+"/master/master_pan", g_client->config_masterpan);
+    gconf_client->set(gconf_dir+"/master/metronome_volume", g_client->config_metronome);
+    gconf_client->set(gconf_dir+"/master/metronome_pan", g_client->config_metronome_pan);
+    gconf_client->set(gconf_dir+"/master/master_mute", g_client->config_mastermute);
+    gconf_client->set(gconf_dir+"/master/metronome_mute", g_client->config_metronome_mute);
 
-
-
-      for (x = 0;;x++) {
-        int a=g_client->EnumLocalChannels(x);
-        if (a<0) break;
-
-
-        int sch=0;
-        bool bc=0;
-        void *has_jesus=0;
-        char *lcn;
-        float v=0.0f,p=0.0f;
-        bool m=0,s=0;
-      
-        lcn=g_client->GetLocalChannelInfo(a,&sch,NULL,&bc);
-        g_client->GetLocalChannelMonitoring(a,&v,&p,&m,&s);
-        g_client->GetLocalChannelProcessor(a,NULL,&has_jesus);
-
-        char *ptr=lcn;
-        while (*ptr) {
-          if (*ptr == '`') *ptr='\'';
-          ptr++;
-        }
-        fprintf(fp,"local %d source %d bc %d mute %d solo %d volume %f pan %f jesus %d name `%s`\n",a,sch,bc,m,s,v,p,!!has_jesus,lcn);
-      }
-      fclose(fp);
-    }    
-  }
-
-
-  // delete all effects processors in g_client
-  {
-    int x=0;
-    for (x = 0;;x++) {
-      int a=g_client->EnumLocalChannels(x);
+    unsigned localchannel;
+    for (localchannel = 0;;localchannel++) {
+      int a = g_client->EnumLocalChannels(localchannel);
       if (a<0) break;
+
+      int sch = 0, bitrate = 0;
+      bool broadcast = 0;
+      float v = 0.0f, p = 0.0f;
+      bool m = 0, s = 0;
+      
+      Glib::ustring name = g_client->GetLocalChannelInfo(a,
+							 &sch,
+							 &bitrate,
+							 &broadcast);
+      g_client->GetLocalChannelMonitoring(a, &v,&p,&m,&s);
+
+      char localdir[20];
+      snprintf(localdir, sizeof(localdir), "/local%d", localchannel);
+      Glib::ustring localpath = gconf_dir+localdir;
+      gconf_client->set(localpath+"/active", true);
+      gconf_client->unset(localpath+"/name");
+      gconf_client->set(localpath+"/name", name);
+      gconf_client->set(localpath+"/source", sch);
+      gconf_client->set(localpath+"/bitrate", bitrate);
+      gconf_client->set(localpath+"/broadcast", broadcast);
+      gconf_client->set(localpath+"/volume", v);
+      gconf_client->set(localpath+"/pan", p);
+      gconf_client->set(localpath+"/mute", m);
+      gconf_client->set(localpath+"/solo", s);
+    }
+    for (; localchannel < g_client->GetMaxLocalChannels(); localchannel++) {
+      char localdir[20];
+      snprintf(localdir, sizeof(localdir), "/local%d", localchannel);
+      Glib::ustring localpath = gconf_dir+localdir;
+
+      if (gconf_client->dir_exists(localpath)) {
+	gconf_client->set(localpath+"/active", false);
+      } else {
+	break;
+      }
     }
   }
-
 
   delete g_client;
 
