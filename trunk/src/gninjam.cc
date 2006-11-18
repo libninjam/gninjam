@@ -135,12 +135,12 @@ void sigfunc(int sig)
   Gtk::Main::quit();
 }
 
+#include <gconfmm.h>
+
 int main(int argc, char **argv)
 {  
   Gtk::Main m(&argc, &argv);
 
-  WDL_String sessiondir;
-  int sessionspec=0;
   int nolog=0,nowav=1,writeogg=0,g_nssf=0;
   d_license = new class dialog_license();
   g_chat_scroll = 0;
@@ -153,12 +153,26 @@ int main(int argc, char **argv)
   g_client->LicenseAgreementCallback=licensecallback;
   g_client->ChatMessage_Callback=chatmsg_cb;
 
-  {
-    char *dev_name_in = NULL;
-    g_audio=create_audioStreamer_JACK(dev_name_in,audiostream_onsamples,g_client);
+  Gnome::Conf::init();
+  Glib::RefPtr<Gnome::Conf::Client> gconf_client = Gnome::Conf::Client::get_default_client();
+  Glib::ustring gconf_dir = "/apps/gninjam";
+  Glib::ustring gconf_prefdir = gconf_dir+"/preferences";
+  gconf_client->add_dir(gconf_dir);
+
+  if (gconf_client->get_int(gconf_prefdir+"/audio_driver") == 0) {
+    g_audio = create_audioStreamer_JACK(NULL,
+					audiostream_onsamples,
+					g_client);
+  } else {
+    Glib::ustring audiocfgstr = gconf_client->get_string(gconf_prefdir+"audio_config_string");
+    char* cfgstr = new char[audiocfgstr.size()+1];
+    memcpy(cfgstr, audiocfgstr.c_str(), audiocfgstr.size());
+
+    g_audio = create_audioStreamer_ALSA(cfgstr,
+					audiostream_onsamples);
+    delete cfgstr;
   }
-  if (!g_audio)
-  {
+  if (!g_audio) {
     printf("Error opening audio!\n");
     return 0;
   }
@@ -279,63 +293,68 @@ int main(int argc, char **argv)
     }
   }
 
-  if (!sessiondir.Get()[0])
-  {
+  Glib::ustring sessiondir = gconf_client->get_string(gconf_prefdir+"/session_directory");
+  if (sessiondir == "") {
     char buf[512];
     
-    int cnt=0;
-    while (cnt < 16)
-    {
+    int cnt = 0;
+    while (cnt < 16) {
       time_t tv;
       time(&tv);
-      struct tm *t=localtime(&tv);
-      sprintf(buf,"%04d%02d%02d_%02d%02d",t->tm_year+1900,t->tm_mon+1,t->tm_mday,t->tm_hour,t->tm_min);
+      struct tm *t = localtime(&tv);
+      sprintf(buf,
+	      "%04d%02d%02d_%02d%02d",
+	      t->tm_year+1900,
+	      t->tm_mon+1,
+	      t->tm_mday,
+	      t->tm_hour,
+	      t->tm_min);
       if (cnt)
-        wsprintf(buf+strlen(buf),"_%d",cnt);
-      strcat(buf,".ninjam");
-
-      if (!mkdir(buf,0700)) break;
-
+	wsprintf(buf+strlen(buf), "_%d", cnt);
+      strcat(buf, ".ninjam");
+      
+      if (!mkdir(buf, 0700)) break;
       cnt++;
     }
-    
-    if (cnt >= 16)
-    {
+    if (cnt >= 16) {
       printf("Error creating session directory\n");
-      buf[0]=0;
+      buf[0] = 0;
       return 0;
     }
-      
-    sessiondir.Set(buf);
+    sessiondir = buf;
+  } else {
+    mkdir(sessiondir.c_str(), 0700);
   }
-  else
-    mkdir(sessiondir.Get(),0700);
-  if (sessiondir.Get()[0] && sessiondir.Get()[strlen(sessiondir.Get())-1]!='\\' && sessiondir.Get()[strlen(sessiondir.Get())-1]!='/')
-    sessiondir.Append("/");
-
-  g_client->SetWorkDir(sessiondir.Get());
-
-
-  if (!nowav)
-  {
-    WDL_String wf;
-    wf.Set(sessiondir.Get());
-    wf.Append("output.wav");
-    g_client->waveWrite = new WaveWriter(wf.Get(),24,g_audio->m_outnch>1?2:1,g_audio->m_srate);
+  if ((sessiondir != "") &&
+      (sessiondir[sessiondir.size()-1] != '\\') &&
+      (sessiondir[sessiondir.size()-1] != '/')) {
+    sessiondir += "/";
   }
-  if (writeogg)
-  {
-    WDL_String wf;
-    wf.Set(sessiondir.Get());
-    wf.Append("output.ogg");
-    g_client->SetOggOutFile(fopen(wf.Get(),"ab"),g_audio->m_srate,g_audio->m_outnch>1?2:1,writeogg);
+  g_client->SetWorkDir(sessiondir.c_str());
+
+  switch (gconf_client->get_int(gconf_prefdir+"/savelocalaudio")) {
+  case 2:
+    if (g_client->waveWrite != NULL)
+      delete g_client->waveWrite;
+    g_client->waveWrite = new WaveWriter((sessiondir+"output.wav").c_str(),
+					 24,
+					 g_audio->m_outnch>1?2:1,
+					 g_audio->m_srate);
+  case 1:
+    g_client->SetOggOutFile(fopen((sessiondir+"output.ogg").c_str(),"ab"),
+			    g_audio->m_srate,
+			    g_audio->m_outnch>1?2:1,
+			    gconf_client->get_int(gconf_prefdir+"/ogg_bitrate"));
+  case 0:
+    g_client->config_savelocalaudio = 0;
+    break;
+  default:
+    g_client->config_savelocalaudio = -1;
+    break;
   }
-  if (!nolog)
-  {
-    WDL_String lf;
-    lf.Set(sessiondir.Get());
-    lf.Append("clipsort.log");
-    g_client->SetLogFile(lf.Get());
+  
+  if (gconf_client->get_bool(gconf_prefdir+"/save_log")) {
+    g_client->SetLogFile((sessiondir+"clipsort.log").c_str());
   }
   
   g_audio_enable=1;
@@ -402,7 +421,7 @@ int main(int argc, char **argv)
 
   delete g_client;
 
-
+  /*
   if (g_nssf) {
     int n;
     for (n = 0; n < 16; n ++) {
@@ -430,7 +449,7 @@ int main(int argc, char **argv)
   if (!sessionspec) {
       rmdir(sessiondir.Get());
   }
-
+  */
   JNL::close_socketlib();
 
   return 0;
