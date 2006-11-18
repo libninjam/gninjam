@@ -26,7 +26,7 @@ public:
   void init(int idx);
   void update_VUmeter();
 private:
-  void on_entry_local_channelname_activate();
+  void on_entry_local_channelname_changed();
   void on_checkbutton_local_transmit_toggled();
   void on_combobox_local_input_changed();
   void on_hscale_local_volume_value_changed();
