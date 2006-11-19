@@ -26,5 +26,6 @@ public:
   void add_channel(int idx);
   void update();
   void update_VUmeters();
+  void update_inputLists();
 };
 #endif

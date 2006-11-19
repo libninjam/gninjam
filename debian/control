@@ -2,11 +2,11 @@ Source: gninjam
 Section: unknown
 Priority: optional
 Maintainer: Tobias Gehrig <tobias@gehrignet.de>
-Build-Depends: debhelper (>= 5), autotools-dev, libninjam-common-dev (>= 0.02-4), libninjam-client-dev (>= 0.02-4), libgtkmm-2.4-dev, libgconfmm-2.6-dev
+Build-Depends: debhelper (>= 5), autotools-dev, libninjam-common-dev (>= 0.02-5), libninjam-client-dev (>= 0.02-5), libgtkmm-2.4-dev, libgconfmm-2.6-dev
 Standards-Version: 3.7.2
 
 Package: gninjam
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libninjam-client (>= 0.02-4)
+Depends: ${shlibs:Depends}, ${misc:Depends}, libninjam-client (>= 0.02-5)
 Description: Gtk NINJAM client
  Gtk Client for the Realtime Music Collaboration Software NINJAM

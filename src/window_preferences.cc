@@ -18,6 +18,7 @@
 
 #include "config.h"
 #include "window_preferences.hh"
+#include "gNinjamClient.hh"
 
 #include <gtkmm/liststore.h>
 
@@ -28,6 +29,7 @@ extern audioStreamer *g_audio;
 extern NJClient *g_client;
 extern int g_audio_enable;
 extern void audiostream_onsamples(float **inbuf, int innch, float **outbuf, int outnch, int len, int srate);
+extern gNinjamClient *window;
 
 window_preferences::window_preferences()
   : _gconf_client(Gnome::Conf::Client::get_default_client()),
@@ -65,25 +67,41 @@ void window_preferences::on_button_abort_clicked()
 void window_preferences::on_button_apply_clicked()
 {
   int audiodriver = combobox_audiodriver->get_active_row_number();
-  Glib::ustring audiocfgstr = entry_audioconfigstring->get_text();
+  Glib::ustring alsacfgstr = entry_alsa_configstring->get_text();
+  Glib::ustring client_name = entry_jack_client_name->get_text();
+  int nInputChannels = (int)spinbutton_jack_ninputchannels->get_value();
+  int nOutputChannels = (int)spinbutton_jack_noutputchannels->get_value();
+
   if (audiodriver == 0) {
-    if (audiodriver != _gconf_client->get_int(_gconf_dir+"/audio_driver")) {
+    if ((audiodriver != _gconf_client->get_int(_gconf_dir+"/audio_driver"))||
+	(client_name != _gconf_client->get_string(_gconf_dir+"/jack_client_name"))||
+	(nInputChannels != _gconf_client->get_int(_gconf_dir+"/jack_ninput_channels"))||
+	(nOutputChannels != _gconf_client->get_int(_gconf_dir+"/jack_noutput_channels"))) {
       g_audio_enable = 0;
       if (g_audio != NULL)
 	delete g_audio;
-      g_audio = create_audioStreamer_JACK(NULL,
+      if (client_name == "")
+	client_name = "ninjam";
+      if (nInputChannels == 0)
+	nInputChannels = 4;
+      if (nOutputChannels == 0)
+	nOutputChannels = 2;
+      g_audio = create_audioStreamer_JACK(client_name.c_str(),
+					  nInputChannels,
+					  nOutputChannels,
 					  audiostream_onsamples,
 					  g_client);
+      window->update_inputLists();
       g_audio_enable = 1;
     }
   } else {
     if ((audiodriver != _gconf_client->get_int(_gconf_dir+"/audio_driver")) ||
-	(audiocfgstr != _gconf_client->get_string(_gconf_dir+"/audio_config_string"))) {
+	(alsacfgstr != _gconf_client->get_string(_gconf_dir+"/alsa_config_string"))) {
       g_audio_enable = 0;
       if (g_audio != NULL)
 	delete g_audio;
-      char* cfgstr = new char[audiocfgstr.size()+1];
-      memcpy(cfgstr, audiocfgstr.c_str(), audiocfgstr.size());
+      char* cfgstr = new char[alsacfgstr.size()+1];
+      memcpy(cfgstr, alsacfgstr.c_str(), alsacfgstr.size());
       g_audio = create_audioStreamer_ALSA(cfgstr,
 					  audiostream_onsamples);
       delete cfgstr;
@@ -169,8 +187,8 @@ void window_preferences::on_button_apply_clicked()
   }
   _gconf_client->set(_gconf_dir+"/audio_driver",
 		     audiodriver);
-  _gconf_client->set(_gconf_dir+"/audio_config_string",
-		     audiocfgstr);
+  _gconf_client->set(_gconf_dir+"/alsa_config_string",
+		     alsacfgstr);
   _gconf_client->set(_gconf_dir+"/session_directory",
 		     session_dir);
   _gconf_client->set(_gconf_dir+"/savelocalaudio",
@@ -179,6 +197,18 @@ void window_preferences::on_button_apply_clicked()
 		     oggbitrate);
   _gconf_client->set(_gconf_dir+"/save_log",
 		     savelog);
+  _gconf_client->set(_gconf_dir+"/jack_client_name",
+		     client_name);
+  _gconf_client->set(_gconf_dir+"/jack_ninput_channels",
+		     nInputChannels);
+  _gconf_client->set(_gconf_dir+"/jack_noutput_channels",
+		     nOutputChannels);
+  _gconf_client->set(_gconf_dir+"/hostname",
+		     entry_hostname->get_text());
+  _gconf_client->set(_gconf_dir+"/username",
+		     entry_username->get_text());
+  _gconf_client->set(_gconf_dir+"/password",
+		     entry_password->get_text());
 }
 
 void window_preferences::on_button_ok_clicked()
@@ -190,7 +220,7 @@ void window_preferences::on_button_ok_clicked()
 void window_preferences::on_window_preferences_show()
 {
   combobox_audiodriver->set_active(_gconf_client->get_int(_gconf_dir+"/audio_driver"));
-  entry_audioconfigstring->set_text(_gconf_client->get_string(_gconf_dir+"/audio_config_string"));
+  entry_alsa_configstring->set_text(_gconf_client->get_string(_gconf_dir+"/alsa_config_string"));
   entry_sessiondir->set_text(_gconf_client->get_string(_gconf_dir+"/session_directory"));
   if (g_client->config_savelocalaudio >= 0) {
     combobox_savelocalaudio->set_active(g_client->config_savelocalaudio);
@@ -199,4 +229,7 @@ void window_preferences::on_window_preferences_show()
   }
   spinbutton_oggbitrate->set_value(_gconf_client->get_int(_gconf_dir+"/ogg_bitrate"));
   checkbutton_savelog->set_active(_gconf_client->get_bool(_gconf_dir+"/save_log"));
+  entry_jack_client_name->set_text(_gconf_client->get_string(_gconf_dir+"/jack_client_name"));
+  spinbutton_jack_ninputchannels->set_value(_gconf_client->get_int(_gconf_dir+"/jack_ninput_channels"));
+  spinbutton_jack_noutputchannels->set_value(_gconf_client->get_int(_gconf_dir+"/jack_noutput_channels"));
 }

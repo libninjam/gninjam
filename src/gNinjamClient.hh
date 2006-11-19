@@ -32,6 +32,7 @@ public:
   ~gNinjamClient();
   void addChatText(Glib::ustring text);
   void setChatTopic(Glib::ustring text);
+  void update_inputLists();
 private:
   bool on_timeout();
   bool on_timeout_gui();
