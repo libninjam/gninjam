@@ -161,11 +161,28 @@ int main(int argc, char **argv)
   gconf_client->add_dir(gconf_dir);
 
   if (gconf_client->get_int(gconf_prefdir+"/audio_driver") == 0) {
-    g_audio = create_audioStreamer_JACK(NULL,
+    Glib::ustring client_name = gconf_client->get_string(gconf_prefdir+"/jack_client_name");
+    if (client_name == "") {
+      client_name = "ninjam";
+      gconf_client->set(gconf_prefdir+"/jack_client_name", client_name);
+    }
+    int nInputChannels = gconf_client->get_int(gconf_prefdir+"/jack_ninput_channels");
+    if (nInputChannels == 0) {
+      nInputChannels = 4;
+      gconf_client->set(gconf_prefdir+"/jack_ninput_channels", nInputChannels);
+    }
+    int nOutputChannels = gconf_client->get_int(gconf_prefdir+"/jack_noutput_channels");
+    if (nOutputChannels == 0) {
+      nOutputChannels = 2;
+      gconf_client->set(gconf_prefdir+"/jack_noutput_channels", nOutputChannels);
+    }
+    g_audio = create_audioStreamer_JACK(client_name.c_str(),
+					nInputChannels,
+					nOutputChannels,
 					audiostream_onsamples,
 					g_client);
   } else {
-    Glib::ustring audiocfgstr = gconf_client->get_string(gconf_prefdir+"audio_config_string");
+    Glib::ustring audiocfgstr = gconf_client->get_string(gconf_prefdir+"/alsa_config_string");
     char* cfgstr = new char[audiocfgstr.size()+1];
     memcpy(cfgstr, audiocfgstr.c_str(), audiocfgstr.size());
 

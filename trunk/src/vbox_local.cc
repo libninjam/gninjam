@@ -68,3 +68,13 @@ void vbox_local::update_VUmeters()
     channel->update_VUmeter();
   }
 }
+
+void vbox_local::update_inputLists()
+{
+  std::list<Widget*> channels = get_children();
+  std::list<Widget*>::iterator iter = channels.begin();
+  while (iter != channels.end()) {
+    vbox_local_channel* channel = (vbox_local_channel*)*iter++;
+    channel->update_inputList();
+  }
+}

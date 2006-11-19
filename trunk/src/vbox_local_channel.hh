@@ -25,6 +25,7 @@ public:
   vbox_local_channel(GlademmData *gmm_data);
   void init(int idx);
   void update_VUmeter();
+  void update_inputList();
 private:
   void on_entry_local_channelname_changed();
   void on_checkbutton_local_transmit_toggled();
@@ -35,5 +36,7 @@ private:
   void on_checkbutton_local_solo_toggled();
   void on_button_local_remove_clicked();
   int _idx;
+  Gtk::TreeModel::ColumnRecord _column_model;
+  Gtk::TreeModelColumn<Glib::ustring> _textcolumn;
 };
 #endif

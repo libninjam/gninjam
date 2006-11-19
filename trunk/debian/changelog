@@ -1,3 +1,10 @@
+gninjam (0.01a-5) unstable; urgency=low
+
+  * make number of in-/output channels for jack configurable
+  * make default connection parameters configurable
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Sun, 19 Nov 2006 02:16:35 +0100
+
 gninjam (0.01a-4) unstable; urgency=low
 
   * use gconf for saving channel parameters

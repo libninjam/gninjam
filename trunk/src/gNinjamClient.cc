@@ -70,23 +70,12 @@ gNinjamClient::gNinjamClient()
   sigc::connection conn = Glib::signal_timeout().connect(my_slot, TIMEOUT_VALUE);
   sigc::slot<bool> my_slot2 = sigc::mem_fun(*this, &gNinjamClient::on_timeout_gui);
   sigc::connection conn2 = Glib::signal_timeout().connect(my_slot2, 100);
-  //vbox_local->remove(vbox_local_channel);
-  /*
-  vbox_local_channel* vlc = Gtk::manage(new class vbox_local_channel(NULL));
-  vlc->show();
-  vbox_local->pack_start(*vlc);
-  vbox_local_channel* vlc2 = Gtk::manage(new class vbox_local_channel(NULL));
-  vlc2->show();
-  vbox_local->pack_start(*vlc2);
-  */
-  /*
-    d_connect->entry_hostname->set_text("localhost");
-  d_connect->entry_username->set_text("tobias");
-  d_connect->entry_password->set_text("gehrig");
-  */
-  d_connect->entry_hostname->set_text("test.ninjam.com:2049");
-  d_connect->entry_username->set_text("anonymous:test");
-  d_connect->entry_password->set_text("");
+
+  Glib::RefPtr<Gnome::Conf::Client> gconf_client = Gnome::Conf::Client::get_default_client();
+  Glib::ustring gconf_dir = "/apps/gninjam/preferences";
+  d_connect->entry_hostname->set_text(gconf_client->get_string(gconf_dir+"/hostname"));
+  d_connect->entry_username->set_text(gconf_client->get_string(gconf_dir+"/username"));
+  d_connect->entry_password->set_text(gconf_client->get_string(gconf_dir+"/password"));
 }
 
 gNinjamClient::~gNinjamClient()
@@ -329,4 +318,9 @@ void gNinjamClient::addChatText(Glib::ustring text)
 void gNinjamClient::setChatTopic(Glib::ustring text)
 {
   label_chat->set_text(text);
+}
+
+void gNinjamClient::update_inputLists()
+{
+  vbox_local->update_inputLists();
 }

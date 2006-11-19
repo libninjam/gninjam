@@ -36,6 +36,8 @@ vbox_local_channel::vbox_local_channel(GlademmData *gmm_data)
 {
   hscale_local_pan->signal_format_value().connect(sigc::ptr_fun(on_hscale_pan_format_value), false);
   hscale_local_volume->signal_format_value().connect(sigc::ptr_fun(on_hscale_volume_format_value), false);
+  _column_model.add(_textcolumn);
+  combobox_local_input->pack_start(_textcolumn);
 }
 
 void vbox_local_channel::update_VUmeter()
@@ -49,6 +51,22 @@ void vbox_local_channel::update_VUmeter()
   }
 }
 
+void vbox_local_channel::update_inputList()
+{
+  int active = combobox_local_input->get_active_row_number();
+  Glib::RefPtr<Gtk::ListStore> model = Gtk::ListStore::create(_column_model);
+  const char* sourcename;
+  Gtk::TreeModel::Row row;
+  for (int i=0; (sourcename = g_audio->GetChannelName(i)) != NULL; i++) {
+    row = *(model->append());
+    row[_textcolumn] = sourcename;
+  }
+  row = *(model->append());
+  row[_textcolumn] = "Silence";
+  combobox_local_input->set_model(model);
+  combobox_local_input->set_active(active);
+}
+
 void vbox_local_channel::init(int idx)
 {
   _idx = idx;
@@ -59,19 +77,7 @@ void vbox_local_channel::init(int idx)
 						    &bitrate,
 						    &broadcast);
   entry_local_channelname->set_text(channelname);
-  Gtk::TreeModel::ColumnRecord column_model;
-  Gtk::TreeModelColumn<Glib::ustring> textcolumn;
-  column_model.add(textcolumn);
-  Glib::RefPtr<Gtk::ListStore> model = Gtk::ListStore::create(column_model);
-  combobox_local_input->set_model(model);
-  const char* sourcename;
-  for (int i=0; (sourcename = g_audio->GetChannelName(i)) != NULL; i++) {
-    Gtk::TreeModel::Row row = *(model->append());
-    row[textcolumn] = sourcename;
-  }
-  Gtk::TreeModel::Row row = *(model->append());
-  row[textcolumn] = "Silence";
-  combobox_local_input->pack_start(textcolumn);
+  update_inputList();
   combobox_local_input->set_active(sourcechannel);
   checkbutton_local_transmit->set_active(broadcast);
   float volume, pan;
