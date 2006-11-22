@@ -1,3 +1,17 @@
+gninjam (0.01a-6) unstable; urgency=low
+
+  * changed remote channel view so that the user name is displayed above
+    all of the users channels not within each channel seperately
+  * added support for output channel selection
+  * added de-/selection of views to hide those that are note wanted
+  * added handlebar to master controls to tear it of the window
+  * changed callback for gui update so that the gui is only updated when
+    needed
+  * added support to switch between stereo and mono mode for output channels
+  * added item in channel lists to add new channels while run-time
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Wed, 22 Nov 2006 04:09:14 +0100
+
 gninjam (0.01a-5) unstable; urgency=low
 
   * make number of in-/output channels for jack configurable

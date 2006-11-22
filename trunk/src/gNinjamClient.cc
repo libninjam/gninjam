@@ -36,11 +36,12 @@
 #include <float.h>
 
 #include <iostream>
-
 #include <ninjam/njmisc.h>
 #include "common.hh"
 
 #define TIMEOUT_VALUE 50
+
+#include <gtkmm/liststore.h>
 
 #include <ninjam/audiostream.h>
 #include <ninjam/njclient.h>
@@ -50,7 +51,9 @@ extern NJClient *g_client;
 
 gNinjamClient::gNinjamClient()
   : d_connect(new class dialog_connect()),
-    w_preferences(new class window_preferences())
+    w_preferences(new class window_preferences()),
+    _old_status(0),
+    _audio_status_changed(true)
 {
   hscale_master_pan->signal_format_value().connect(sigc::ptr_fun(on_hscale_pan_format_value), false);
   hscale_metronome_pan->signal_format_value().connect(sigc::ptr_fun(on_hscale_pan_format_value), false);
@@ -63,14 +66,20 @@ gNinjamClient::gNinjamClient()
   hscale_metronome_volume->set_value(VAL2DB(g_client->config_metronome));
   hscale_metronome_pan->set_value(g_client->config_metronome_pan);
   checkbutton_metronome_mute->set_active(g_client->config_metronome_mute);
+  checkbutton_metronome_stereo->set_active(g_client->config_metronome_stereoout);
 
+  _column_model.add(_textcolumn);
+  combobox_metronome_output->pack_start(_textcolumn);
+
+  int metrochan = g_client->config_metronome_channel;
   vbox_local->update();
+  update_inputLists();
+  update_outputLists();
+  combobox_metronome_output->set_active(metrochan);
 
   sigc::slot<bool> my_slot = sigc::mem_fun(*this, &gNinjamClient::on_timeout);
   sigc::connection conn = Glib::signal_timeout().connect(my_slot, TIMEOUT_VALUE);
-  sigc::slot<bool> my_slot2 = sigc::mem_fun(*this, &gNinjamClient::on_timeout_gui);
-  sigc::connection conn2 = Glib::signal_timeout().connect(my_slot2, 100);
-
+  connect_gui_status_update(100);
   Glib::RefPtr<Gnome::Conf::Client> gconf_client = Gnome::Conf::Client::get_default_client();
   Glib::ustring gconf_dir = "/apps/gninjam/preferences";
   d_connect->entry_hostname->set_text(gconf_client->get_string(gconf_dir+"/hostname"));
@@ -82,6 +91,14 @@ gNinjamClient::~gNinjamClient()
 {
   delete d_connect;
   delete w_preferences;
+}
+
+void gNinjamClient::connect_gui_status_update(unsigned timeout)
+{
+  if (_gui_connection.connected())
+    _gui_connection.disconnect();
+  _gui_connection = Glib::signal_timeout().connect(sigc::mem_fun(*this, &gNinjamClient::on_timeout_gui),
+						   timeout);
 }
 
 bool gNinjamClient::on_timeout()
@@ -96,37 +113,58 @@ bool gNinjamClient::on_timeout()
 bool gNinjamClient::on_timeout_gui()
 {
   int status = g_client->GetStatus();
-  Glib::ustring statusmsg = "Status: ";
-  switch (status) {
-  case NJClient::NJC_STATUS_OK:
-    statusmsg += "Connected to ";
-    statusmsg += g_client->GetHostName();
-    statusmsg += " as ";
-    statusmsg += g_client->GetUserName();
-    break;
-  case NJClient::NJC_STATUS_INVALIDAUTH:
-    statusmsg += "ERROR: invalid login/password";
-    break;
-  case NJClient::NJC_STATUS_CANTCONNECT:
-    statusmsg += "ERROR: failed connecting to host";
-    break;
-  case NJClient::NJC_STATUS_PRECONNECT:
-    statusmsg += "Not connected";
-    break;
-  case NJClient::NJC_STATUS_DISCONNECTED:
-    statusmsg += "ERROR: disconnected from host";
-    break;
-    
-  default:
-    char statusnum[8];
-    snprintf(statusnum, sizeof(statusnum), "%d", status);
-    statusmsg += "CODE = ";
-    statusmsg += statusnum;
-    break;
+  if (status != _old_status) {
+    _old_status = status;
+    Glib::ustring statusmsg = "Status: ";
+    switch (status) {
+    case NJClient::NJC_STATUS_OK:
+      statusmsg += "Connected to ";
+      statusmsg += g_client->GetHostName();
+      statusmsg += " as ";
+      statusmsg += g_client->GetUserName();
+      break;
+    case NJClient::NJC_STATUS_INVALIDAUTH:
+      statusmsg += "ERROR: invalid login/password";
+      break;
+    case NJClient::NJC_STATUS_CANTCONNECT:
+      statusmsg += "ERROR: failed connecting to host";
+      break;
+    case NJClient::NJC_STATUS_PRECONNECT:
+      statusmsg += "Not connected";
+      break;
+    case NJClient::NJC_STATUS_DISCONNECTED:
+      statusmsg += "ERROR: disconnected from host";
+      break;
+      
+    default:
+      char statusnum[8];
+      snprintf(statusnum, sizeof(statusnum), "%d", status);
+      statusmsg += "CODE = ";
+      statusmsg += statusnum;
+      break;
+    }
+    if (g_client->GetErrorStr()[0]) {
+      statusmsg += ". Server gave explanation: ";
+      statusmsg += g_client->GetErrorStr();
+    }
+    label_connection_status->set_text(statusmsg);
   }
-  if (g_client->GetErrorStr()[0]) {
-    statusmsg += ". Server gave explanation: ";
-    statusmsg += g_client->GetErrorStr();
+  if (_audio_status_changed && g_audio) {
+    _audio_status_changed = false;
+    char output[16];
+    snprintf(output, sizeof(output), "%d", g_audio->m_srate);
+    Glib::ustring statusmsg = output;
+    statusmsg += " Hz ";
+    snprintf(output, sizeof(output), "%d", g_audio->m_innch);
+    statusmsg += output;
+    statusmsg += "ch->";
+    snprintf(output, sizeof(output), "%d", g_audio->m_outnch);
+    statusmsg += output;
+    statusmsg += "ch ";
+    snprintf(output, sizeof(output), "%d", g_audio->m_bps);
+    statusmsg += output;
+    statusmsg += "bps";
+    label_audio_info->set_text(statusmsg);
   }
   if (status >= 0) {
     int pos, len;
@@ -149,25 +187,10 @@ bool gNinjamClient::on_timeout_gui()
     snprintf(output, sizeof(output), "%.2f dB", value);
     progressbar_master->set_text(output);
     vbox_local->update_VUmeters();
-    vbox_remote->update();
+    vbox_remote->update_VUmeters();
+    if (g_client->HasUserInfoChanged())
+      vbox_remote->update();
   }
-  if (g_audio) {
-    statusmsg += " : ";
-    char output[16];
-    snprintf(output, sizeof(output), "%d", g_audio->m_srate);
-    statusmsg += output;
-    statusmsg += " Hz ";
-    snprintf(output, sizeof(output), "%d", g_audio->m_innch);
-    statusmsg += output;
-    statusmsg += "ch->";
-    snprintf(output, sizeof(output), "%d", g_audio->m_outnch);
-    statusmsg += output;
-    statusmsg += "ch ";
-    snprintf(output, sizeof(output), "%d", g_audio->m_bps);
-    statusmsg += output;
-    statusmsg += "bps";
-  }
-  statusbar1->push(statusmsg);
   return true;
 }
 
@@ -323,4 +346,64 @@ void gNinjamClient::setChatTopic(Glib::ustring text)
 void gNinjamClient::update_inputLists()
 {
   vbox_local->update_inputLists();
+  _audio_status_changed = true;
+}
+
+void gNinjamClient::update_outputLists()
+{
+  vbox_remote->update_outputLists();
+
+  int active = combobox_metronome_output->get_active_row_number();
+  Glib::RefPtr<Gtk::ListStore> model = Gtk::ListStore::create(_column_model);
+  Gtk::TreeModel::Row row;
+  for (int i=0; i < g_audio->m_outnch; i++) {
+    row = *(model->append());
+    row[_textcolumn] = g_audio->GetOutputChannelName(i);
+  }
+  row = *(model->append());
+  row[_textcolumn] = "New channel";
+  combobox_metronome_output->set_model(model);
+  combobox_metronome_output->set_active(active);
+
+  _audio_status_changed = true;
+}
+
+void gNinjamClient::on_local_channels1_activate()
+{
+  if (frame_local->is_visible())
+    frame_local->hide();
+  else
+    frame_local->show();
+}
+
+void gNinjamClient::on_remote_channels1_activate()
+{  
+  if (frame_remote->is_visible())
+    frame_remote->hide();
+  else
+    frame_remote->show();
+}
+
+void gNinjamClient::on_chat1_activate()
+{  
+  if (frame_chat->is_visible())
+    frame_chat->hide();
+  else
+    frame_chat->show();
+}
+
+void gNinjamClient::on_combobox_metronome_output_changed()
+{
+  int channel = combobox_metronome_output->get_active_row_number();
+  if (g_audio && (channel == g_audio->m_outnch)) {
+    if (g_audio->addOutputChannel()) {
+      update_outputLists();
+    }
+  }
+  g_client->config_metronome_channel = channel;
+}
+
+void gNinjamClient::on_checkbutton_metronome_stereo_toggled()
+{
+  g_client->config_metronome_stereoout = checkbutton_metronome_stereo->get_active();
 }
