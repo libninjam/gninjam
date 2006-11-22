@@ -18,7 +18,7 @@
 
 #include "config.h"
 #include "vbox_remote.hh"
-#include "vbox_remote_channel.hh"
+#include "RemoteUserFrame.hh"
 #include <list>
 
 #include <ninjam/njclient.h>
@@ -32,23 +32,39 @@ vbox_remote::vbox_remote(GlademmData *gmm_data)
 
 void vbox_remote::update()
 {
-  std::list<Widget*> channels = get_children();
-  std::list<Widget*>::iterator iter = channels.begin();
-  int iChan = 0;
+  std::list<Widget*> users = get_children();
+  std::list<Widget*>::iterator iter = users.begin();
   for (int iUser=0; iUser < g_client->GetNumUsers(); iUser++) {
-    int iEnum;
-    for (int iUserChan=0; (iEnum = g_client->EnumUserChannels(iUser, iUserChan)) >= 0; iUserChan++, iChan++) {
-      if (iter == channels.end()) {
-	vbox_remote_channel* channel = Gtk::manage(new class vbox_remote_channel(NULL));
-	channel->set_data(iUser, iEnum);
-	pack_start(*channel);
-      } else {
-	vbox_remote_channel* channel = (vbox_remote_channel*)*iter++;
-	channel->set_data(iUser, iEnum);
-      }
+    if (iter == users.end()) {
+      RemoteUserFrame* user = Gtk::manage(new class RemoteUserFrame(NULL));
+      user->update(iUser);
+      pack_start(*user);
+    } else {
+      RemoteUserFrame* user = (RemoteUserFrame*)*iter++;
+      user->update(iUser);
     }
   }
-  while (iter != channels.end()) {
+  while (iter != users.end()) {
     remove(*(*iter++));
+  }
+}
+
+void vbox_remote::update_VUmeters()
+{
+  std::list<Widget*> users = get_children();
+  std::list<Widget*>::iterator iter = users.begin();
+  while (iter != users.end()) {
+    RemoteUserFrame* user = (RemoteUserFrame*)*iter++;
+    user->update_VUmeters();
+  }
+}
+
+void vbox_remote::update_outputLists()
+{
+  std::list<Widget*> users = get_children();
+  std::list<Widget*>::iterator iter = users.begin();
+  while (iter != users.end()) {
+    RemoteUserFrame* user = (RemoteUserFrame*)*iter++;
+    user->update_outputLists();
   }
 }

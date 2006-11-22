@@ -207,6 +207,10 @@ int main(int argc, char **argv)
       g_client->config_metronome_pan = gconf_client->get_float(gconf_dir+"/master/metronome_pan");
       g_client->config_mastermute = gconf_client->get_bool(gconf_dir+"/master/master_mute");
       g_client->config_metronome_mute = gconf_client->get_bool(gconf_dir+"/master/metronome_mute");
+      g_client->config_metronome_channel = gconf_client->get_int(gconf_dir+"/master/metronome_channel");
+      if (g_client->config_metronome_channel >= g_audio->m_outnch)
+	g_client->config_metronome_channel = 0;
+      g_client->config_metronome_stereoout = gconf_client->get_bool(gconf_dir+"/master/metronome_stereo_output");
     }
     unsigned localchannel = 0;
     int a = 0;
@@ -221,9 +225,12 @@ int main(int argc, char **argv)
 					    true, gconf_client->get_float(localpath+"/pan"),
 					    true, gconf_client->get_bool(localpath+"/mute"),
 					    true, gconf_client->get_bool(localpath+"/solo"));
+	int source = gconf_client->get_int(localpath+"/source");
+	if (source >= g_audio->m_innch)
+	  source = 0;
 	g_client->SetLocalChannelInfo(a,
 				      gconf_client->get_string(localpath+"/name").c_str(),
-				      true, gconf_client->get_int(localpath+"/source"),
+				      true, source,
 				      false, gconf_client->get_int(localpath+"/bitrate"),
 				      true, gconf_client->get_bool(localpath+"/broadcast"));
 	a++;
@@ -322,7 +329,9 @@ int main(int argc, char **argv)
     gconf_client->set(gconf_dir+"/master/metronome_pan", g_client->config_metronome_pan);
     gconf_client->set(gconf_dir+"/master/master_mute", g_client->config_mastermute);
     gconf_client->set(gconf_dir+"/master/metronome_mute", g_client->config_metronome_mute);
-
+    gconf_client->set(gconf_dir+"/master/metronome_channel", g_client->config_metronome_channel);
+    gconf_client->set(gconf_dir+"/master/metronome_stereo_output", g_client->config_metronome_stereoout);
+    
     unsigned localchannel;
     for (localchannel = 0;;localchannel++) {
       int a = g_client->EnumLocalChannels(localchannel);

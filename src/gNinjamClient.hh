@@ -33,6 +33,7 @@ public:
   void addChatText(Glib::ustring text);
   void setChatTopic(Glib::ustring text);
   void update_inputLists();
+  void update_outputLists();
 private:
   bool on_timeout();
   bool on_timeout_gui();
@@ -53,8 +54,19 @@ private:
   void on_checkbutton_metronome_mute_toggled();
   void on_hscale_master_pan_value_changed();
   void on_chat_entry_activate();
+  void on_local_channels1_activate();
+  void on_remote_channels1_activate();
+  void on_chat1_activate();
+  void on_combobox_metronome_output_changed();
+  void on_checkbutton_metronome_stereo_toggled();
+  void connect_gui_status_update(unsigned timeout);
 
   dialog_connect *d_connect;
   window_preferences *w_preferences;
+  int _old_status;
+  bool _audio_status_changed;
+  sigc::connection _gui_connection;
+  Gtk::TreeModel::ColumnRecord _column_model;
+  Gtk::TreeModelColumn<Glib::ustring> _textcolumn;
 };
 #endif

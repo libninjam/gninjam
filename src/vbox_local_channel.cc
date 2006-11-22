@@ -18,6 +18,7 @@
 
 #include "config.h"
 #include "vbox_local_channel.hh"
+#include "gNinjamClient.hh"
 
 #include "common.hh"
 
@@ -29,6 +30,7 @@
 
 extern audioStreamer *g_audio;
 extern NJClient *g_client;
+extern gNinjamClient *window;
 
 vbox_local_channel::vbox_local_channel(GlademmData *gmm_data)
   : vbox_local_channel_glade(gmm_data),
@@ -62,7 +64,7 @@ void vbox_local_channel::update_inputList()
     row[_textcolumn] = sourcename;
   }
   row = *(model->append());
-  row[_textcolumn] = "Silence";
+  row[_textcolumn] = "New channel";
   combobox_local_input->set_model(model);
   combobox_local_input->set_active(active);
 }
@@ -111,9 +113,14 @@ void vbox_local_channel::on_checkbutton_local_transmit_toggled()
 
 void vbox_local_channel::on_combobox_local_input_changed()
 {
+  int channel = combobox_local_input->get_active_row_number();
+  if (g_audio && (channel == g_audio->m_innch)) {
+    if (g_audio->addInputChannel())
+      window->update_inputLists();
+  }
   g_client->SetLocalChannelInfo(_idx,
 				NULL, // name
-				true, combobox_local_input->get_active_row_number(), // src
+				true, channel, // src
 				false, 0, // bitrate
 				false, false); // broadcast
   g_client->NotifyServerOfChannelChange();

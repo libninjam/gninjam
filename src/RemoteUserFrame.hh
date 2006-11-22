@@ -16,28 +16,15 @@
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
-#ifndef _VBOX_REMOTE_CHANNEL_HH
-#  include "vbox_remote_channel_glade.hh"
-#  define _VBOX_REMOTE_CHANNEL_HH
-class vbox_remote_channel : public vbox_remote_channel_glade
+#ifndef _REMOTEUSERFRAME_HH
+#  include "RemoteUserFrame_glade.hh"
+#  define _REMOTEUSERFRAME_HH
+class RemoteUserFrame : public RemoteUserFrame_glade
 {  
 public:
-  vbox_remote_channel(GlademmData *gmm_data);
-  void set_data(int useridx, int channelidx);
-  void update_VUmeter();
-  void update_outputList();
-private:   
-  void on_checkbutton_remote_receive_toggled();
-  void on_hscale_remote_volume_value_changed();
-  void on_hscale_remote_pan_value_changed();
-  void on_checkbutton_remote_mute_toggled();
-  void on_checkbutton_remote_solo_toggled();
-  void on_combobox_remote_output_changed();
-  void on_checkbutton_remote_stereo_toggled();
-
-  int _useridx;
-  int _channelidx;
-  Gtk::TreeModel::ColumnRecord _column_model;
-  Gtk::TreeModelColumn<Glib::ustring> _textcolumn;
+  RemoteUserFrame(GlademmData *gmm_data);
+  void update(int useridx);
+  void update_VUmeters();
+  void update_outputLists();
 };
 #endif

@@ -22,6 +22,8 @@ gninjam_SOURCES = \
 	window_preferences.cc \
 	dialog_connect_glade.cc \
 	dialog_connect.cc \
+	RemoteUserFrame_glade.cc \
+	RemoteUserFrame.cc \
 	common.cc
 
 noinst_HEADERS = \
@@ -41,6 +43,8 @@ noinst_HEADERS = \
 	window_preferences.hh \
 	dialog_connect_glade.hh \
 	dialog_connect.hh \
+	RemoteUserFrame_glade.hh \
+	RemoteUserFrame.hh \
 	common.hh
 
 AM_CXXFLAGS = @GTKMM_CFLAGS@ @GCONF_CFLAGS@ -I/usr/include/libninjam -s -malign-double -lpthread

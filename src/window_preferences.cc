@@ -92,13 +92,14 @@ void window_preferences::on_button_apply_clicked()
 					  audiostream_onsamples,
 					  g_client);
       window->update_inputLists();
+      window->update_outputLists();
       g_audio_enable = 1;
     }
   } else {
     if ((audiodriver != _gconf_client->get_int(_gconf_dir+"/audio_driver")) ||
 	(alsacfgstr != _gconf_client->get_string(_gconf_dir+"/alsa_config_string"))) {
       g_audio_enable = 0;
-      if (g_audio != NULL)
+      if (g_audio)
 	delete g_audio;
       char* cfgstr = new char[alsacfgstr.size()+1];
       memcpy(cfgstr, alsacfgstr.c_str(), alsacfgstr.size());
@@ -230,6 +231,14 @@ void window_preferences::on_window_preferences_show()
   spinbutton_oggbitrate->set_value(_gconf_client->get_int(_gconf_dir+"/ogg_bitrate"));
   checkbutton_savelog->set_active(_gconf_client->get_bool(_gconf_dir+"/save_log"));
   entry_jack_client_name->set_text(_gconf_client->get_string(_gconf_dir+"/jack_client_name"));
-  spinbutton_jack_ninputchannels->set_value(_gconf_client->get_int(_gconf_dir+"/jack_ninput_channels"));
-  spinbutton_jack_noutputchannels->set_value(_gconf_client->get_int(_gconf_dir+"/jack_noutput_channels"));
+  if (g_audio) {
+    spinbutton_jack_ninputchannels->set_value(g_audio->m_innch);
+    spinbutton_jack_noutputchannels->set_value(g_audio->m_outnch);
+  } else {
+    spinbutton_jack_ninputchannels->set_value(_gconf_client->get_int(_gconf_dir+"/jack_ninput_channels"));
+    spinbutton_jack_noutputchannels->set_value(_gconf_client->get_int(_gconf_dir+"/jack_noutput_channels"));
+  }
+  entry_hostname->set_text(_gconf_client->get_string(_gconf_dir+"/hostname"));
+  entry_username->set_text(_gconf_client->get_string(_gconf_dir+"/username"));
+  entry_password->set_text(_gconf_client->get_string(_gconf_dir+"/password"));
 }

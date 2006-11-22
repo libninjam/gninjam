@@ -25,5 +25,7 @@ class vbox_remote : public vbox_remote_glade
 public:
   vbox_remote(GlademmData *gmm_data);
   void update();
+  void update_VUmeters();
+  void update_outputLists();
 };
 #endif
