@@ -1,3 +1,10 @@
+gninjam (0.01a-7) unstable; urgency=low
+
+  * fix border in remote channel view
+  * fix gtkmm dependencies in configure.in
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Thu, 23 Nov 2006 02:03:50 +0100
+
 gninjam (0.01a-6) unstable; urgency=low
 
   * changed remote channel view so that the user name is displayed above
