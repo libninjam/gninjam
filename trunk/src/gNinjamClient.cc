@@ -363,7 +363,7 @@ void gNinjamClient::addChatText(Glib::ustring text)
 
 void gNinjamClient::setChatTopic(Glib::ustring text)
 {
-  label_chat->set_text(_("<b>Chat</b>: ")+text);
+  label_chat->set_text(text);
 }
 
 void gNinjamClient::update_inputLists()
