@@ -1,3 +1,9 @@
+gninjam (0.01a-8) unstable; urgency=low
+
+  * change menu items so that everything is consistently in english
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Thu, 23 Nov 2006 16:23:51 +0100
+
 gninjam (0.01a-7) unstable; urgency=low
 
   * fix border in remote channel view
