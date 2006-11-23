@@ -17,6 +17,28 @@
 */
 
 #include "config.h"
+/*
+ * Standard gettext macros.
+ */
+#ifdef ENABLE_NLS
+#  include <libintl.h>
+#  undef _
+#  define _(String) dgettext (GETTEXT_PACKAGE, String)
+#  ifdef gettext_noop
+#    define N_(String) gettext_noop (String)
+#  else
+#    define N_(String) (String)
+#  endif
+#else
+#  define textdomain(String) (String)
+#  define gettext(String) (String)
+#  define dgettext(Domain,Message) (Message)
+#  define dcgettext(Domain,Message,Type) (Message)
+#  define bindtextdomain(Domain,Directory) (Domain)
+#  define _(String) (String)
+#  define N_(String) (String)
+#endif
+
 #include "vbox_remote_channel.hh"
 #include "gNinjamClient.hh"
 
@@ -62,7 +84,7 @@ void vbox_remote_channel::update_outputList()
     row[_textcolumn] = g_audio->GetOutputChannelName(i);
   }
   row = *(model->append());
-  row[_textcolumn] = "New channel";
+  row[_textcolumn] = _("New channel");
   combobox_remote_output->set_model(model);
   combobox_remote_output->set_active(active);
 }

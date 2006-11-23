@@ -17,6 +17,28 @@
 */
 
 #include "config.h"
+/*
+ * Standard gettext macros.
+ */
+#ifdef ENABLE_NLS
+#  include <libintl.h>
+#  undef _
+#  define _(String) dgettext (GETTEXT_PACKAGE, String)
+#  ifdef gettext_noop
+#    define N_(String) gettext_noop (String)
+#  else
+#    define N_(String) (String)
+#  endif
+#else
+#  define textdomain(String) (String)
+#  define gettext(String) (String)
+#  define dgettext(Domain,Message) (Message)
+#  define dcgettext(Domain,Message,Type) (Message)
+#  define bindtextdomain(Domain,Directory) (Domain)
+#  define _(String) (String)
+#  define N_(String) (String)
+#endif
+
 #include "vbox_local_channel.hh"
 #include "gNinjamClient.hh"
 
@@ -64,7 +86,7 @@ void vbox_local_channel::update_inputList()
     row[_textcolumn] = sourcename;
   }
   row = *(model->append());
-  row[_textcolumn] = "New channel";
+  row[_textcolumn] = _("New channel");
   combobox_local_input->set_model(model);
   combobox_local_input->set_active(active);
 }

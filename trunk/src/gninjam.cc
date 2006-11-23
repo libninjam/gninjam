@@ -17,7 +17,30 @@
 */
 
 #include <config.h>
+/*
+ * Standard gettext macros.
+ */
+#ifdef ENABLE_NLS
+#  include <libintl.h>
+#  undef _
+#  define _(String) dgettext (GETTEXT_PACKAGE, String)
+#  ifdef gettext_noop
+#    define N_(String) gettext_noop (String)
+#  else
+#    define N_(String) (String)
+#  endif
+#else
+#  define textdomain(String) (String)
+#  define gettext(String) (String)
+#  define dgettext(Domain,Message) (Message)
+#  define dcgettext(Domain,Message,Type) (Message)
+#  define bindtextdomain(Domain,Directory) (Domain)
+#  define _(String) (String)
+#  define N_(String) (String)
+#endif
+
 #include <gtkmm/main.h>
+#include <glib/gi18n.h>
 
 #include "gNinjamClient.hh"
 
@@ -70,9 +93,9 @@ void chatmsg_cb(int user32, NJClient *inst, const char **parms, int nparms)
       tmp = "*** ";
       if (parms[1] && *parms[1]) {
         tmp += parms[1];
-        tmp += " sets topic to: ";
+        tmp += _(" sets topic to: ");
       } else
-	tmp += "Topic is: ";
+	tmp += _("Topic is: ");
       tmp += parms[2];
 
       window->setChatTopic(parms[2]);
@@ -98,9 +121,9 @@ void chatmsg_cb(int user32, NJClient *inst, const char **parms, int nparms)
     if (parms[1] && *parms[1]) {
       tmp = "*** ";
       tmp += parms[1];
-      tmp += " has ";
-      tmp += (parms[0][0]=='P' ? "left" : "joined");
-      tmp += " the server";
+      tmp += _(" has ");
+      tmp += (parms[0][0]=='P' ? _("left") : _("joined"));
+      tmp += _(" the server");
       window->addChatText(tmp);
     }
   } 
@@ -139,6 +162,12 @@ void sigfunc(int sig)
 
 int main(int argc, char **argv)
 {  
+#if defined(ENABLE_NLS)
+   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
+   bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+   textdomain (GETTEXT_PACKAGE);
+#endif //ENABLE_NLS
+   
   Gtk::Main m(&argc, &argv);
 
   int nolog=0,nowav=1,writeogg=0,g_nssf=0;
@@ -191,7 +220,7 @@ int main(int argc, char **argv)
     delete cfgstr;
   }
   if (!g_audio) {
-    printf("Error opening audio!\n");
+    printf(_("Error opening audio!\n"));
     return 0;
   }
 
@@ -239,7 +268,7 @@ int main(int argc, char **argv)
       }
     }
     if (localchannel == 0) {
-      g_client->SetLocalChannelInfo(0,"new channel",true,0,false,0,true,true);
+      g_client->SetLocalChannelInfo(0,_("new channel"),true,0,false,0,true,true);
       g_client->SetLocalChannelMonitoring(0,false,0.0f,false,0.0f,false,false,false,false);
     }
   }
@@ -268,7 +297,7 @@ int main(int argc, char **argv)
       cnt++;
     }
     if (cnt >= 16) {
-      printf("Error creating session directory\n");
+      printf(_("Error creating session directory\n"));
       buf[0] = 0;
       return 0;
     }

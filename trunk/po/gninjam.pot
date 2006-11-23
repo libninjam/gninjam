@@ -1,0 +1,305 @@
+# gNinjam - Gtk client for NINJAM
+# Copyright (C) 2006 Tobias Gehrig
+# This file is distributed under the same license as the gninjam package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#: src/gNinjamClient_glade.cc:146 src/gNinjamClient_glade.cc:149
+#: src/gNinjamClient_glade.cc:377 src/window_preferences_glade.cc:121
+#: src/window_preferences_glade.cc:208 src/window_preferences_glade.cc:247
+#: src/window_preferences_glade.cc:289 src/window_preferences_glade.cc:297
+#: src/window_preferences_glade.cc:305 src/dialog_connect_glade.cc:105
+#: src/dialog_connect_glade.cc:113 src/dialog_connect_glade.cc:121
+#: src/vbox_local_channel_glade.cc:75 src/vbox_remote_channel_glade.cc:74
+#: src/RemoteUserFrame_glade.cc:55
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-11-23 18:36+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/gninjam.cc:96
+msgid " sets topic to: "
+msgstr ""
+
+#: src/gninjam.cc:98
+msgid "Topic is: "
+msgstr ""
+
+#: src/gninjam.cc:124
+msgid " has "
+msgstr ""
+
+#: src/gninjam.cc:125
+msgid "left"
+msgstr ""
+
+#: src/gninjam.cc:125
+msgid "joined"
+msgstr ""
+
+#: src/gninjam.cc:126
+msgid " the server"
+msgstr ""
+
+#: src/gninjam.cc:223
+#, c-format
+msgid "Error opening audio!\n"
+msgstr ""
+
+#: src/gninjam.cc:271 src/gNinjamClient.cc:224
+msgid "new channel"
+msgstr ""
+
+#: src/gninjam.cc:300 src/window_preferences.cc:160
+#, c-format
+msgid "Error creating session directory\n"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:97
+msgid "Master:"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:98
+msgid "Metronome:"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:107 src/gNinjamClient_glade.cc:108
+#: src/vbox_local_channel_glade.cc:65 src/vbox_remote_channel_glade.cc:64
+msgid "Mute"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:113 src/vbox_remote_channel_glade.cc:66
+msgid "Stereo"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:123
+msgid "<b>Local</b>"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:130
+msgid "<b>Remote</b>"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:141
+msgid "<b>Chat</b>"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:190
+msgid "_Local channels"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:193
+msgid "_Remote channels"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:196
+msgid "_Chat"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:202
+msgid "_File"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:205
+msgid "_Edit"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:208
+msgid "_View"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:211
+msgid "_Help"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:428
+msgid "NINJAM"
+msgstr ""
+
+#: src/gNinjamClient.cc:140
+msgid "Status: "
+msgstr ""
+
+#: src/gNinjamClient.cc:143
+msgid "Connected to "
+msgstr ""
+
+#: src/gNinjamClient.cc:145
+msgid " as "
+msgstr ""
+
+#: src/gNinjamClient.cc:149
+msgid "ERROR: invalid login/password"
+msgstr ""
+
+#: src/gNinjamClient.cc:152
+msgid "ERROR: failed connecting to host"
+msgstr ""
+
+#: src/gNinjamClient.cc:155
+msgid "Not connected"
+msgstr ""
+
+#: src/gNinjamClient.cc:158
+msgid "ERROR: disconnected from host"
+msgstr ""
+
+#: src/gNinjamClient.cc:164
+msgid "CODE = "
+msgstr ""
+
+#: src/gNinjamClient.cc:169
+msgid ". Server gave explanation: "
+msgstr ""
+
+#: src/gNinjamClient.cc:205
+msgid " BPM "
+msgstr ""
+
+#: src/gNinjamClient.cc:345
+msgid "*** error: /msg requires a username and a message."
+msgstr ""
+
+#: src/gNinjamClient.cc:348
+msgid "*** error: unknown command."
+msgstr ""
+
+#: src/gNinjamClient.cc:365
+msgid "<b>Chat</b>: "
+msgstr ""
+
+#: src/gNinjamClient.cc:386 src/vbox_local_channel.cc:89
+#: src/vbox_remote_channel.cc:87
+msgid "New channel"
+msgstr ""
+
+#: src/dialog_license_glade.cc:63
+msgid "You must agree to this license to connect to this server."
+msgstr ""
+
+#: src/dialog_license_glade.cc:105
+msgid "License"
+msgstr ""
+
+#: src/window_preferences_glade.cc:60
+msgid "Audio driver:"
+msgstr ""
+
+#: src/window_preferences_glade.cc:64
+msgid "Session directory:"
+msgstr ""
+
+#: src/window_preferences_glade.cc:65
+msgid "Save local audio:"
+msgstr ""
+
+#: src/window_preferences_glade.cc:71
+msgid "Ogg bitrate:"
+msgstr ""
+
+#: src/window_preferences_glade.cc:72
+msgid "Save log files"
+msgstr ""
+
+#: src/window_preferences_glade.cc:75
+msgid "General"
+msgstr ""
+
+#: src/window_preferences_glade.cc:76
+msgid "Client name:"
+msgstr ""
+
+#: src/window_preferences_glade.cc:77
+msgid "Number of input channels:"
+msgstr ""
+
+#: src/window_preferences_glade.cc:85
+msgid "Number of output channels:"
+msgstr ""
+
+#: src/window_preferences_glade.cc:87
+msgid "Jack settings"
+msgstr ""
+
+#: src/window_preferences_glade.cc:88
+msgid "Config string:"
+msgstr ""
+
+#: src/window_preferences_glade.cc:92
+msgid "Alsa settings"
+msgstr ""
+
+#: src/window_preferences_glade.cc:93 src/dialog_connect_glade.cc:60
+msgid "Hostname:"
+msgstr ""
+
+#: src/window_preferences_glade.cc:94 src/dialog_connect_glade.cc:61
+msgid "Username:"
+msgstr ""
+
+#: src/window_preferences_glade.cc:95 src/dialog_connect_glade.cc:62
+msgid "Password:"
+msgstr ""
+
+#: src/window_preferences_glade.cc:101
+msgid "Default Connection"
+msgstr ""
+
+#: src/window_preferences_glade.cc:360
+msgid "Preferences"
+msgstr ""
+
+#: src/window_preferences.cc:66
+msgid "Jack"
+msgstr ""
+
+#: src/window_preferences.cc:68
+msgid "Alsa"
+msgstr ""
+
+#: src/window_preferences.cc:74
+msgid "None"
+msgstr ""
+
+#: src/window_preferences.cc:76
+msgid "Ogg Files"
+msgstr ""
+
+#: src/window_preferences.cc:78
+msgid "Ogg+Wave Files"
+msgstr ""
+
+#: src/window_preferences.cc:80
+msgid "Delete Ogg Files as soon as possible"
+msgstr ""
+
+#: src/dialog_connect_glade.cc:139
+msgid "Connect"
+msgstr ""
+
+#: src/window1_glade.cc:68
+msgid "window1"
+msgstr ""
+
+#: src/vbox_local_channel_glade.cc:55
+msgid "Transmit"
+msgstr ""
+
+#: src/vbox_local_channel_glade.cc:66 src/vbox_remote_channel_glade.cc:65
+msgid "Solo"
+msgstr ""
+
+#: src/vbox_local_channel_glade.cc:68
+msgid "Remove"
+msgstr ""
+
+#: src/vbox_remote_channel_glade.cc:54
+msgid "Receive"
+msgstr ""

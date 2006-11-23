@@ -1,3 +1,13 @@
+2006-11-23  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.am (EXTRA_DIST): Add m4/ChangeLog.
+
+2006-11-23  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.am (ACLOCAL_AMFLAGS): New variable.
+	(EXTRA_DIST): Add config.rpath, m4/ChangeLog.
+	* configure.in (AC_OUTPUT): Add po/Makefile.in.
+
 2006-11-13  gettextize  <bug-gnu-gettext@gnu.org>
 
 	* Makefile.am (ACLOCAL_AMFLAGS): New variable.
@@ -477,4 +487,19 @@
 	update files from .glade file
 
 2006/11/23 16:21:59 CET
+	update files from .glade file
+
+2006/11/23 16:59:55 CET
+	update files from .glade file
+
+2006/11/23 17:48:21 CET
+	update files from .glade file
+
+2006/11/23 18:34:37 CET
+	update files from .glade file
+
+2006/11/23 18:35:14 CET
+	update files from .glade file
+
+2006/11/23 18:35:47 CET
 	update files from .glade file

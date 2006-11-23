@@ -17,6 +17,28 @@
 */
 
 #include "config.h"
+/*
+ * Standard gettext macros.
+ */
+#ifdef ENABLE_NLS
+#  include <libintl.h>
+#  undef _
+#  define _(String) dgettext (GETTEXT_PACKAGE, String)
+#  ifdef gettext_noop
+#    define N_(String) gettext_noop (String)
+#  else
+#    define N_(String) (String)
+#  endif
+#else
+#  define textdomain(String) (String)
+#  define gettext(String) (String)
+#  define dgettext(Domain,Message) (Message)
+#  define dcgettext(Domain,Message,Type) (Message)
+#  define bindtextdomain(Domain,Directory) (Domain)
+#  define _(String) (String)
+#  define N_(String) (String)
+#endif
+
 #include "gNinjamClient.hh"
 
 #include <gtkmm/main.h>
@@ -67,6 +89,7 @@ gNinjamClient::gNinjamClient()
   hscale_metronome_pan->set_value(g_client->config_metronome_pan);
   checkbutton_metronome_mute->set_active(g_client->config_metronome_mute);
   checkbutton_metronome_stereo->set_active(g_client->config_metronome_stereoout);
+  chat_entry->set_text("");
 
   _column_model.add(_textcolumn);
   combobox_metronome_output->pack_start(_textcolumn);
@@ -115,36 +138,36 @@ bool gNinjamClient::on_timeout_gui()
   int status = g_client->GetStatus();
   if (status != _old_status) {
     _old_status = status;
-    Glib::ustring statusmsg = "Status: ";
+    Glib::ustring statusmsg = _("Status: ");
     switch (status) {
     case NJClient::NJC_STATUS_OK:
-      statusmsg += "Connected to ";
+      statusmsg += _("Connected to ");
       statusmsg += g_client->GetHostName();
-      statusmsg += " as ";
+      statusmsg += _(" as ");
       statusmsg += g_client->GetUserName();
       break;
     case NJClient::NJC_STATUS_INVALIDAUTH:
-      statusmsg += "ERROR: invalid login/password";
+      statusmsg += _("ERROR: invalid login/password");
       break;
     case NJClient::NJC_STATUS_CANTCONNECT:
-      statusmsg += "ERROR: failed connecting to host";
+      statusmsg += _("ERROR: failed connecting to host");
       break;
     case NJClient::NJC_STATUS_PRECONNECT:
-      statusmsg += "Not connected";
+      statusmsg += _("Not connected");
       break;
     case NJClient::NJC_STATUS_DISCONNECTED:
-      statusmsg += "ERROR: disconnected from host";
+      statusmsg += _("ERROR: disconnected from host");
       break;
       
     default:
       char statusnum[8];
       snprintf(statusnum, sizeof(statusnum), "%d", status);
-      statusmsg += "CODE = ";
+      statusmsg += _("CODE = ");
       statusmsg += statusnum;
       break;
     }
     if (g_client->GetErrorStr()[0]) {
-      statusmsg += ". Server gave explanation: ";
+      statusmsg += _(". Server gave explanation: ");
       statusmsg += g_client->GetErrorStr();
     }
     label_connection_status->set_text(statusmsg);
@@ -180,7 +203,7 @@ bool gNinjamClient::on_timeout_gui()
     beatmsg += " @ ";
     snprintf(output, sizeof(output), "%.1f", g_client->GetActualBPM());
     beatmsg += output;
-    beatmsg += " BPM ";
+    beatmsg += _(" BPM ");
     progressbar1->set_text(beatmsg);
     float value = VAL2DB(g_client->GetOutputPeak());
     progressbar_master->set_fraction((value+120)/140);
@@ -199,7 +222,7 @@ void gNinjamClient::on_neu1_activate()
   int idx, maxchannels = g_client->GetMaxLocalChannels();
   for (idx = 0; (idx < maxchannels) && g_client->GetLocalChannelInfo(idx,NULL,NULL,NULL); idx++);
   if (idx < maxchannels) {
-    g_client->SetLocalChannelInfo(idx,"new channel",true,0,false,0,true,true);
+    g_client->SetLocalChannelInfo(idx,_("new channel"),true,0,false,0,true,true);
     // g_client->SetLocalChannelMonitoring(idx,false,0.0f,false,0.0f,false,false,false,false);
     g_client->NotifyServerOfChannelChange();
     vbox_local->add_channel(idx);
@@ -320,10 +343,10 @@ void gNinjamClient::on_chat_entry_activate()
 	  tmp += msg;
 	  addChatText(tmp);
 	} else {
-	  addChatText("*** error: /msg requires a username and a message.");
+	  addChatText(_("*** error: /msg requires a username and a message."));
 	}
       } else {
-	addChatText("*** error: unknown command.");
+	addChatText(_("*** error: unknown command."));
       }
     } else {
       g_client->ChatMessage_Send("MSG", text.c_str());
@@ -340,7 +363,7 @@ void gNinjamClient::addChatText(Glib::ustring text)
 
 void gNinjamClient::setChatTopic(Glib::ustring text)
 {
-  label_chat->set_text(text);
+  label_chat->set_text(_("<b>Chat</b>: ")+text);
 }
 
 void gNinjamClient::update_inputLists()
@@ -361,7 +384,7 @@ void gNinjamClient::update_outputLists()
     row[_textcolumn] = g_audio->GetOutputChannelName(i);
   }
   row = *(model->append());
-  row[_textcolumn] = "New channel";
+  row[_textcolumn] = _("New channel");
   combobox_metronome_output->set_model(model);
   combobox_metronome_output->set_active(active);
 

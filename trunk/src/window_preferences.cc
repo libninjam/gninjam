@@ -17,6 +17,28 @@
 */
 
 #include "config.h"
+/*
+ * Standard gettext macros.
+ */
+#ifdef ENABLE_NLS
+#  include <libintl.h>
+#  undef _
+#  define _(String) dgettext (GETTEXT_PACKAGE, String)
+#  ifdef gettext_noop
+#    define N_(String) gettext_noop (String)
+#  else
+#    define N_(String) (String)
+#  endif
+#else
+#  define textdomain(String) (String)
+#  define gettext(String) (String)
+#  define dgettext(Domain,Message) (Message)
+#  define dcgettext(Domain,Message,Type) (Message)
+#  define bindtextdomain(Domain,Directory) (Domain)
+#  define _(String) (String)
+#  define N_(String) (String)
+#endif
+
 #include "window_preferences.hh"
 #include "gNinjamClient.hh"
 
@@ -41,21 +63,21 @@ window_preferences::window_preferences()
   Glib::RefPtr<Gtk::ListStore> model = Gtk::ListStore::create(column_model);
   combobox_audiodriver->set_model(model);
   Gtk::TreeModel::Row row = *(model->append());
-  row[textcolumn] = "Jack";
+  row[textcolumn] = _("Jack");
   row = *(model->append());
-  row[textcolumn] = "Alsa";
+  row[textcolumn] = _("Alsa");
   combobox_audiodriver->pack_start(textcolumn);
 
   model = Gtk::ListStore::create(column_model);
   combobox_savelocalaudio->set_model(model);
   row = *(model->append());
-  row[textcolumn] = "None";
+  row[textcolumn] = _("None");
   row = *(model->append());
-  row[textcolumn] = "Ogg Files";
+  row[textcolumn] = _("Ogg Files");
   row = *(model->append());
-  row[textcolumn] = "Ogg+Wave Files";
+  row[textcolumn] = _("Ogg+Wave Files");
   row = *(model->append());
-  row[textcolumn] = "Delete Ogg Files as soon as possible";
+  row[textcolumn] = _("Delete Ogg Files as soon as possible");
   combobox_savelocalaudio->pack_start(textcolumn);
 }
 
@@ -135,7 +157,7 @@ void window_preferences::on_button_apply_clicked()
 	cnt++;
       }
       if (cnt >= 16) {
-	printf("Error creating session directory\n");
+	printf(_("Error creating session directory\n"));
 	buf[0] = 0;
 	return;
       }
