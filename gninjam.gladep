@@ -6,6 +6,5 @@
   <program_name>gninjam</program_name>
   <language>C++</language>
   <gnome_support>FALSE</gnome_support>
-  <gettext_support>FALSE</gettext_support>
   <use_widget_names>TRUE</use_widget_names>
 </glade-project>

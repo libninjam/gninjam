@@ -18,6 +18,29 @@
 
 #include "common.hh"
 
+#include "config.h"
+/*
+ * Standard gettext macros.
+ */
+#ifdef ENABLE_NLS
+#  include <libintl.h>
+#  undef _
+#  define _(String) dgettext (GETTEXT_PACKAGE, String)
+#  ifdef gettext_noop
+#    define N_(String) gettext_noop (String)
+#  else
+#    define N_(String) (String)
+#  endif
+#else
+#  define textdomain(String) (String)
+#  define gettext(String) (String)
+#  define dgettext(Domain,Message) (Message)
+#  define dcgettext(Domain,Message,Type) (Message)
+#  define bindtextdomain(Domain,Directory) (Domain)
+#  define _(String) (String)
+#  define N_(String) (String)
+#endif
+
 Glib::ustring on_hscale_volume_format_value(double value)
 {
   char output[10];
@@ -28,7 +51,7 @@ Glib::ustring on_hscale_volume_format_value(double value)
 Glib::ustring on_hscale_pan_format_value(double value)
 {
   if (value == 0.0) {
-    return "center";
+    return _("center");
   } else {
     char output[9];
     snprintf(output, sizeof(output), "%d %%", (int)(value*100));

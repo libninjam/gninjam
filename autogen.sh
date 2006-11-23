@@ -41,13 +41,17 @@ else
 fi
 echo `automake$AM_POSTFIX --version | head -1` found
 
-echo This script runs configure and make...
-echo You did remember necessary arguments for configure, right?
-
 # autoreconf$AC_POSTFIX -fim _might_ do the trick, too.
 #  chose to your taste
-aclocal$AM_POSTFIX
+aclocal$AM_POSTFIX -I m4
 libtoolize --force --copy
+glib-gettextize --force --copy
+if test ! -e po/Makevars
+then cp po/Makevars.template po/Makevars
+fi
+if test ! -e po/LINGUAS
+then touch po/LINGUAS
+fi
 autoheader$AC_POSTFIX
 automake$AM_POSTFIX --add-missing --copy --gnu
 autoconf$AC_POSTFIX
