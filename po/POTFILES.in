@@ -1,0 +1,21 @@
+# List of source files containing translatable strings.
+./src/gninjam.cc
+./src/common.cc
+./src/gNinjamClient_glade.cc
+./src/gNinjamClient.cc
+./src/vbox_local_glade.cc
+./src/vbox_local.cc
+./src/vbox_remote_glade.cc
+./src/vbox_remote.cc
+./src/dialog_license_glade.cc
+./src/dialog_license.cc
+./src/window_preferences_glade.cc
+./src/window_preferences.cc
+./src/dialog_connect_glade.cc
+./src/dialog_connect.cc
+./src/vbox_local_channel_glade.cc
+./src/vbox_local_channel.cc
+./src/vbox_remote_channel_glade.cc
+./src/vbox_remote_channel.cc
+./src/RemoteUserFrame_glade.cc
+./src/RemoteUserFrame.cc
