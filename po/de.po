@@ -27,7 +27,7 @@ msgstr "Thema ist: "
 
 #: src/gninjam.cc:124
 msgid " has "
-msgstr " hat"
+msgstr " hat "
 
 #: src/gninjam.cc:125
 msgid "left"
