@@ -38,7 +38,7 @@ void vbox_remote::update()
     if (iter == users.end()) {
       RemoteUserFrame* user = Gtk::manage(new class RemoteUserFrame(NULL));
       user->update(iUser);
-      pack_start(*user);
+      pack_start(*user, Gtk::PACK_SHRINK, 0);
     } else {
       RemoteUserFrame* user = (RemoteUserFrame*)*iter++;
       user->update(iUser);
