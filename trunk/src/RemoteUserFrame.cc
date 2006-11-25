@@ -20,18 +20,29 @@
 #include "RemoteUserFrame.hh"
 #include "vbox_remote_channel.hh"
 
+#include "common.hh"
+
 #include <ninjam/njclient.h>
+#include <ninjam/njmisc.h>
 
 extern NJClient *g_client;
 
 RemoteUserFrame::RemoteUserFrame(GlademmData *gmm_data)
   : RemoteUserFrame_glade(gmm_data)
 {
+  hscale_pan->signal_format_value().connect(sigc::ptr_fun(on_hscale_pan_format_value), false);
+  hscale_volume->signal_format_value().connect(sigc::ptr_fun(on_hscale_volume_format_value), false);
 }
 
 void RemoteUserFrame::update(int useridx)
 {
-  label->set_text(g_client->GetUserState(useridx));
+  _useridx = useridx;
+  float vol, pan;
+  bool mute;
+  label->set_text(g_client->GetUserState(useridx, &vol, &pan, &mute));
+  hscale_volume->set_value(VAL2DB(vol));
+  hscale_pan->set_value(pan);
+  checkbutton_mute->set_active(mute);
 
   std::list<Widget*> channels = vbox->get_children();
   std::list<Widget*>::iterator iter = channels.begin();
@@ -69,4 +80,28 @@ void RemoteUserFrame::update_outputLists()
     vbox_remote_channel* channel = (vbox_remote_channel*)*iter++;
     channel->update_outputList();
   }
+}
+
+void RemoteUserFrame::on_hscale_volume_value_changed()
+{
+  g_client->SetUserState(_useridx,
+			 true, DB2VAL(hscale_volume->get_value()), // vol
+			 false, 0.0f, // pan
+			 false, false); // mute
+}
+
+void RemoteUserFrame::on_hscale_pan_value_changed()
+{
+  g_client->SetUserState(_useridx,
+			 false, 0.0f, // vol
+			 true, hscale_pan->get_value(), // pan
+			 false, false); // mute
+}
+
+void RemoteUserFrame::on_checkbutton_mute_toggled()
+{
+  g_client->SetUserState(_useridx,
+			 false, 0.0f, // vol
+			 false, 0.0f, // pan
+			 true, checkbutton_mute->get_active()); // mute
 }

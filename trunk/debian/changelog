@@ -1,3 +1,9 @@
+gninjam (0.01a-11) unstable; urgency=low
+
+  * added remote user master control
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Sat, 25 Nov 2006 23:16:15 +0100
+
 gninjam (0.01a-10) unstable; urgency=low
 
   * fix markup problem
