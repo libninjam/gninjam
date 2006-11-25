@@ -35,7 +35,7 @@ void vbox_local::add_channel(int idx)
 {
   vbox_local_channel* channel = Gtk::manage(new class vbox_local_channel(NULL));
   channel->init(idx);
-  pack_start(*channel);
+  pack_start(*channel, Gtk::PACK_SHRINK, 0);
 }
 
 void vbox_local::update()
@@ -46,9 +46,7 @@ void vbox_local::update()
   int iEnum;
   for (iChan = 0; (iEnum = g_client->EnumLocalChannels(iChan)) >= 0; iChan++) {
     if (iter == channels.end()) {
-      vbox_local_channel* channel = Gtk::manage(new class vbox_local_channel(NULL));
-      channel->init(iEnum);
-      pack_start(*channel);
+      add_channel(iEnum);
     } else {
       vbox_local_channel* channel = (vbox_local_channel*)*iter++;
       channel->init(iEnum);

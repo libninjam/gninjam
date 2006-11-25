@@ -51,7 +51,7 @@ void RemoteUserFrame::update(int useridx)
     if (iter == channels.end()) {
       vbox_remote_channel* channel = Gtk::manage(new class vbox_remote_channel(NULL));
       channel->set_data(useridx, iEnum);
-      vbox->pack_start(*channel);
+      vbox->pack_start(*channel, Gtk::PACK_SHRINK, 0);
     } else {
       vbox_remote_channel* channel = (vbox_remote_channel*)*iter++;
       channel->set_data(useridx, iEnum);
