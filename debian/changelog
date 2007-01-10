@@ -1,3 +1,9 @@
+gninjam (0.01a-11ubuntu1) feisty; urgency=low
+
+  * use pkgconfig file of libninjam to get include and lib paths
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Wed, 10 Jan 2007 21:29:45 +0100
+
 gninjam (0.01a-11) unstable; urgency=low
 
   * added remote user master control
