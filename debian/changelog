@@ -1,6 +1,13 @@
+gninjam (0.01a-11ubuntu2) feisty; urgency=low
+
+  * use pkgconfig file of ninjam-client instead of ninjam
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Thu, 11 Jan 2007 00:25:44 +0100
+
 gninjam (0.01a-11ubuntu1) feisty; urgency=low
 
   * use pkgconfig file of libninjam to get include and lib paths
+    (patch by Adam Sampson)
 
  -- Tobias Gehrig <tobias@gehrignet.de>  Wed, 10 Jan 2007 21:29:45 +0100
 
