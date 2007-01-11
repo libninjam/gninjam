@@ -68,5 +68,6 @@ private:
   sigc::connection _gui_connection;
   Gtk::TreeModel::ColumnRecord _column_model;
   Gtk::TreeModelColumn<Glib::ustring> _textcolumn;
+  Gtk::Adjustment _dummy_adjustment;
 };
 #endif
