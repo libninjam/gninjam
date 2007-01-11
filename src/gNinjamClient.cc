@@ -75,7 +75,8 @@ gNinjamClient::gNinjamClient()
   : d_connect(new class dialog_connect()),
     w_preferences(new class window_preferences()),
     _old_status(0),
-    _audio_status_changed(true)
+    _audio_status_changed(true),
+    _dummy_adjustment(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 {
   hscale_master_pan->signal_format_value().connect(sigc::ptr_fun(on_hscale_pan_format_value), false);
   hscale_metronome_pan->signal_format_value().connect(sigc::ptr_fun(on_hscale_pan_format_value), false);
@@ -93,6 +94,11 @@ gNinjamClient::gNinjamClient()
 
   _column_model.add(_textcolumn);
   combobox_metronome_output->pack_start(_textcolumn);
+
+  // The dummy adjustment is necessary because of a Gtkmm bug: there's no way to pass
+  // 0 as the first argument of this method, since it now takes references rather than
+  // pointers.
+  chat_log->set_scroll_adjustments(_dummy_adjustment, *chat_log_scroll->get_adjustment());
 
   int metrochan = g_client->config_metronome_channel;
   vbox_local->update();
@@ -356,9 +362,14 @@ void gNinjamClient::on_chat_entry_activate()
 
 void gNinjamClient::addChatText(Glib::ustring text)
 {
-  Glib::RefPtr<Gtk::TextBuffer> buffer = textview1->get_buffer();
-  Glib::ustring buffertext = buffer->get_text();
-  buffer->set_text(buffertext+text+"\n");
+  Glib::RefPtr<Gtk::TextBuffer> buffer = chat_log->get_buffer();
+  if (buffer->begin() != buffer->end()) {
+    buffer->insert(buffer->end(), "\n");
+  }
+  buffer->insert(buffer->end(), text);
+
+  Gtk::Adjustment *adj = chat_log_scroll->get_adjustment();
+  adj->set_value(adj->get_upper());
 }
 
 void gNinjamClient::setChatTopic(Glib::ustring text)
