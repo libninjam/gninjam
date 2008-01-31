@@ -239,7 +239,7 @@ int main(int argc, char **argv)
 	g_client->SetLocalChannelInfo(a,
 				      gconf_client->get_string(localpath+"/name").c_str(),
 				      true, source,
-				      false, gconf_client->get_int(localpath+"/bitrate"),
+				      true, gconf_client->get_int(localpath+"/bitrate"),
 				      true, gconf_client->get_bool(localpath+"/broadcast"));
 	a++;
       } else {
