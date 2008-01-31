@@ -3,6 +3,7 @@ gninjam (0.01a-11ubuntu5) gutsy; urgency=low
   * escape more chat messages to overcome those Gtk-warnings
   * make empty strings non-translatable
   * fix preference dialog to show correct value of savelocalaudio after startup
+  * make bitrate configurable for each local channel
 
  -- Tobias Gehrig <tobias@gehrignet.de>  Thu, 31 Jan 2008 01:35:06 +0100
 

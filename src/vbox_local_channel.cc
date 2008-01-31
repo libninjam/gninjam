@@ -109,6 +109,7 @@ void vbox_local_channel::init(int idx)
   g_client->GetLocalChannelMonitoring(_idx, &volume, &pan, &mute, &solo);
   hscale_local_volume->set_value(VAL2DB(volume));
   hscale_local_pan->set_value(pan);
+  spinbutton_bitrate->set_value(bitrate);
   checkbutton_local_mute->set_active(mute);
   checkbutton_local_solo->set_active(solo);
 }
@@ -165,6 +166,16 @@ void vbox_local_channel::on_hscale_local_pan_value_changed()
 				      true, hscale_local_pan->get_value(), // pan
 				      false, false, // mute
 				      false, false); // solo
+  g_client->NotifyServerOfChannelChange();
+}
+
+void vbox_local_channel::on_spinbutton_bitrate_value_changed()
+{
+  g_client->SetLocalChannelInfo(_idx,
+				NULL, // name
+				false, 0, // src
+				true, (int)spinbutton_bitrate->get_value(), // bitrate
+				false, false); // broadcast
   g_client->NotifyServerOfChannelChange();
 }
 
