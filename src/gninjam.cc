@@ -290,8 +290,8 @@ int main(int argc, char **argv)
     sessiondir += "/";
   }
   g_client->SetWorkDir(sessiondir.c_str());
-
-  switch (gconf_client->get_int(gconf_prefdir+"/savelocalaudio")) {
+  int savelocalaudio = gconf_client->get_int(gconf_prefdir+"/savelocalaudio");
+  switch (savelocalaudio) {
   case 2:
     if (g_client->waveWrite != NULL)
       delete g_client->waveWrite;
@@ -305,7 +305,7 @@ int main(int argc, char **argv)
 			    g_audio->m_outnch>1?2:1,
 			    gconf_client->get_int(gconf_prefdir+"/ogg_bitrate"));
   case 0:
-    g_client->config_savelocalaudio = 0;
+    g_client->config_savelocalaudio = savelocalaudio;
     break;
   default:
     g_client->config_savelocalaudio = -1;
