@@ -2280,6 +2280,28 @@ Delete Ogg Files as soon as possible</property>
 	      </child>
 
 	      <child>
+		<widget class="GtkSpinButton" id="spinbutton_bitrate">
+		  <property agent="glademm" name="cxx_visibility">protected</property>
+		  <property name="visible">True</property>
+		  <property name="tooltip" translatable="yes">Bitrate</property>
+		  <property name="can_focus">True</property>
+		  <property name="climb_rate">1</property>
+		  <property name="digits">0</property>
+		  <property name="numeric">True</property>
+		  <property name="update_policy">GTK_UPDATE_IF_VALID</property>
+		  <property name="snap_to_ticks">False</property>
+		  <property name="wrap">False</property>
+		  <property name="adjustment">8 8 300 1 10 10</property>
+		  <signal name="value_changed" handler="on_spinbutton_bitrate_value_changed" last_modification_time="Thu, 31 Jan 2008 03:43:22 GMT"/>
+		</widget>
+		<packing>
+		  <property name="padding">0</property>
+		  <property name="expand">False</property>
+		  <property name="fill">True</property>
+		</packing>
+	      </child>
+
+	      <child>
 		<widget class="GtkCheckButton" id="checkbutton_local_mute">
 		  <property agent="glademm" name="cxx_visibility">protected</property>
 		  <property name="visible">True</property>
@@ -2765,6 +2787,7 @@ Delete Ogg Files as soon as possible</property>
 </widget>
 
 <widget class="GtkAboutDialog" id="aboutdialog">
+  <property name="border_width">5</property>
   <property agent="glademm" name="cxx_separate_class">True</property>
   <property agent="glademm" name="cxx_separate_file">True</property>
   <property agent="glademm" name="cxx_visibility">public</property>
