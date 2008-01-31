@@ -72,7 +72,7 @@ vbox_local_channel_glade::vbox_local_channel_glade(GlademmData *gmm_data
    entry_local_channelname->set_visibility(true);
    entry_local_channelname->set_editable(true);
    entry_local_channelname->set_max_length(0);
-   entry_local_channelname->set_text(_(""));
+   entry_local_channelname->set_text("");
    entry_local_channelname->set_has_frame(true);
    entry_local_channelname->set_activates_default(false);
    checkbutton_local_transmit->set_name("checkbutton_local_transmit");

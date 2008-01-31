@@ -1,3 +1,17 @@
+gninjam (0.01a-11ubuntu5) gutsy; urgency=low
+
+  * escape more chat messages to overcome those Gtk-warnings
+  * make empty strings non-translatable
+  * fix preference dialog to show correct value of savelocalaudio after startup
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Thu, 31 Jan 2008 01:35:06 +0100
+
+gninjam (0.01a-11ubuntu4) gutsy; urgency=low
+
+  * rebuild with new libninjam version
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Sun, 20 Jan 2008 01:51:47 +0100
+
 gninjam (0.01a-11ubuntu3) feisty; urgency=low
 
   * fix automatic scrolling of chat log (patch by Adam Sampson)
