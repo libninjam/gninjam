@@ -118,7 +118,7 @@ window_preferences_glade::window_preferences_glade(
    entry_sessiondir->set_visibility(true);
    entry_sessiondir->set_editable(true);
    entry_sessiondir->set_max_length(0);
-   entry_sessiondir->set_text(_(""));
+   entry_sessiondir->set_text("");
    entry_sessiondir->set_has_frame(true);
    entry_sessiondir->set_activates_default(false);
    label11->set_name("label11");
@@ -205,7 +205,7 @@ window_preferences_glade::window_preferences_glade(
    entry_jack_client_name->set_visibility(true);
    entry_jack_client_name->set_editable(true);
    entry_jack_client_name->set_max_length(0);
-   entry_jack_client_name->set_text(_(""));
+   entry_jack_client_name->set_text("");
    entry_jack_client_name->set_has_frame(true);
    entry_jack_client_name->set_activates_default(false);
    label17->set_name("label17");
@@ -244,7 +244,7 @@ window_preferences_glade::window_preferences_glade(
    entry_alsa_configstring->set_visibility(true);
    entry_alsa_configstring->set_editable(true);
    entry_alsa_configstring->set_max_length(0);
-   entry_alsa_configstring->set_text(_(""));
+   entry_alsa_configstring->set_text("");
    entry_alsa_configstring->set_has_frame(true);
    entry_alsa_configstring->set_activates_default(false);
    table4->set_name("table4");
@@ -286,7 +286,7 @@ window_preferences_glade::window_preferences_glade(
    entry_hostname->set_visibility(true);
    entry_hostname->set_editable(true);
    entry_hostname->set_max_length(0);
-   entry_hostname->set_text(_(""));
+   entry_hostname->set_text("");
    entry_hostname->set_has_frame(true);
    entry_hostname->set_activates_default(false);
    entry_username->set_name("entry_username");
@@ -294,7 +294,7 @@ window_preferences_glade::window_preferences_glade(
    entry_username->set_visibility(true);
    entry_username->set_editable(true);
    entry_username->set_max_length(0);
-   entry_username->set_text(_(""));
+   entry_username->set_text("");
    entry_username->set_has_frame(true);
    entry_username->set_activates_default(false);
    entry_password->set_name("entry_password");
@@ -302,7 +302,7 @@ window_preferences_glade::window_preferences_glade(
    entry_password->set_visibility(false);
    entry_password->set_editable(true);
    entry_password->set_max_length(0);
-   entry_password->set_text(_(""));
+   entry_password->set_text("");
    entry_password->set_has_frame(true);
    entry_password->set_activates_default(false);
    table6->set_name("table6");

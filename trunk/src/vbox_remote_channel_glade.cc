@@ -74,7 +74,7 @@ vbox_remote_channel_glade::vbox_remote_channel_glade(GlademmData *gmm_data
    entry_remote_channelname->set_visibility(true);
    entry_remote_channelname->set_editable(false);
    entry_remote_channelname->set_max_length(0);
-   entry_remote_channelname->set_text(_(""));
+   entry_remote_channelname->set_text("");
    entry_remote_channelname->set_has_frame(true);
    entry_remote_channelname->set_activates_default(false);
    checkbutton_remote_receive->set_name("checkbutton_remote_receive");

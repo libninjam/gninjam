@@ -65,7 +65,7 @@ RemoteUserFrame_glade::RemoteUserFrame_glade(GlademmData *gmm_data
    
    Gtk::VBox *vbox6 = Gtk::manage(new class Gtk::VBox(false, 0));
    Gtk::Alignment *alignment4 = Gtk::manage(new class Gtk::Alignment(0.5, 0.5, 1, 1));
-   label = Gtk::manage(new class Gtk::Label(_("")));
+   label = Gtk::manage(new class Gtk::Label(""));
    label25->set_name("label25");
    label25->set_alignment(0.5,0.5);
    label25->set_padding(0,0);

@@ -102,7 +102,7 @@ dialog_connect_glade::dialog_connect_glade(
    entry_hostname->set_visibility(true);
    entry_hostname->set_editable(true);
    entry_hostname->set_max_length(0);
-   entry_hostname->set_text(_(""));
+   entry_hostname->set_text("");
    entry_hostname->set_has_frame(true);
    entry_hostname->set_activates_default(false);
    entry_username->set_name("entry_username");
@@ -110,7 +110,7 @@ dialog_connect_glade::dialog_connect_glade(
    entry_username->set_visibility(true);
    entry_username->set_editable(true);
    entry_username->set_max_length(0);
-   entry_username->set_text(_(""));
+   entry_username->set_text("");
    entry_username->set_has_frame(true);
    entry_username->set_activates_default(false);
    entry_password->set_name("entry_password");
@@ -118,7 +118,7 @@ dialog_connect_glade::dialog_connect_glade(
    entry_password->set_visibility(false);
    entry_password->set_editable(true);
    entry_password->set_max_length(0);
-   entry_password->set_text(_(""));
+   entry_password->set_text("");
    entry_password->set_has_frame(true);
    entry_password->set_activates_default(false);
    table1->set_name("table1");

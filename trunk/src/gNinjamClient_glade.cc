@@ -146,10 +146,10 @@ gNinjamClient_glade::gNinjamClient_glade(
    
    Gtk::HPaned *hpaned1 = Gtk::manage(new class Gtk::HPaned());
    progressbar1 = Gtk::manage(new class Gtk::ProgressBar());
-   label_connection_status = Gtk::manage(new class Gtk::Label(_("")));
+   label_connection_status = Gtk::manage(new class Gtk::Label(""));
    
    Gtk::VSeparator *vseparator1 = Gtk::manage(new class Gtk::VSeparator());
-   label_audio_info = Gtk::manage(new class Gtk::Label(_("")));
+   label_audio_info = Gtk::manage(new class Gtk::Label(""));
    
    Gtk::HBox *hbox1 = Gtk::manage(new class Gtk::HBox(false, 0));
    Gtk::VBox *vbox1 = Gtk::manage(new class Gtk::VBox(false, 0));
@@ -378,7 +378,7 @@ gNinjamClient_glade::gNinjamClient_glade(
    chat_entry->set_visibility(true);
    chat_entry->set_editable(true);
    chat_entry->set_max_length(0);
-   chat_entry->set_text(_(""));
+   chat_entry->set_text("");
    chat_entry->set_has_frame(true);
    chat_entry->set_activates_default(true);
    vbox3->set_name("vbox3");
