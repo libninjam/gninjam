@@ -1,3 +1,9 @@
+gninjam (0.01a-12~sessionmode) gutsy; urgency=low
+
+  * add voice chat and session mode
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Mon, 04 Feb 2008 23:26:02 +0100
+
 gninjam (0.01a-12) gutsy; urgency=low
 
   * disable markup for the label of the RemoteUserFrame to overcome 
