@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 # gNinjam - Gtk client for NINJAM
-# Copyright (C) 2006 Tobias Gehrig
+# Copyright (C) 2006-2008 Tobias Gehrig
 # This file is distributed under the same license as the gninjam package.
-# Tobias Gehrig <tobias@gehrignet.de>, 2006.
+# Tobias Gehrig <tobias@gehrignet.de>, 2006-2008.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.01a\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-11-23 17:38+0100\n"
-"PO-Revision-Date: 2006-11-23 17:43+0100\n"
+"PO-Revision-Date: 2008-02-04 21:01+0100\n"
 "Last-Translator: Tobias Gehrig <tobias@gehrignet.de>\n"
 "Language-Team: deutsch <tobias@gehrignet.de>\n"
 "MIME-Version: 1.0\n"
@@ -276,6 +277,10 @@ msgstr "Ogg+Wave Dateien"
 msgid "Delete Ogg Files as soon as possible"
 msgstr "Lösche Ogg Dateien so bald wie möglich"
 
+#: src/window_preferences_glade.cc:99 src/dialog_connect_glade.cc:66
+msgid "Connect _anonymously"
+msgstr "_Anonym verbinden"
+
 #: src/dialog_connect_glade.cc:139
 msgid "Connect"
 msgstr "Verbinden"
@@ -292,6 +297,14 @@ msgstr "Solo"
 msgid "Remove"
 msgstr "Entfernen"
 
+#: src/vbox_local_channel_glade.cc:111
+msgid "Bitrate"
+msgstr "Bitrate"
+
 #: src/vbox_remote_channel_glade.cc:54
 msgid "Receive"
 msgstr "Empfangen"
+
+#: src/RemoteUserFrame_glade.cc:55
+msgid "User master:"
+msgstr "Benutzer Master:"
