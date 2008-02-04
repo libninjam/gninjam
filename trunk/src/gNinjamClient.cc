@@ -113,6 +113,7 @@ gNinjamClient::gNinjamClient()
   Glib::ustring gconf_dir = "/apps/gninjam/preferences";
   d_connect->entry_hostname->set_text(gconf_client->get_string(gconf_dir+"/hostname"));
   d_connect->entry_username->set_text(gconf_client->get_string(gconf_dir+"/username"));
+  d_connect->checkbutton_anonymous->set_active(gconf_client->get_bool(gconf_dir+"/anonymous_login"));
   d_connect->entry_password->set_text(gconf_client->get_string(gconf_dir+"/password"));
 }
 
@@ -243,7 +244,13 @@ void gNinjamClient::on_verbinden1_activate()
   if (response_id == Gtk::RESPONSE_OK) {
     Glib::ustring hostname = d_connect->entry_hostname->get_text();
     Glib::ustring username = d_connect->entry_username->get_text();
-    Glib::ustring password = d_connect->entry_password->get_text();
+    bool anonymous = d_connect->checkbutton_anonymous->get_active();
+    Glib::ustring password = "";
+    if (anonymous)
+      username = "anonymous:" + username;
+    else
+      password = d_connect->entry_password->get_text();
+
     g_client->Connect(hostname.c_str(), username.c_str(), password.c_str());
   }
 }

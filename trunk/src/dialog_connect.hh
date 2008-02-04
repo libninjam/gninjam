@@ -21,5 +21,6 @@
 #  define _DIALOG_CONNECT_HH
 class dialog_connect : public dialog_connect_glade
 {  
+        void on_checkbutton_anonymous_toggled();
 };
 #endif

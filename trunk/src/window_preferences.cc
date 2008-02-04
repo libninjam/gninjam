@@ -81,6 +81,18 @@ window_preferences::window_preferences()
   combobox_savelocalaudio->pack_start(textcolumn);
 }
 
+void window_preferences::on_checkbutton_anonymous_toggled()
+{
+  if (checkbutton_anonymous->get_active()) {
+    label23->hide();
+    entry_password->hide();
+  }
+  else {
+    label23->show();
+    entry_password->show();
+  }
+}
+
 void window_preferences::on_button_abort_clicked()
 {
   this->hide();
@@ -230,6 +242,8 @@ void window_preferences::on_button_apply_clicked()
 		     entry_hostname->get_text());
   _gconf_client->set(_gconf_dir+"/username",
 		     entry_username->get_text());
+  _gconf_client->set(_gconf_dir+"/anonymous_login",
+		     checkbutton_anonymous->get_active());
   _gconf_client->set(_gconf_dir+"/password",
 		     entry_password->get_text());
 }
@@ -262,5 +276,6 @@ void window_preferences::on_window_preferences_show()
   }
   entry_hostname->set_text(_gconf_client->get_string(_gconf_dir+"/hostname"));
   entry_username->set_text(_gconf_client->get_string(_gconf_dir+"/username"));
+  checkbutton_anonymous->set_active(_gconf_client->get_bool(_gconf_dir+"/anonymous_login"));
   entry_password->set_text(_gconf_client->get_string(_gconf_dir+"/password"));
 }
