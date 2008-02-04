@@ -1,3 +1,11 @@
+gninjam (0.01a-12) gutsy; urgency=low
+
+  * disable markup for the label of the RemoteUserFrame to overcome 
+    those gtk warnings about the @ symbol.
+  * add checkbutton for anonymous login
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Mon, 04 Feb 2008 20:46:59 +0100
+
 gninjam (0.01a-11ubuntu5) gutsy; urgency=low
 
   * escape more chat messages to overcome those Gtk-warnings
