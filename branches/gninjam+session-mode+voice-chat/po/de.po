@@ -1,0 +1,297 @@
+# -*- coding: utf-8 -*-
+# gNinjam - Gtk client for NINJAM
+# Copyright (C) 2006 Tobias Gehrig
+# This file is distributed under the same license as the gninjam package.
+# Tobias Gehrig <tobias@gehrignet.de>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.01a\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-11-23 17:38+0100\n"
+"PO-Revision-Date: 2006-11-23 17:43+0100\n"
+"Last-Translator: Tobias Gehrig <tobias@gehrignet.de>\n"
+"Language-Team: deutsch <tobias@gehrignet.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/gninjam.cc:96
+msgid " sets topic to: "
+msgstr " setzt Thema auf: "
+
+#: src/gninjam.cc:98
+msgid "Topic is: "
+msgstr "Thema ist: "
+
+#: src/gninjam.cc:124
+msgid " has "
+msgstr " hat "
+
+#: src/gninjam.cc:125
+msgid "left"
+msgstr "den Server verlassen"
+
+#: src/gninjam.cc:125
+msgid "joined"
+msgstr "den Server betreten"
+
+#: src/gninjam.cc:126
+msgid " the server"
+msgstr ""
+
+#: src/gninjam.cc:223
+#, c-format
+msgid "Error opening audio!\n"
+msgstr "Fehler beim öffnen des Audio!\n"
+
+#: src/gninjam.cc:271 src/gNinjamClient.cc:224
+msgid "new channel"
+msgstr "neuer Kanal"
+
+#: src/gninjam.cc:300 src/window_preferences.cc:160
+#, c-format
+msgid "Error creating session directory\n"
+msgstr "Fehler beim Erstellen der Sitzungsverzeichnisses\n"
+
+#: src/common.cc:54
+msgid "center"
+msgstr "Mitte"
+
+#: src/gNinjamClient_glade.cc:97
+msgid "Master:"
+msgstr "Master:"
+
+#: src/gNinjamClient_glade.cc:98
+msgid "Metronome:"
+msgstr "Metronom:"
+
+#: src/gNinjamClient_glade.cc:107 src/gNinjamClient_glade.cc:108
+#: src/vbox_local_channel_glade.cc:65 src/vbox_remote_channel_glade.cc:64
+msgid "Mute"
+msgstr "Stumm"
+
+#: src/gNinjamClient_glade.cc:113 src/vbox_remote_channel_glade.cc:66
+msgid "Stereo"
+msgstr "Stereo"
+
+#: src/gNinjamClient_glade.cc:123
+msgid "<b>Local</b>"
+msgstr "<b>Lokal</b>"
+
+#: src/gNinjamClient_glade.cc:130
+msgid "<b>Remote</b>"
+msgstr "<b>Entfernt</b>"
+
+#: src/gNinjamClient_glade.cc:141
+msgid "<b>Chat</b>"
+msgstr "<b>Chat</b>"
+
+#: src/gNinjamClient_glade.cc:190
+msgid "_Local channels"
+msgstr "_Lokale Kanäle"
+
+#: src/gNinjamClient_glade.cc:193
+msgid "_Remote channels"
+msgstr "_Entfernte Kanäle"
+
+#: src/gNinjamClient_glade.cc:196
+msgid "_Chat"
+msgstr "_Chat"
+
+#: src/gNinjamClient_glade.cc:202
+msgid "_File"
+msgstr "_Datei"
+
+#: src/gNinjamClient_glade.cc:205
+msgid "_Edit"
+msgstr "_Bearbeiten"
+
+#: src/gNinjamClient_glade.cc:208
+msgid "_View"
+msgstr "_Ansicht"
+
+#: src/gNinjamClient_glade.cc:211
+msgid "_Help"
+msgstr "_Hilfe"
+
+#: src/gNinjamClient_glade.cc:428
+msgid "NINJAM"
+msgstr "NINJAM"
+
+#: src/gNinjamClient.cc:140
+msgid "Status: "
+msgstr "Status: "
+
+#: src/gNinjamClient.cc:143
+msgid "Connected to "
+msgstr "Verbunden mit "
+
+#: src/gNinjamClient.cc:145
+msgid " as "
+msgstr " als "
+
+#: src/gNinjamClient.cc:149
+msgid "ERROR: invalid login/password"
+msgstr "FEHLER: falsches Login/Passwort"
+
+#: src/gNinjamClient.cc:152
+msgid "ERROR: failed connecting to host"
+msgstr "FEHLER: Verbindung zum Server fehlgeschlagen"
+
+#: src/gNinjamClient.cc:155
+msgid "Not connected"
+msgstr "Nicht verbunden"
+
+#: src/gNinjamClient.cc:158
+msgid "ERROR: disconnected from host"
+msgstr "FEHLER: vom Server getrennt"
+
+#: src/gNinjamClient.cc:164
+msgid "CODE = "
+msgstr "CODE = "
+
+#: src/gNinjamClient.cc:169
+msgid ". Server gave explanation: "
+msgstr ". Server gab Erklärung: "
+
+#: src/gNinjamClient.cc:205
+msgid " BPM "
+msgstr " BPM "
+
+#: src/gNinjamClient.cc:345
+msgid "*** error: /msg requires a username and a message."
+msgstr "*** Fehler: /msg benötigt einen Benutzernamen und eine Nachricht."
+
+#: src/gNinjamClient.cc:348
+msgid "*** error: unknown command."
+msgstr "*** Fehler: unbekannter Befehl."
+
+#: src/gNinjamClient.cc:365
+msgid "<b>Chat</b>: "
+msgstr "<b>Chat</b>: "
+
+#: src/gNinjamClient.cc:386 src/vbox_local_channel.cc:89
+#: src/vbox_remote_channel.cc:87
+msgid "New channel"
+msgstr "Neuer Kanal"
+
+#: src/dialog_license_glade.cc:63
+msgid "You must agree to this license to connect to this server."
+msgstr "Sie müssen der Lizenz zustimmen, um sich mit dem Server zu verbinden."
+
+#: src/dialog_license_glade.cc:105
+msgid "License"
+msgstr "Lizenz"
+
+#: src/window_preferences_glade.cc:60
+msgid "Audio driver:"
+msgstr "Audio Treiber:"
+
+#: src/window_preferences_glade.cc:64
+msgid "Session directory:"
+msgstr "Sitzungsverzeichnis:"
+
+#: src/window_preferences_glade.cc:65
+msgid "Save local audio:"
+msgstr "Speichere lokale Audiodateien:"
+
+#: src/window_preferences_glade.cc:71
+msgid "Ogg bitrate:"
+msgstr "Ogg Bitrate"
+
+#: src/window_preferences_glade.cc:72
+msgid "Save log files"
+msgstr "Speichere Log Dateien"
+
+#: src/window_preferences_glade.cc:75
+msgid "General"
+msgstr "Allgemein"
+
+#: src/window_preferences_glade.cc:76
+msgid "Client name:"
+msgstr "Klientennamen:"
+
+#: src/window_preferences_glade.cc:77
+msgid "Number of input channels:"
+msgstr "Zahl der Eingangskanäle:"
+
+#: src/window_preferences_glade.cc:85
+msgid "Number of output channels:"
+msgstr "Zahl der Ausgangskanäle:"
+
+#: src/window_preferences_glade.cc:87
+msgid "Jack settings"
+msgstr "Jack Einstellungen"
+
+#: src/window_preferences_glade.cc:88
+msgid "Config string:"
+msgstr "Konfigurationszeichenkette:"
+
+#: src/window_preferences_glade.cc:92
+msgid "Alsa settings"
+msgstr "Alsa Einstellungen"
+
+#: src/window_preferences_glade.cc:93 src/dialog_connect_glade.cc:60
+msgid "Hostname:"
+msgstr "Servername:"
+
+#: src/window_preferences_glade.cc:94 src/dialog_connect_glade.cc:61
+msgid "Username:"
+msgstr "Benutzername:"
+
+#: src/window_preferences_glade.cc:95 src/dialog_connect_glade.cc:62
+msgid "Password:"
+msgstr "Passwort:"
+
+#: src/window_preferences_glade.cc:101
+msgid "Default Connection"
+msgstr "Standard Verbindung"
+
+#: src/window_preferences_glade.cc:360
+msgid "Preferences"
+msgstr "Einstellungen"
+
+#: src/window_preferences.cc:66
+msgid "Jack"
+msgstr "Jack"
+
+#: src/window_preferences.cc:68
+msgid "Alsa"
+msgstr "Alsa"
+
+#: src/window_preferences.cc:74
+msgid "None"
+msgstr "Keine"
+
+#: src/window_preferences.cc:76
+msgid "Ogg Files"
+msgstr "Ogg Dateien"
+
+#: src/window_preferences.cc:78
+msgid "Ogg+Wave Files"
+msgstr "Ogg+Wave Dateien"
+
+#: src/window_preferences.cc:80
+msgid "Delete Ogg Files as soon as possible"
+msgstr "Lösche Ogg Dateien so bald wie möglich"
+
+#: src/dialog_connect_glade.cc:139
+msgid "Connect"
+msgstr "Verbinden"
+
+#: src/vbox_local_channel_glade.cc:55
+msgid "Transmit"
+msgstr "Übertragen"
+
+#: src/vbox_local_channel_glade.cc:66 src/vbox_remote_channel_glade.cc:65
+msgid "Solo"
+msgstr "Solo"
+
+#: src/vbox_local_channel_glade.cc:68
+msgid "Remove"
+msgstr "Entfernen"
+
+#: src/vbox_remote_channel_glade.cc:54
+msgid "Receive"
+msgstr "Empfangen"

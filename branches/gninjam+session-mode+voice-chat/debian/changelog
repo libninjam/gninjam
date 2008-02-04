@@ -1,0 +1,110 @@
+gninjam (0.01a-11ubuntu5) gutsy; urgency=low
+
+  * escape more chat messages to overcome those Gtk-warnings
+  * make empty strings non-translatable
+  * fix preference dialog to show correct value of savelocalaudio after startup
+  * make bitrate configurable for each local channel
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Thu, 31 Jan 2008 01:35:06 +0100
+
+gninjam (0.01a-11ubuntu4) gutsy; urgency=low
+
+  * rebuild with new libninjam version
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Sun, 20 Jan 2008 01:51:47 +0100
+
+gninjam (0.01a-11ubuntu3) feisty; urgency=low
+
+  * fix automatic scrolling of chat log (patch by Adam Sampson)
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Thu, 11 Jan 2007 20:59:09 +0100
+
+gninjam (0.01a-11ubuntu2) feisty; urgency=low
+
+  * use pkgconfig file of ninjam-client instead of ninjam
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Thu, 11 Jan 2007 00:25:44 +0100
+
+gninjam (0.01a-11ubuntu1) feisty; urgency=low
+
+  * use pkgconfig file of libninjam to get include and lib paths
+    (patch by Adam Sampson)
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Wed, 10 Jan 2007 21:29:45 +0100
+
+gninjam (0.01a-11) unstable; urgency=low
+
+  * added remote user master control
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Sat, 25 Nov 2006 23:16:15 +0100
+
+gninjam (0.01a-10) unstable; urgency=low
+
+  * fix markup problem
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Thu, 23 Nov 2006 19:24:37 +0100
+
+gninjam (0.01a-9) unstable; urgency=low
+
+  * add internationalization
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Thu, 23 Nov 2006 17:53:08 +0100
+
+gninjam (0.01a-8) unstable; urgency=low
+
+  * change menu items so that everything is consistently in english
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Thu, 23 Nov 2006 16:23:51 +0100
+
+gninjam (0.01a-7) unstable; urgency=low
+
+  * fix border in remote channel view
+  * fix gtkmm dependencies in configure.in
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Thu, 23 Nov 2006 02:03:50 +0100
+
+gninjam (0.01a-6) unstable; urgency=low
+
+  * changed remote channel view so that the user name is displayed above
+    all of the users channels not within each channel seperately
+  * added support for output channel selection
+  * added de-/selection of views to hide those that are note wanted
+  * added handlebar to master controls to tear it of the window
+  * changed callback for gui update so that the gui is only updated when
+    needed
+  * added support to switch between stereo and mono mode for output channels
+  * added item in channel lists to add new channels while run-time
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Wed, 22 Nov 2006 04:09:14 +0100
+
+gninjam (0.01a-5) unstable; urgency=low
+
+  * make number of in-/output channels for jack configurable
+  * make default connection parameters configurable
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Sun, 19 Nov 2006 02:16:35 +0100
+
+gninjam (0.01a-4) unstable; urgency=low
+
+  * use gconf for saving channel parameters
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Sat, 18 Nov 2006 13:41:04 +0100
+
+gninjam (0.01a-3) unstable; urgency=low
+
+  * added preference dialog
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Sat, 18 Nov 2006 04:01:27 +0100
+
+gninjam (0.01a-2) unstable; urgency=low
+
+  * added dependency for libninjam-client
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Fri, 17 Nov 2006 17:16:05 +0100
+
+gninjam (0.01a-1) unstable; urgency=low
+
+  * Initial release with debian packaging
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Fri, 17 Nov 2006 16:50:49 +0100
+
