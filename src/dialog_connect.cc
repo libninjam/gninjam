@@ -18,3 +18,15 @@
 
 #include "config.h"
 #include "dialog_connect.hh"
+
+void dialog_connect::on_checkbutton_anonymous_toggled()
+{
+  if (checkbutton_anonymous->get_active()) {
+    label6->hide();
+    entry_password->hide();
+  }
+  else {
+    label6->show();
+    entry_password->show();
+  }
+}
