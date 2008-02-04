@@ -240,14 +240,15 @@ int main(int argc, char **argv)
 				      gconf_client->get_string(localpath+"/name").c_str(),
 				      true, source,
 				      true, gconf_client->get_int(localpath+"/bitrate"),
-				      true, gconf_client->get_bool(localpath+"/broadcast"));
+				      true, gconf_client->get_bool(localpath+"/broadcast"),
+				      true, gconf_client->get_int(localpath+"/mode"));
 	a++;
       } else {
 	break;
       }
     }
     if (localchannel == 0) {
-      g_client->SetLocalChannelInfo(0,_("new channel"),true,0,false,0,true,true);
+      g_client->SetLocalChannelInfo(0,_("new channel"),true,0,false,0,true,true,true,0);
       g_client->SetLocalChannelMonitoring(0,false,0.0f,false,0.0f,false,false,false,false);
     }
   }
@@ -345,7 +346,7 @@ int main(int argc, char **argv)
       int a = g_client->EnumLocalChannels(localchannel);
       if (a<0) break;
 
-      int sch = 0, bitrate = 0;
+      int sch = 0, bitrate = 0, mode = 0;
       bool broadcast = 0;
       float v = 0.0f, p = 0.0f;
       bool m = 0, s = 0;
@@ -353,7 +354,8 @@ int main(int argc, char **argv)
       Glib::ustring name = g_client->GetLocalChannelInfo(a,
 							 &sch,
 							 &bitrate,
-							 &broadcast);
+							 &broadcast,
+							 &mode);
       g_client->GetLocalChannelMonitoring(a, &v,&p,&m,&s);
 
       char localdir[20];
@@ -369,6 +371,8 @@ int main(int argc, char **argv)
       gconf_client->set(localpath+"/pan", p);
       gconf_client->set(localpath+"/mute", m);
       gconf_client->set(localpath+"/solo", s);
+      gconf_client->set(localpath+"/mode", mode);
+
     }
     for (; localchannel < g_client->GetMaxLocalChannels(); localchannel++) {
       char localdir[20];

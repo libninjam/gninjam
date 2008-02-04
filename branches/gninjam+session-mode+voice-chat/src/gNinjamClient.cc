@@ -227,9 +227,9 @@ bool gNinjamClient::on_timeout_gui()
 void gNinjamClient::on_neu1_activate()
 {
   int idx, maxchannels = g_client->GetMaxLocalChannels();
-  for (idx = 0; (idx < maxchannels) && g_client->GetLocalChannelInfo(idx,NULL,NULL,NULL); idx++);
+  for (idx = 0; (idx < maxchannels) && g_client->GetLocalChannelInfo(idx,NULL,NULL,NULL,NULL); idx++);
   if (idx < maxchannels) {
-    g_client->SetLocalChannelInfo(idx,_("new channel"),true,0,false,0,true,true);
+    g_client->SetLocalChannelInfo(idx,_("new channel"),true,0,false,0,true,true,true,0);
     // g_client->SetLocalChannelMonitoring(idx,false,0.0f,false,0.0f,false,false,false,false);
     g_client->NotifyServerOfChannelChange();
     vbox_local->add_channel(idx);

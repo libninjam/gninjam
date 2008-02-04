@@ -36,6 +36,7 @@ private:
   void on_checkbutton_local_mute_toggled();
   void on_checkbutton_local_solo_toggled();
   void on_button_local_remove_clicked();
+  void on_combobox_local_mode_changed();
   int _idx;
   Gtk::TreeModel::ColumnRecord _column_model;
   Gtk::TreeModelColumn<Glib::ustring> _textcolumn;

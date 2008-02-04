@@ -96,9 +96,14 @@ void vbox_remote_channel::set_data(int useridx, int channelidx)
 
   float vol, pan;
   bool sub, mute, solo, stereoout;
-  int outch;
-  char *name = g_client->GetUserChannelState(useridx, channelidx, &sub, &vol, &pan, &mute, &solo, &outch, &stereoout);
-  entry_remote_channelname->set_text(name);
+  int outch, mode;
+  Glib::ustring name = g_client->GetUserChannelState(useridx, channelidx, &sub, &vol, &pan, &mute, &solo, &outch, &stereoout, &mode);
+  Glib::ustring modestring = "";
+  if (mode == 1)
+    modestring = _("[Voice Chat] ");
+  else if (mode == 2)
+    modestring = _("[Session] ");
+  entry_remote_channelname->set_text(modestring + name);
   update_outputList();
   combobox_remote_output->set_active(outch);
   checkbutton_remote_receive->set_active(sub);

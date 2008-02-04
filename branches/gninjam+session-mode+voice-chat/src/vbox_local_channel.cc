@@ -62,6 +62,19 @@ vbox_local_channel::vbox_local_channel(GlademmData *gmm_data)
   hscale_local_volume->signal_format_value().connect(sigc::ptr_fun(on_hscale_volume_format_value), false);
   _column_model.add(_textcolumn);
   combobox_local_input->pack_start(_textcolumn);
+
+  Gtk::TreeModel::ColumnRecord column_model;
+  Gtk::TreeModelColumn<Glib::ustring> textcolumn;
+  column_model.add(textcolumn);
+  Glib::RefPtr<Gtk::ListStore> model = Gtk::ListStore::create(column_model);
+  combobox_local_mode->set_model(model);
+  Gtk::TreeModel::Row row = *(model->append());
+  row[textcolumn] = _("Normal NINJAM");
+  row = *(model->append());
+  row[textcolumn] = _("Voice Chat");
+  row = *(model->append());
+  row[textcolumn] = _("Session Mode");
+  combobox_local_mode->pack_start(textcolumn);
 }
 
 void vbox_local_channel::update_VUmeter()
@@ -94,12 +107,13 @@ void vbox_local_channel::update_inputList()
 void vbox_local_channel::init(int idx)
 {
   _idx = idx;
-  int sourcechannel, bitrate;
+  int sourcechannel, bitrate, mode;
   bool broadcast;
   char *channelname = g_client->GetLocalChannelInfo(_idx,
 						    &sourcechannel,
 						    &bitrate,
-						    &broadcast);
+						    &broadcast,
+						    &mode);
   entry_local_channelname->set_text(channelname);
   update_inputList();
   combobox_local_input->set_active(sourcechannel);
@@ -112,6 +126,7 @@ void vbox_local_channel::init(int idx)
   spinbutton_bitrate->set_value(bitrate);
   checkbutton_local_mute->set_active(mute);
   checkbutton_local_solo->set_active(solo);
+  combobox_local_mode->set_active(mode);
 }
 
 void vbox_local_channel::on_entry_local_channelname_changed()
@@ -120,7 +135,8 @@ void vbox_local_channel::on_entry_local_channelname_changed()
 				entry_local_channelname->get_text().c_str(), // name
 				false, 0, // src
 				false, 0, // bitrate
-				false, false); // broadcast
+				false, false, // broadcast
+				false, 0); // mode
   g_client->NotifyServerOfChannelChange();
 }
 
@@ -130,7 +146,8 @@ void vbox_local_channel::on_checkbutton_local_transmit_toggled()
 				NULL, // name
 				false, 0, // src
 				false, 0, // bitrate
-				true, checkbutton_local_transmit->get_active()); // broadcast
+				true, checkbutton_local_transmit->get_active(), // broadcast
+				false, 0); // mode
   g_client->NotifyServerOfChannelChange();
 }
 
@@ -145,7 +162,8 @@ void vbox_local_channel::on_combobox_local_input_changed()
 				NULL, // name
 				true, channel, // src
 				false, 0, // bitrate
-				false, false); // broadcast
+				false, false, // broadcast
+				false, 0); // mode
   g_client->NotifyServerOfChannelChange();
 }
 
@@ -175,7 +193,8 @@ void vbox_local_channel::on_spinbutton_bitrate_value_changed()
 				NULL, // name
 				false, 0, // src
 				true, (int)spinbutton_bitrate->get_value(), // bitrate
-				false, false); // broadcast
+				false, false, // broadcast
+				false, 0); // mode
   g_client->NotifyServerOfChannelChange();
 }
 
@@ -205,4 +224,15 @@ void vbox_local_channel::on_button_local_remove_clicked()
   g_client->NotifyServerOfChannelChange();
   Gtk::Container* parent = get_parent();
   parent->remove(*this);
+}
+
+void vbox_local_channel::on_combobox_local_mode_changed()
+{
+  g_client->SetLocalChannelInfo(_idx,
+				NULL, // name
+				false, 0, // src
+				false, 0, // bitrate
+				false, false, // broadcast
+				true, combobox_local_mode->get_active_row_number()); // mode
+  g_client->NotifyServerOfChannelChange();
 }
