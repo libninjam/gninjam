@@ -64,6 +64,7 @@
 #define TIMEOUT_VALUE 50
 
 #include <gtkmm/liststore.h>
+#include <gtkmm/aboutdialog.h>
 
 #include <ninjam/audiostream.h>
 #include <ninjam/njclient.h>
@@ -115,6 +116,17 @@ gNinjamClient::gNinjamClient()
   d_connect->entry_username->set_text(gconf_client->get_string(gconf_dir+"/username"));
   d_connect->checkbutton_anonymous->set_active(gconf_client->get_bool(gconf_dir+"/anonymous_login"));
   d_connect->entry_password->set_text(gconf_client->get_string(gconf_dir+"/password"));
+
+  // setup about dialog
+  std::list<Glib::ustring> authors;
+  _about_dialog.set_program_name("gNinjam");
+  _about_dialog.set_version(PACKAGE_VERSION);
+  _about_dialog.set_copyright("(C) 2006 Tobias Gehrig");
+  _about_dialog.set_comments(_("Gtk client for NINJAM"));
+  _about_dialog.set_website("http://gninjam.sf.net");
+  authors.push_back("Tobias Gehrig <tobias@gehrignet.de>");
+  _about_dialog.set_authors(authors);
+  _about_dialog.set_translator_credits(_("translator-credits"));
 }
 
 gNinjamClient::~gNinjamClient()
@@ -287,7 +299,9 @@ void gNinjamClient::on_einstellungen1_activate()
 }
 
 void gNinjamClient::on_info1_activate()
-{  
+{
+  _about_dialog.run();
+  _about_dialog.hide();
 }
 
 void gNinjamClient::on_hscale_master_volume_value_changed()
