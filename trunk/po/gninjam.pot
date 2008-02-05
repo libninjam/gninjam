@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-04 23:12+0100\n"
+"POT-Creation-Date: 2008-02-05 01:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid "Error opening audio!\n"
 msgstr ""
 
-#: src/gninjam.cc:250 src/gNinjamClient.cc:232
+#: src/gninjam.cc:250 src/gNinjamClient.cc:244
 msgid "new channel"
 msgstr ""
 
@@ -120,59 +120,67 @@ msgstr ""
 msgid "NINJAM"
 msgstr ""
 
-#: src/gNinjamClient.cc:148
-msgid "Status: "
+#: src/gNinjamClient.cc:125
+msgid "Gtk client for NINJAM"
 msgstr ""
 
-#: src/gNinjamClient.cc:151
-msgid "Connected to "
-msgstr ""
-
-#: src/gNinjamClient.cc:153
-msgid " as "
-msgstr ""
-
-#: src/gNinjamClient.cc:157
-msgid "ERROR: invalid login/password"
+#: src/gNinjamClient.cc:129
+msgid "translator-credits"
 msgstr ""
 
 #: src/gNinjamClient.cc:160
-msgid "ERROR: failed connecting to host"
+msgid "Status: "
 msgstr ""
 
 #: src/gNinjamClient.cc:163
-msgid "Not connected"
+msgid "Connected to "
 msgstr ""
 
-#: src/gNinjamClient.cc:166
-msgid "ERROR: disconnected from host"
+#: src/gNinjamClient.cc:165
+msgid " as "
+msgstr ""
+
+#: src/gNinjamClient.cc:169
+msgid "ERROR: invalid login/password"
 msgstr ""
 
 #: src/gNinjamClient.cc:172
+msgid "ERROR: failed connecting to host"
+msgstr ""
+
+#: src/gNinjamClient.cc:175
+msgid "Not connected"
+msgstr ""
+
+#: src/gNinjamClient.cc:178
+msgid "ERROR: disconnected from host"
+msgstr ""
+
+#: src/gNinjamClient.cc:184
 msgid "CODE = "
 msgstr ""
 
-#: src/gNinjamClient.cc:177
+#: src/gNinjamClient.cc:189
 msgid ". Server gave explanation: "
 msgstr ""
 
-#: src/gNinjamClient.cc:213
+#: src/gNinjamClient.cc:225
 msgid " BPM "
 msgstr ""
 
-#: src/gNinjamClient.cc:359
+#: src/gNinjamClient.cc:373
 msgid "*** error: /msg requires a username and a message."
 msgstr ""
 
-#: src/gNinjamClient.cc:362
+#: src/gNinjamClient.cc:376
 msgid "*** error: unknown command."
 msgstr ""
 
-#: src/gNinjamClient.cc:384
+#: src/gNinjamClient.cc:398
 msgid "<b>Chat</b>: "
 msgstr ""
 
-#: src/gNinjamClient.cc:405 src/vbox_local_channel.cc:89
+#: src/gNinjamClient.cc:419 src/vbox_local_channel.cc:89
 #: src/vbox_remote_channel.cc:87
 msgid "New channel"
 msgstr ""
@@ -281,7 +289,7 @@ msgstr ""
 msgid "Delete Ogg Files as soon as possible"
 msgstr ""
 
-#: src/dialog_connect_glade.cc:146
+#: src/dialog_connect_glade.cc:147
 msgid "Connect"
 msgstr ""
 

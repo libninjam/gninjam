@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: 0.01a\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-11-23 17:38+0100\n"
-"PO-Revision-Date: 2008-02-04 21:01+0100\n"
+"PO-Revision-Date: 2008-02-05 01:15+0100\n"
 "Last-Translator: Tobias Gehrig <tobias@gehrignet.de>\n"
 "Language-Team: deutsch <tobias@gehrignet.de>\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr ""
 msgid "Error opening audio!\n"
 msgstr "Fehler beim öffnen des Audio!\n"
 
-#: src/gninjam.cc:250 src/gNinjamClient.cc:232
+#: src/gninjam.cc:250 src/gNinjamClient.cc:244
 msgid "new channel"
 msgstr "neuer Kanal"
 
@@ -121,59 +121,59 @@ msgstr "_Hilfe"
 msgid "NINJAM"
 msgstr "NINJAM"
 
-#: src/gNinjamClient.cc:148
+#: src/gNinjamClient.cc:160
 msgid "Status: "
 msgstr "Status: "
 
-#: src/gNinjamClient.cc:151
+#: src/gNinjamClient.cc:163
 msgid "Connected to "
 msgstr "Verbunden mit "
 
-#: src/gNinjamClient.cc:153
+#: src/gNinjamClient.cc:165
 msgid " as "
 msgstr " als "
 
-#: src/gNinjamClient.cc:157
+#: src/gNinjamClient.cc:169
 msgid "ERROR: invalid login/password"
 msgstr "FEHLER: falsches Login/Passwort"
 
-#: src/gNinjamClient.cc:160
+#: src/gNinjamClient.cc:172
 msgid "ERROR: failed connecting to host"
 msgstr "FEHLER: Verbindung zum Server fehlgeschlagen"
 
-#: src/gNinjamClient.cc:163
+#: src/gNinjamClient.cc:175
 msgid "Not connected"
 msgstr "Nicht verbunden"
 
-#: src/gNinjamClient.cc:166
+#: src/gNinjamClient.cc:178
 msgid "ERROR: disconnected from host"
 msgstr "FEHLER: vom Server getrennt"
 
-#: src/gNinjamClient.cc:172
+#: src/gNinjamClient.cc:184
 msgid "CODE = "
 msgstr "CODE = "
 
-#: src/gNinjamClient.cc:177
+#: src/gNinjamClient.cc:189
 msgid ". Server gave explanation: "
 msgstr ". Server gab Erklärung: "
 
-#: src/gNinjamClient.cc:213
+#: src/gNinjamClient.cc:225
 msgid " BPM "
 msgstr " BPM "
 
-#: src/gNinjamClient.cc:359
+#: src/gNinjamClient.cc:373
 msgid "*** error: /msg requires a username and a message."
 msgstr "*** Fehler: /msg benötigt einen Benutzernamen und eine Nachricht."
 
-#: src/gNinjamClient.cc:362
+#: src/gNinjamClient.cc:376
 msgid "*** error: unknown command."
 msgstr "*** Fehler: unbekannter Befehl."
 
-#: src/gNinjamClient.cc:384
+#: src/gNinjamClient.cc:398
 msgid "<b>Chat</b>: "
 msgstr "<b>Chat</b>: "
 
-#: src/gNinjamClient.cc:405 src/vbox_local_channel.cc:89
+#: src/gNinjamClient.cc:419 src/vbox_local_channel.cc:89
 #: src/vbox_remote_channel.cc:87
 msgid "New channel"
 msgstr "Neuer Kanal"
@@ -282,7 +282,7 @@ msgstr "Lösche Ogg Dateien so bald wie möglich"
 msgid "Connect _anonymously"
 msgstr "_Anonym verbinden"
 
-#: src/dialog_connect_glade.cc:146
+#: src/dialog_connect_glade.cc:147
 msgid "Connect"
 msgstr "Verbinden"
 
@@ -309,3 +309,11 @@ msgstr "Empfangen"
 #: src/RemoteUserFrame_glade.cc:55
 msgid "User master:"
 msgstr "Benutzer Master:"
+
+#: src/gNinjamClient.cc:125
+msgid "Gtk client for NINJAM"
+msgstr "Gtk Klient für NINJAM"
+
+#: src/gNinjamClient.cc:129
+msgid "translator-credits"
+msgstr "Tobias Gehrig <tobias@gehrignet.de"
