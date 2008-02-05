@@ -316,4 +316,4 @@ msgstr "Gtk Klient für NINJAM"
 
 #: src/gNinjamClient.cc:129
 msgid "translator-credits"
-msgstr "Tobias Gehrig <tobias@gehrignet.de"
+msgstr "Tobias Gehrig <tobias@gehrignet.de>"
