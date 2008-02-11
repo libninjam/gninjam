@@ -50,7 +50,7 @@ msgstr "Fehler beim öffnen des Audio!\n"
 msgid "new channel"
 msgstr "neuer Kanal"
 
-#: src/gninjam.cc:279 src/window_preferences.cc:172
+#: src/gninjam.cc:279 src/window_preferences.cc:181
 #, c-format
 msgid "Error creating session directory\n"
 msgstr "Fehler beim Erstellen der Sitzungsverzeichnisses\n"
@@ -173,7 +173,7 @@ msgstr "*** Fehler: unbekannter Befehl."
 msgid "<b>Chat</b>: "
 msgstr "<b>Chat</b>: "
 
-#: src/gNinjamClient.cc:419 src/vbox_local_channel.cc:89
+#: src/gNinjamClient.cc:421 src/vbox_local_channel.cc:91
 #: src/vbox_remote_channel.cc:87
 msgid "New channel"
 msgstr "Neuer Kanal"
@@ -317,3 +317,7 @@ msgstr "Gtk Klient für NINJAM"
 #: src/gNinjamClient.cc:129
 msgid "translator-credits"
 msgstr "Tobias Gehrig <tobias@gehrignet.de>"
+
+#, c-format
+msgid "Falling back on alsa audio driver!\n"
+msgstr "Greife auf Alsa Audiotreiber zurück.\n"

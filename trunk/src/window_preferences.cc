@@ -105,12 +105,14 @@ void window_preferences::on_button_apply_clicked()
   Glib::ustring client_name = entry_jack_client_name->get_text();
   int nInputChannels = (int)spinbutton_jack_ninputchannels->get_value();
   int nOutputChannels = (int)spinbutton_jack_noutputchannels->get_value();
+  bool audiooff = (g_audio == NULL);
 
   if (audiodriver == 0) {
     if ((audiodriver != _gconf_client->get_int(_gconf_dir+"/audio_driver"))||
 	(client_name != _gconf_client->get_string(_gconf_dir+"/jack_client_name"))||
 	(nInputChannels != _gconf_client->get_int(_gconf_dir+"/jack_ninput_channels"))||
-	(nOutputChannels != _gconf_client->get_int(_gconf_dir+"/jack_noutput_channels"))) {
+	(nOutputChannels != _gconf_client->get_int(_gconf_dir+"/jack_noutput_channels"))||
+	audiooff) {
       g_audio_enable = 0;
       if (g_audio != NULL)
 	delete g_audio;
@@ -127,11 +129,14 @@ void window_preferences::on_button_apply_clicked()
 					  g_client);
       window->update_inputLists();
       window->update_outputLists();
-      g_audio_enable = 1;
+      if (g_audio) {
+	g_audio_enable = 1;
+      }
     }
   } else {
     if ((audiodriver != _gconf_client->get_int(_gconf_dir+"/audio_driver")) ||
-	(alsacfgstr != _gconf_client->get_string(_gconf_dir+"/alsa_config_string"))) {
+	(alsacfgstr != _gconf_client->get_string(_gconf_dir+"/alsa_config_string"))||
+	audiooff) {
       g_audio_enable = 0;
       if (g_audio)
 	delete g_audio;
@@ -140,7 +145,11 @@ void window_preferences::on_button_apply_clicked()
       g_audio = create_audioStreamer_ALSA(cfgstr,
 					  audiostream_onsamples);
       delete cfgstr;
-      g_audio_enable = 1;
+      window->update_inputLists();
+      window->update_outputLists();
+      if (g_audio) {
+	g_audio_enable = 1;
+      }
     }
   }
   Glib::ustring session_dir = entry_sessiondir->get_text();
@@ -190,20 +199,25 @@ void window_preferences::on_button_apply_clicked()
   int oggbitrate = (int)spinbutton_oggbitrate->get_value();
   if ((savelocalaudio != _gconf_client->get_int(_gconf_dir+"/savelocalaudio")) ||
       ((oggbitrate != _gconf_client->get_int(_gconf_dir+"/ogg_bitrate")) &&
-       (savelocalaudio > 0))) {
+       (savelocalaudio > 0)) ||
+      audiooff) {
     switch (savelocalaudio) {
     case 2:
-      if (g_client->waveWrite != NULL)
+      if (g_client->waveWrite != NULL) {
 	delete g_client->waveWrite;
-      g_client->waveWrite = new WaveWriter((sessiondir+"output.wav").c_str(),
-					   24,
-					   g_audio->m_outnch>1?2:1,
-					   g_audio->m_srate);
+	g_client->waveWrite = NULL;
+      }
+      if (g_audio)
+	g_client->waveWrite = new WaveWriter((sessiondir+"output.wav").c_str(),
+					     24,
+					     g_audio->m_outnch>1?2:1,
+					     g_audio->m_srate);
     case 1:
-      g_client->SetOggOutFile(fopen((sessiondir+"output.ogg").c_str(),"ab"),
-			      g_audio->m_srate,
-			      g_audio->m_outnch>1?2:1,
-			      oggbitrate);
+      if (g_audio)
+	g_client->SetOggOutFile(fopen((sessiondir+"output.ogg").c_str(),"ab"),
+				g_audio->m_srate,
+				g_audio->m_outnch>1?2:1,
+				oggbitrate);
     case 0:
       g_client->config_savelocalaudio = savelocalaudio;
       break;
