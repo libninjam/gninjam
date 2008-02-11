@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-05 01:13+0100\n"
+"POT-Creation-Date: 2008-02-11 22:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,7 @@ msgstr ""
 msgid "new channel"
 msgstr ""
 
-#: src/gninjam.cc:279 src/window_preferences.cc:172
+#: src/gninjam.cc:279 src/window_preferences.cc:181
 #, c-format
 msgid "Error creating session directory\n"
 msgstr ""
@@ -180,7 +180,7 @@ msgstr ""
 msgid "<b>Chat</b>: "
 msgstr ""
 
-#: src/gNinjamClient.cc:419 src/vbox_local_channel.cc:89
+#: src/gNinjamClient.cc:421 src/vbox_local_channel.cc:91
 #: src/vbox_remote_channel.cc:87
 msgid "New channel"
 msgstr ""

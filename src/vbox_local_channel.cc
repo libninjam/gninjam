@@ -81,9 +81,11 @@ void vbox_local_channel::update_inputList()
   Glib::RefPtr<Gtk::ListStore> model = Gtk::ListStore::create(_column_model);
   const char* sourcename;
   Gtk::TreeModel::Row row;
-  for (int i=0; (sourcename = g_audio->GetChannelName(i)) != NULL; i++) {
-    row = *(model->append());
-    row[_textcolumn] = sourcename;
+  if (g_audio) {
+    for (int i=0; (sourcename = g_audio->GetChannelName(i)) != NULL; i++) {
+      row = *(model->append());
+      row[_textcolumn] = sourcename;
+    }
   }
   row = *(model->append());
   row[_textcolumn] = _("New channel");

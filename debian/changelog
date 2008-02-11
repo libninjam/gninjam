@@ -1,3 +1,9 @@
+gninjam (0.01a-12ubuntu1) gutsy; urgency=low
+
+  * start gui even if audio interface could not be successfully initialized.
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Mon, 11 Feb 2008 14:58:52 +0100
+
 gninjam (0.01a-12) gutsy; urgency=low
 
   * disable markup for the label of the RemoteUserFrame to overcome 
