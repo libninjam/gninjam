@@ -97,11 +97,13 @@ void vbox_remote_channel::set_data(int useridx, int channelidx)
   float vol, pan;
   bool sub, mute, solo, stereoout;
   int outch, mode;
-  Glib::ustring name = g_client->GetUserChannelState(useridx, channelidx, &sub, &vol, &pan, &mute, &solo, &outch, &stereoout, &mode);
+  Glib::ustring name = g_client->GetUserChannelState(useridx, channelidx, &sub, &vol, &pan, &mute, &solo, &outch, &mode);
+  stereoout = !!(outch & 1024);
+  outch &= 1023;
   Glib::ustring modestring = "";
-  if (mode == 1)
+  if (mode == 2)
     modestring = _("[Voice Chat] ");
-  else if (mode == 2)
+  else if (mode == 4)
     modestring = _("[Session] ");
   entry_remote_channelname->set_text(modestring + name);
   update_outputList();
@@ -122,8 +124,7 @@ void vbox_remote_channel::on_checkbutton_remote_receive_toggled()
 				false, 0.0f, // pan
 				false, false, // mute
 				false, false, // solo
-				false, 0, // outch
-				false, false); // stereoout
+				false, 0); // outch
 }
 
 void vbox_remote_channel::on_hscale_remote_volume_value_changed()
@@ -134,8 +135,7 @@ void vbox_remote_channel::on_hscale_remote_volume_value_changed()
 				false, 0.0f, // pan
 				false, false, // mute
 				false, false, // solo
-				false, 0, // outch
-				false, false); // stereoout
+				false, 0); // outch
 }
 
 void vbox_remote_channel::on_hscale_remote_pan_value_changed()
@@ -146,8 +146,7 @@ void vbox_remote_channel::on_hscale_remote_pan_value_changed()
 				true, hscale_remote_pan->get_value(), // pan
 				false, false, // mute
 				false, false, // solo
-				false, 0, // outch
-				false, false); // stereoout
+				false, 0); // outch
 }
 
 void vbox_remote_channel::on_checkbutton_remote_mute_toggled()
@@ -158,8 +157,7 @@ void vbox_remote_channel::on_checkbutton_remote_mute_toggled()
 				false, 0.0f, // pan
 				true, checkbutton_remote_mute->get_active(), // mute
 				false, false, // solo
-				false, 0, // outch
-				false, false); // stereoout
+				false, 0); // outch
 }
 
 void vbox_remote_channel::on_checkbutton_remote_solo_toggled()
@@ -170,8 +168,7 @@ void vbox_remote_channel::on_checkbutton_remote_solo_toggled()
 				false, 0.0f, // pan
 				false, false, // mute
 				true, checkbutton_remote_solo->get_active(), // solo
-				false, 0, // outch
-				false, false); // stereoout
+				false, 0);// outch
 }
 
 void vbox_remote_channel::on_combobox_remote_output_changed()
@@ -181,24 +178,19 @@ void vbox_remote_channel::on_combobox_remote_output_changed()
     if (g_audio->addOutputChannel())
       window->update_outputLists();
   }
+  channel &= 1023;
+  if (!checkbutton_remote_stereo->get_active())
+    channel |= 1024;
   g_client->SetUserChannelState(_useridx, _channelidx,
 				false, false, // sub
 				false, 0.0f, // vol
 				false, 0.0f, // pan
 				false, false, // mute
 				false, false, // solo
-				true, channel, // outch
-				false, false); // stereoout
+				true, channel); // outch
 }
 
 void vbox_remote_channel::on_checkbutton_remote_stereo_toggled()
 {
-  g_client->SetUserChannelState(_useridx, _channelidx,
-				false, false, // sub
-				false, 0.0f, // vol
-				false, 0.0f, // pan
-				false, false, // mute
-				false, false, // solo
-				false, 0, // outch
-				true, checkbutton_remote_stereo->get_active()); // stereoout
+  on_combobox_remote_output_changed();
 }

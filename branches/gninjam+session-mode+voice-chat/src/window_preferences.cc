@@ -50,7 +50,7 @@
 extern audioStreamer *g_audio;
 extern NJClient *g_client;
 extern int g_audio_enable;
-extern void audiostream_onsamples(float **inbuf, int innch, float **outbuf, int outnch, int len, int srate);
+extern void audiostream_onsamples(float **inbuf, int innch, float **outbuf, int outnch, int len, int srate, bool hasTransportInfo, bool isPlaying, bool isSeek, double cursessionpos);
 extern gNinjamClient *window;
 
 window_preferences::window_preferences()
