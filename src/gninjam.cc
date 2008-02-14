@@ -23,7 +23,7 @@
 
 #include "gNinjamClient.hh"
 
-#include <WDL/string.h>
+#include <WDL/wdlstring.h>
 #include <WDL/ptrlist.h>
 #include <ninjam/audiostream.h>
 #include <ninjam/njclient.h>
@@ -120,7 +120,7 @@ int licensecallback(int user32, char *licensetext)
     return false;
 }
 
-void audiostream_onsamples(float **inbuf, int innch, float **outbuf, int outnch, int len, int srate) 
+void audiostream_onsamples(float **inbuf, int innch, float **outbuf, int outnch, int len, int srate, bool hasTransportInfo, bool isPlaying, bool isSeek, double cursessionpos) 
 { 
   if (!g_audio_enable) 
   {
@@ -129,7 +129,10 @@ void audiostream_onsamples(float **inbuf, int innch, float **outbuf, int outnch,
     for (x = 0; x < outnch; x ++) memset(outbuf[x],0,sizeof(float)*len);
     return;
   }
-  g_client->AudioProc(inbuf,innch, outbuf, outnch, len,srate);
+  if (hasTransportInfo)
+    g_client->AudioProc(inbuf, innch, outbuf, outnch, len, srate, false, isPlaying, isSeek, cursessionpos);
+  else
+    g_client->AudioProc(inbuf, innch, outbuf, outnch, len, srate);
 }
 
 void sigfunc(int sig)
@@ -241,6 +244,7 @@ int main(int argc, char **argv)
 				      true, source,
 				      true, gconf_client->get_int(localpath+"/bitrate"),
 				      true, gconf_client->get_bool(localpath+"/broadcast"),
+				      true, gconf_client->get_int(localpath+"/output_channel"),
 				      true, gconf_client->get_int(localpath+"/mode"));
 	a++;
       } else {
@@ -248,7 +252,7 @@ int main(int argc, char **argv)
       }
     }
     if (localchannel == 0) {
-      g_client->SetLocalChannelInfo(0,_("new channel"),true,0,false,0,true,true,true,0);
+      g_client->SetLocalChannelInfo(0,_("new channel"),true,0,false,0,true,true,true,1024,true,0);
       g_client->SetLocalChannelMonitoring(0,false,0.0f,false,0.0f,false,false,false,false);
     }
   }
@@ -346,7 +350,7 @@ int main(int argc, char **argv)
       int a = g_client->EnumLocalChannels(localchannel);
       if (a<0) break;
 
-      int sch = 0, bitrate = 0, mode = 0;
+      int sch = 0, bitrate = 0, outch = 0, mode = 0;
       bool broadcast = 0;
       float v = 0.0f, p = 0.0f;
       bool m = 0, s = 0;
@@ -355,6 +359,7 @@ int main(int argc, char **argv)
 							 &sch,
 							 &bitrate,
 							 &broadcast,
+							 &outch,
 							 &mode);
       g_client->GetLocalChannelMonitoring(a, &v,&p,&m,&s);
 
@@ -371,6 +376,7 @@ int main(int argc, char **argv)
       gconf_client->set(localpath+"/pan", p);
       gconf_client->set(localpath+"/mute", m);
       gconf_client->set(localpath+"/solo", s);
+      gconf_client->set(localpath+"/output_channel", outch);
       gconf_client->set(localpath+"/mode", mode);
 
     }

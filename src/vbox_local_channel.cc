@@ -62,6 +62,7 @@ vbox_local_channel::vbox_local_channel(GlademmData *gmm_data)
   hscale_local_volume->signal_format_value().connect(sigc::ptr_fun(on_hscale_volume_format_value), false);
   _column_model.add(_textcolumn);
   combobox_local_input->pack_start(_textcolumn);
+  combobox_local_output->pack_start(_textcolumn);
 
   Gtk::TreeModel::ColumnRecord column_model;
   Gtk::TreeModelColumn<Glib::ustring> textcolumn;
@@ -104,29 +105,49 @@ void vbox_local_channel::update_inputList()
   combobox_local_input->set_active(active);
 }
 
+void vbox_local_channel::update_outputList()
+{
+  int active = combobox_local_output->get_active_row_number();
+  Glib::RefPtr<Gtk::ListStore> model = Gtk::ListStore::create(_column_model);
+  Gtk::TreeModel::Row row;
+  for (int i=0; i < g_audio->m_outnch; i++) {
+    row = *(model->append());
+    row[_textcolumn] = g_audio->GetOutputChannelName(i);
+  }
+  row = *(model->append());
+  row[_textcolumn] = _("New channel");
+  combobox_local_output->set_model(model);
+  combobox_local_output->set_active(active);
+}
+
 void vbox_local_channel::init(int idx)
 {
   _idx = idx;
-  int sourcechannel, bitrate, mode;
+  int sourcechannel, bitrate, outch, mode;
   bool broadcast;
   char *channelname = g_client->GetLocalChannelInfo(_idx,
 						    &sourcechannel,
 						    &bitrate,
 						    &broadcast,
+						    &outch,
 						    &mode);
   entry_local_channelname->set_text(channelname);
   update_inputList();
-  combobox_local_input->set_active(sourcechannel);
+  combobox_local_input->set_active(sourcechannel&1023);
+  checkbutton_local_stereo_in->set_active(!!(sourcechannel&1024));
   checkbutton_local_transmit->set_active(broadcast);
   float volume, pan;
   bool mute, solo;
   g_client->GetLocalChannelMonitoring(_idx, &volume, &pan, &mute, &solo);
   hscale_local_volume->set_value(VAL2DB(volume));
   hscale_local_pan->set_value(pan);
+  update_outputList();
+  combobox_local_output->set_active(outch&1023);
+  checkbutton_local_stereo_out->set_active(!(outch&1024));
   spinbutton_bitrate->set_value(bitrate);
   checkbutton_local_mute->set_active(mute);
   checkbutton_local_solo->set_active(solo);
-  combobox_local_mode->set_active(mode);
+  combobox_local_mode->set_active(mode>>1);
 }
 
 void vbox_local_channel::on_entry_local_channelname_changed()
@@ -136,6 +157,7 @@ void vbox_local_channel::on_entry_local_channelname_changed()
 				false, 0, // src
 				false, 0, // bitrate
 				false, false, // broadcast
+				false, 0, // outch
 				false, 0); // mode
   g_client->NotifyServerOfChannelChange();
 }
@@ -147,6 +169,7 @@ void vbox_local_channel::on_checkbutton_local_transmit_toggled()
 				false, 0, // src
 				false, 0, // bitrate
 				true, checkbutton_local_transmit->get_active(), // broadcast
+				false, 0, // outch
 				false, 0); // mode
   g_client->NotifyServerOfChannelChange();
 }
@@ -158,13 +181,22 @@ void vbox_local_channel::on_combobox_local_input_changed()
     if (g_audio->addInputChannel())
       window->update_inputLists();
   }
+  channel &= 1023;
+  if (checkbutton_local_stereo_in->get_active())
+    channel |= 1024;
   g_client->SetLocalChannelInfo(_idx,
 				NULL, // name
 				true, channel, // src
 				false, 0, // bitrate
 				false, false, // broadcast
+				false, 0, // outch
 				false, 0); // mode
   g_client->NotifyServerOfChannelChange();
+}
+
+void vbox_local_channel::on_checkbutton_local_stereo_in_toggled()
+{
+  on_combobox_local_input_changed();
 }
 
 void vbox_local_channel::on_hscale_local_volume_value_changed()
@@ -187,6 +219,31 @@ void vbox_local_channel::on_hscale_local_pan_value_changed()
   g_client->NotifyServerOfChannelChange();
 }
 
+void vbox_local_channel::on_combobox_local_output_changed()
+{
+  int channel = combobox_local_output->get_active_row_number();
+  if (g_audio && (channel == g_audio->m_outnch)) {
+    if (g_audio->addOutputChannel())
+      window->update_outputLists();
+  }
+  channel &= 1023;
+  if (!checkbutton_local_stereo_out->get_active())
+    channel |= 1024;
+  g_client->SetLocalChannelInfo(_idx,
+				NULL, // name
+				true, channel, // src
+				false, 0, // bitrate
+				false, false, // broadcast
+				false, 0, // outch
+				false, 0); // mode
+  g_client->NotifyServerOfChannelChange();
+}
+
+void vbox_local_channel::on_checkbutton_local_stereo_out_toggled()
+{
+  on_combobox_local_output_changed();
+}
+
 void vbox_local_channel::on_spinbutton_bitrate_value_changed()
 {
   g_client->SetLocalChannelInfo(_idx,
@@ -194,6 +251,7 @@ void vbox_local_channel::on_spinbutton_bitrate_value_changed()
 				false, 0, // src
 				true, (int)spinbutton_bitrate->get_value(), // bitrate
 				false, false, // broadcast
+				false, 0, // outch
 				false, 0); // mode
   g_client->NotifyServerOfChannelChange();
 }
@@ -233,6 +291,7 @@ void vbox_local_channel::on_combobox_local_mode_changed()
 				false, 0, // src
 				false, 0, // bitrate
 				false, false, // broadcast
-				true, combobox_local_mode->get_active_row_number()); // mode
+				false, 0, // outch
+				true, combobox_local_mode->get_active_row_number()<<1); // mode
   g_client->NotifyServerOfChannelChange();
 }

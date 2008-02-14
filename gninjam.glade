@@ -600,7 +600,7 @@
 		</widget>
 		<packing>
 		  <property name="shrink">True</property>
-		  <property name="resize">False</property>
+		  <property name="resize">True</property>
 		</packing>
 	      </child>
 
@@ -686,7 +686,7 @@
 	    </widget>
 	    <packing>
 	      <property name="shrink">True</property>
-	      <property name="resize">False</property>
+	      <property name="resize">True</property>
 	    </packing>
 	  </child>
 
@@ -1956,6 +1956,7 @@ Delete Ogg Files as soon as possible</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
 	      <property name="response_id">-5</property>
+	      <accelerator key="Return" modifiers="0" signal="clicked"/>
 	    </widget>
 	  </child>
 	</widget>
@@ -2225,14 +2226,15 @@ Delete Ogg Files as soon as possible</property>
 		<widget class="GtkCheckButton" id="checkbutton_local_transmit">
 		  <property agent="glademm" name="cxx_visibility">protected</property>
 		  <property name="visible">True</property>
+		  <property name="tooltip" translatable="yes">Transmit</property>
 		  <property name="can_focus">True</property>
-		  <property name="label" translatable="yes">Transmit</property>
+		  <property name="label" translatable="yes">T</property>
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">True</property>
 		  <property name="active">False</property>
 		  <property name="inconsistent">False</property>
-		  <property name="draw_indicator">True</property>
+		  <property name="draw_indicator">False</property>
 		  <signal name="toggled" handler="on_checkbutton_local_transmit_toggled" last_modification_time="Wed, 15 Nov 2006 03:04:13 GMT"/>
 		</widget>
 		<packing>
@@ -2253,19 +2255,106 @@ Delete Ogg Files as soon as possible</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
-		  <property name="expand">True</property>
-		  <property name="fill">True</property>
+		  <property name="expand">False</property>
+		  <property name="fill">False</property>
 		</packing>
 	      </child>
 
 	      <child>
-		<widget class="GtkProgressBar" id="progressbar_local">
+		<widget class="GtkCheckButton" id="checkbutton_local_stereo_in">
 		  <property agent="glademm" name="cxx_visibility">protected</property>
 		  <property name="visible">True</property>
-		  <property name="orientation">GTK_PROGRESS_LEFT_TO_RIGHT</property>
-		  <property name="fraction">0</property>
-		  <property name="pulse_step">0.10000000149</property>
-		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="tooltip" translatable="yes">Stereo Input</property>
+		  <property name="can_focus">True</property>
+		  <property name="label" translatable="yes">St</property>
+		  <property name="use_underline">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">True</property>
+		  <property name="active">False</property>
+		  <property name="inconsistent">False</property>
+		  <property name="draw_indicator">False</property>
+		  <signal name="toggled" handler="on_checkbutton_local_stereo_in_toggled" last_modification_time="Wed, 13 Feb 2008 15:52:45 GMT"/>
+		</widget>
+		<packing>
+		  <property name="padding">0</property>
+		  <property name="expand">False</property>
+		  <property name="fill">False</property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkComboBox" id="combobox_local_output">
+		  <property agent="glademm" name="cxx_visibility">protected</property>
+		  <property name="visible">True</property>
+		  <property name="add_tearoffs">False</property>
+		  <property name="focus_on_click">True</property>
+		  <signal name="changed" handler="on_combobox_local_output_changed" last_modification_time="Wed, 13 Feb 2008 15:52:37 GMT"/>
+		</widget>
+		<packing>
+		  <property name="padding">0</property>
+		  <property name="expand">False</property>
+		  <property name="fill">False</property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkCheckButton" id="checkbutton_local_stereo_out">
+		  <property agent="glademm" name="cxx_visibility">protected</property>
+		  <property name="visible">True</property>
+		  <property name="tooltip" translatable="yes">Stereo Output</property>
+		  <property name="can_focus">True</property>
+		  <property name="label" translatable="yes">St</property>
+		  <property name="use_underline">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">True</property>
+		  <property name="active">False</property>
+		  <property name="inconsistent">False</property>
+		  <property name="draw_indicator">False</property>
+		  <signal name="toggled" handler="on_checkbutton_local_stereo_out_toggled" last_modification_time="Wed, 13 Feb 2008 15:53:12 GMT"/>
+		</widget>
+		<packing>
+		  <property name="padding">0</property>
+		  <property name="expand">False</property>
+		  <property name="fill">False</property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkCheckButton" id="checkbutton_local_mute">
+		  <property agent="glademm" name="cxx_visibility">protected</property>
+		  <property name="visible">True</property>
+		  <property name="tooltip" translatable="yes">Mute</property>
+		  <property name="can_focus">True</property>
+		  <property name="label" translatable="yes">M</property>
+		  <property name="use_underline">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">True</property>
+		  <property name="active">False</property>
+		  <property name="inconsistent">False</property>
+		  <property name="draw_indicator">False</property>
+		  <signal name="toggled" handler="on_checkbutton_local_mute_toggled" last_modification_time="Wed, 15 Nov 2006 03:15:24 GMT"/>
+		</widget>
+		<packing>
+		  <property name="padding">0</property>
+		  <property name="expand">False</property>
+		  <property name="fill">False</property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkCheckButton" id="checkbutton_local_solo">
+		  <property agent="glademm" name="cxx_visibility">protected</property>
+		  <property name="visible">True</property>
+		  <property name="tooltip" translatable="yes">Solo</property>
+		  <property name="can_focus">True</property>
+		  <property name="label" translatable="yes">S</property>
+		  <property name="use_underline">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">True</property>
+		  <property name="active">False</property>
+		  <property name="inconsistent">False</property>
+		  <property name="draw_indicator">False</property>
+		  <signal name="toggled" handler="on_checkbutton_local_solo_toggled" last_modification_time="Wed, 15 Nov 2006 03:15:32 GMT"/>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -2330,56 +2419,13 @@ Delete Ogg Files as soon as possible</property>
 	      </child>
 
 	      <child>
-		<widget class="GtkCheckButton" id="checkbutton_local_mute">
+		<widget class="GtkProgressBar" id="progressbar_local">
 		  <property agent="glademm" name="cxx_visibility">protected</property>
 		  <property name="visible">True</property>
-		  <property name="can_focus">True</property>
-		  <property name="label" translatable="yes">Mute</property>
-		  <property name="use_underline">True</property>
-		  <property name="relief">GTK_RELIEF_NORMAL</property>
-		  <property name="focus_on_click">True</property>
-		  <property name="active">False</property>
-		  <property name="inconsistent">False</property>
-		  <property name="draw_indicator">True</property>
-		  <signal name="toggled" handler="on_checkbutton_local_mute_toggled" last_modification_time="Wed, 15 Nov 2006 03:15:24 GMT"/>
-		</widget>
-		<packing>
-		  <property name="padding">0</property>
-		  <property name="expand">False</property>
-		  <property name="fill">False</property>
-		</packing>
-	      </child>
-
-	      <child>
-		<widget class="GtkCheckButton" id="checkbutton_local_solo">
-		  <property agent="glademm" name="cxx_visibility">protected</property>
-		  <property name="visible">True</property>
-		  <property name="can_focus">True</property>
-		  <property name="label" translatable="yes">Solo</property>
-		  <property name="use_underline">True</property>
-		  <property name="relief">GTK_RELIEF_NORMAL</property>
-		  <property name="focus_on_click">True</property>
-		  <property name="active">False</property>
-		  <property name="inconsistent">False</property>
-		  <property name="draw_indicator">True</property>
-		  <signal name="toggled" handler="on_checkbutton_local_solo_toggled" last_modification_time="Wed, 15 Nov 2006 03:15:32 GMT"/>
-		</widget>
-		<packing>
-		  <property name="padding">0</property>
-		  <property name="expand">False</property>
-		  <property name="fill">False</property>
-		</packing>
-	      </child>
-
-	      <child>
-		<widget class="GtkButton" id="button_local_remove">
-		  <property name="visible">True</property>
-		  <property name="can_focus">True</property>
-		  <property name="label" translatable="yes">Remove</property>
-		  <property name="use_underline">True</property>
-		  <property name="relief">GTK_RELIEF_NORMAL</property>
-		  <property name="focus_on_click">True</property>
-		  <signal name="clicked" handler="on_button_local_remove_clicked" last_modification_time="Wed, 15 Nov 2006 03:15:54 GMT"/>
+		  <property name="orientation">GTK_PROGRESS_LEFT_TO_RIGHT</property>
+		  <property name="fraction">0</property>
+		  <property name="pulse_step">0.10000000149</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -2399,7 +2445,7 @@ Delete Ogg Files as soon as possible</property>
 	    <widget class="GtkHBox" id="hbox8">
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
-	      <property name="spacing">0</property>
+	      <property name="spacing">4</property>
 
 	      <child>
 		<widget class="GtkComboBox" id="combobox_local_mode">
@@ -2415,8 +2461,8 @@ Session Mode
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
-		  <property name="expand">True</property>
-		  <property name="fill">True</property>
+		  <property name="expand">False</property>
+		  <property name="fill">False</property>
 		</packing>
 	      </child>
 
@@ -2463,9 +2509,62 @@ Session Mode
 		<packing>
 		  <property name="padding">0</property>
 		  <property name="expand">False</property>
+		  <property name="fill">False</property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkLabel" id="label_filler">
+		  <property name="visible">True</property>
+		  <property name="label" translatable="yes"></property>
+		  <property name="use_underline">False</property>
+		  <property name="use_markup">False</property>
+		  <property name="justify">GTK_JUSTIFY_LEFT</property>
+		  <property name="wrap">False</property>
+		  <property name="selectable">False</property>
+		  <property name="xalign">0.5</property>
+		  <property name="yalign">0.5</property>
+		  <property name="xpad">0</property>
+		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
+		</widget>
+		<packing>
+		  <property name="padding">0</property>
+		  <property name="expand">True</property>
 		  <property name="fill">True</property>
 		</packing>
 	      </child>
+
+	      <child>
+		<widget class="GtkButton" id="button_local_remove">
+		  <property name="visible">True</property>
+		  <property name="can_focus">True</property>
+		  <property name="label" translatable="yes">Remove</property>
+		  <property name="use_underline">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">True</property>
+		  <signal name="clicked" handler="on_button_local_remove_clicked" last_modification_time="Wed, 15 Nov 2006 03:15:54 GMT"/>
+		</widget>
+		<packing>
+		  <property name="padding">0</property>
+		  <property name="expand">False</property>
+		  <property name="fill">True</property>
+		</packing>
+	      </child>
+	    </widget>
+	    <packing>
+	      <property name="padding">0</property>
+	      <property name="expand">True</property>
+	      <property name="fill">True</property>
+	    </packing>
+	  </child>
+
+	  <child>
+	    <widget class="GtkHSeparator" id="hseparator2">
+	      <property name="visible">True</property>
 	    </widget>
 	    <packing>
 	      <property name="padding">0</property>
@@ -2531,20 +2630,41 @@ Session Mode
 		<widget class="GtkCheckButton" id="checkbutton_remote_receive">
 		  <property agent="glademm" name="cxx_visibility">protected</property>
 		  <property name="visible">True</property>
+		  <property name="tooltip" translatable="yes">Receive</property>
 		  <property name="can_focus">True</property>
-		  <property name="label" translatable="yes">Receive</property>
+		  <property name="label" translatable="yes">R</property>
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">True</property>
 		  <property name="active">False</property>
 		  <property name="inconsistent">False</property>
-		  <property name="draw_indicator">True</property>
+		  <property name="draw_indicator">False</property>
 		  <signal name="toggled" handler="on_checkbutton_remote_receive_toggled" last_modification_time="Wed, 15 Nov 2006 03:12:52 GMT"/>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
 		  <property name="expand">False</property>
 		  <property name="fill">False</property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkEntry" id="entry_remote_sessionstate">
+		  <property agent="glademm" name="cxx_visibility">protected</property>
+		  <property name="visible">True</property>
+		  <property name="can_focus">True</property>
+		  <property name="editable">False</property>
+		  <property name="visibility">True</property>
+		  <property name="max_length">0</property>
+		  <property name="text" translatable="yes"></property>
+		  <property name="has_frame">True</property>
+		  <property name="invisible_char">●</property>
+		  <property name="activates_default">False</property>
+		</widget>
+		<packing>
+		  <property name="padding">0</property>
+		  <property name="expand">True</property>
+		  <property name="fill">True</property>
 		</packing>
 	      </child>
 
@@ -2559,19 +2679,69 @@ Session Mode
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
-		  <property name="expand">True</property>
-		  <property name="fill">True</property>
+		  <property name="expand">False</property>
+		  <property name="fill">False</property>
 		</packing>
 	      </child>
 
 	      <child>
-		<widget class="GtkProgressBar" id="progressbar_remote">
+		<widget class="GtkCheckButton" id="checkbutton_remote_stereo">
 		  <property agent="glademm" name="cxx_visibility">protected</property>
 		  <property name="visible">True</property>
-		  <property name="orientation">GTK_PROGRESS_LEFT_TO_RIGHT</property>
-		  <property name="fraction">0</property>
-		  <property name="pulse_step">0.10000000149</property>
-		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="tooltip" translatable="yes">Stereo</property>
+		  <property name="can_focus">True</property>
+		  <property name="label" translatable="yes">St</property>
+		  <property name="use_underline">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">True</property>
+		  <property name="active">False</property>
+		  <property name="inconsistent">False</property>
+		  <property name="draw_indicator">False</property>
+		  <signal name="toggled" handler="on_checkbutton_remote_stereo_toggled" last_modification_time="Wed, 22 Nov 2006 13:38:00 GMT"/>
+		</widget>
+		<packing>
+		  <property name="padding">0</property>
+		  <property name="expand">False</property>
+		  <property name="fill">False</property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkCheckButton" id="checkbutton_remote_mute">
+		  <property agent="glademm" name="cxx_visibility">protected</property>
+		  <property name="visible">True</property>
+		  <property name="tooltip" translatable="yes">Mute</property>
+		  <property name="can_focus">True</property>
+		  <property name="label" translatable="yes">M</property>
+		  <property name="use_underline">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">True</property>
+		  <property name="active">False</property>
+		  <property name="inconsistent">False</property>
+		  <property name="draw_indicator">False</property>
+		  <signal name="toggled" handler="on_checkbutton_remote_mute_toggled" last_modification_time="Wed, 15 Nov 2006 03:16:59 GMT"/>
+		</widget>
+		<packing>
+		  <property name="padding">0</property>
+		  <property name="expand">False</property>
+		  <property name="fill">False</property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkCheckButton" id="checkbutton_remote_solo">
+		  <property agent="glademm" name="cxx_visibility">protected</property>
+		  <property name="visible">True</property>
+		  <property name="tooltip" translatable="yes">Solo</property>
+		  <property name="can_focus">True</property>
+		  <property name="label" translatable="yes">S</property>
+		  <property name="use_underline">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">True</property>
+		  <property name="active">False</property>
+		  <property name="inconsistent">False</property>
+		  <property name="draw_indicator">False</property>
+		  <signal name="toggled" handler="on_checkbutton_remote_solo_toggled" last_modification_time="Wed, 15 Nov 2006 03:16:38 GMT"/>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -2636,60 +2806,13 @@ Session Mode
 	      </child>
 
 	      <child>
-		<widget class="GtkCheckButton" id="checkbutton_remote_mute">
+		<widget class="GtkProgressBar" id="progressbar_remote">
 		  <property agent="glademm" name="cxx_visibility">protected</property>
 		  <property name="visible">True</property>
-		  <property name="can_focus">True</property>
-		  <property name="label" translatable="yes">Mute</property>
-		  <property name="use_underline">True</property>
-		  <property name="relief">GTK_RELIEF_NORMAL</property>
-		  <property name="focus_on_click">True</property>
-		  <property name="active">False</property>
-		  <property name="inconsistent">False</property>
-		  <property name="draw_indicator">True</property>
-		  <signal name="toggled" handler="on_checkbutton_remote_mute_toggled" last_modification_time="Wed, 15 Nov 2006 03:16:59 GMT"/>
-		</widget>
-		<packing>
-		  <property name="padding">0</property>
-		  <property name="expand">False</property>
-		  <property name="fill">False</property>
-		</packing>
-	      </child>
-
-	      <child>
-		<widget class="GtkCheckButton" id="checkbutton_remote_solo">
-		  <property agent="glademm" name="cxx_visibility">protected</property>
-		  <property name="visible">True</property>
-		  <property name="can_focus">True</property>
-		  <property name="label" translatable="yes">Solo</property>
-		  <property name="use_underline">True</property>
-		  <property name="relief">GTK_RELIEF_NORMAL</property>
-		  <property name="focus_on_click">True</property>
-		  <property name="active">False</property>
-		  <property name="inconsistent">False</property>
-		  <property name="draw_indicator">True</property>
-		  <signal name="toggled" handler="on_checkbutton_remote_solo_toggled" last_modification_time="Wed, 15 Nov 2006 03:16:38 GMT"/>
-		</widget>
-		<packing>
-		  <property name="padding">0</property>
-		  <property name="expand">False</property>
-		  <property name="fill">False</property>
-		</packing>
-	      </child>
-
-	      <child>
-		<widget class="GtkCheckButton" id="checkbutton_remote_stereo">
-		  <property agent="glademm" name="cxx_visibility">protected</property>
-		  <property name="visible">True</property>
-		  <property name="can_focus">True</property>
-		  <property name="label" translatable="yes">Stereo</property>
-		  <property name="use_underline">True</property>
-		  <property name="relief">GTK_RELIEF_NORMAL</property>
-		  <property name="focus_on_click">True</property>
-		  <property name="active">False</property>
-		  <property name="inconsistent">False</property>
-		  <property name="draw_indicator">True</property>
-		  <signal name="toggled" handler="on_checkbutton_remote_stereo_toggled" last_modification_time="Wed, 22 Nov 2006 13:38:00 GMT"/>
+		  <property name="orientation">GTK_PROGRESS_LEFT_TO_RIGHT</property>
+		  <property name="fraction">0</property>
+		  <property name="pulse_step">0.10000000149</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -2817,14 +2940,15 @@ Session Mode
 			<widget class="GtkCheckButton" id="checkbutton_mute">
 			  <property agent="glademm" name="cxx_visibility">protected</property>
 			  <property name="visible">True</property>
+			  <property name="tooltip" translatable="yes">Mute</property>
 			  <property name="can_focus">True</property>
-			  <property name="label" translatable="yes">Mute</property>
+			  <property name="label" translatable="yes">M</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <property name="focus_on_click">True</property>
 			  <property name="active">False</property>
 			  <property name="inconsistent">False</property>
-			  <property name="draw_indicator">True</property>
+			  <property name="draw_indicator">False</property>
 			  <signal name="toggled" handler="on_checkbutton_mute_toggled" last_modification_time="Sat, 25 Nov 2006 21:37:33 GMT"/>
 			</widget>
 			<packing>

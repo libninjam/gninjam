@@ -26,12 +26,16 @@ public:
   void init(int idx);
   void update_VUmeter();
   void update_inputList();
+  void update_outputList();
 private:
   void on_entry_local_channelname_changed();
   void on_checkbutton_local_transmit_toggled();
   void on_combobox_local_input_changed();
+  void on_checkbutton_local_stereo_in_toggled();
   void on_hscale_local_volume_value_changed();
   void on_hscale_local_pan_value_changed();
+  void on_combobox_local_output_changed();
+  void on_checkbutton_local_stereo_out_toggled();
   void on_spinbutton_bitrate_value_changed();
   void on_checkbutton_local_mute_toggled();
   void on_checkbutton_local_solo_toggled();

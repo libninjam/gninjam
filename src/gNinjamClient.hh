@@ -22,6 +22,7 @@
 
 #include "window_preferences.hh"
 #include "dialog_connect.hh"
+#include <gtkmm/aboutdialog.h>
 
 #include <vector>
 
@@ -69,5 +70,7 @@ private:
   Gtk::TreeModel::ColumnRecord _column_model;
   Gtk::TreeModelColumn<Glib::ustring> _textcolumn;
   Gtk::Adjustment _dummy_adjustment;
+
+  Gtk::AboutDialog _about_dialog;
 };
 #endif
