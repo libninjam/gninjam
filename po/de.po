@@ -41,16 +41,16 @@ msgstr "den Server betreten"
 msgid " the server"
 msgstr ""
 
-#: src/gninjam.cc:202
+#: src/gninjam.cc:205
 #, c-format
 msgid "Error opening audio!\n"
 msgstr "Fehler beim öffnen des Audio!\n"
 
-#: src/gninjam.cc:250 src/gNinjamClient.cc:244
+#: src/gninjam.cc:255 src/gNinjamClient.cc:244
 msgid "new channel"
 msgstr "neuer Kanal"
 
-#: src/gninjam.cc:279 src/window_preferences.cc:172
+#: src/gninjam.cc:284 src/window_preferences.cc:181
 #, c-format
 msgid "Error creating session directory\n"
 msgstr "Fehler beim Erstellen der Sitzungsverzeichnisses\n"
@@ -68,12 +68,12 @@ msgid "Metronome:"
 msgstr "Metronom:"
 
 #: src/gNinjamClient_glade.cc:107 src/gNinjamClient_glade.cc:108
-#: src/vbox_local_channel_glade.cc:68 src/vbox_remote_channel_glade.cc:66
-#: src/RemoteUserFrame_glade.cc:61
+#: src/vbox_local_channel_glade.cc:114 src/vbox_remote_channel_glade.cc:104
+#: src/RemoteUserFrame_glade.cc:94
 msgid "Mute"
 msgstr "Stumm"
 
-#: src/gNinjamClient_glade.cc:113 src/vbox_remote_channel_glade.cc:68
+#: src/gNinjamClient_glade.cc:113 src/vbox_remote_channel_glade.cc:98
 msgid "Stereo"
 msgstr "Stereo"
 
@@ -173,8 +173,8 @@ msgstr "*** Fehler: unbekannter Befehl."
 msgid "<b>Chat</b>: "
 msgstr "<b>Chat</b>: "
 
-#: src/gNinjamClient.cc:419 src/vbox_local_channel.cc:89
-#: src/vbox_remote_channel.cc:87
+#: src/gNinjamClient.cc:422 src/vbox_local_channel.cc:105
+#: src/vbox_local_channel.cc:120 src/vbox_remote_channel.cc:87
 msgid "New channel"
 msgstr "Neuer Kanal"
 
@@ -286,23 +286,23 @@ msgstr "_Anonym verbinden"
 msgid "Connect"
 msgstr "Verbinden"
 
-#: src/vbox_local_channel_glade.cc:55
+#: src/vbox_local_channel_glade.cc:94
 msgid "Transmit"
 msgstr "Übertragen"
 
-#: src/vbox_local_channel_glade.cc:69 src/vbox_remote_channel_glade.cc:67
+#: src/vbox_local_channel_glade.cc:120 src/vbox_remote_channel_glade.cc:110
 msgid "Solo"
 msgstr "Solo"
 
-#: src/vbox_local_channel_glade.cc:71
+#: src/vbox_local_channel_glade.cc:81
 msgid "Remove"
 msgstr "Entfernen"
 
-#: src/vbox_local_channel_glade.cc:111
+#: src/vbox_local_channel_glade.cc:157
 msgid "Bitrate"
 msgstr "Bitrate"
 
-#: src/vbox_remote_channel_glade.cc:56
+#: src/vbox_remote_channel_glade.cc:83
 msgid "Receive"
 msgstr "Empfangen"
 
@@ -317,3 +317,61 @@ msgstr "Gtk Klient für NINJAM"
 #: src/gNinjamClient.cc:129
 msgid "translator-credits"
 msgstr "Tobias Gehrig <tobias@gehrignet.de>"
+
+#, c-format
+msgid "Falling back on alsa audio driver!\n"
+msgstr "Greife auf Alsa Audiotreiber zurück.\n"
+
+#: src/vbox_local_channel_glade.cc:57
+msgid "T"
+msgstr "T"
+
+#: src/vbox_local_channel_glade.cc:59 src/vbox_local_channel_glade.cc:61
+#: src/vbox_remote_channel_glade.cc:59
+msgid "St"
+msgstr "St"
+
+#: src/vbox_local_channel_glade.cc:62 src/vbox_remote_channel_glade.cc:60
+#: src/RemoteUserFrame_glade.cc:61
+msgid "M"
+msgstr "M"
+
+#: src/vbox_local_channel_glade.cc:63 src/vbox_remote_channel_glade.cc:61
+msgid "S"
+msgstr "S"
+
+#: src/vbox_local_channel_glade.cc:79
+msgid "kbit/s"
+msgstr "kbit/s"
+
+#: src/vbox_local_channel_glade.cc:101
+msgid "Stereo Input"
+msgstr "Stereo Eingang"
+
+#: src/vbox_local_channel_glade.cc:108
+msgid "Stereo Output"
+msgstr "Stereo Ausgang"
+
+#: src/vbox_local_channel.cc:73
+msgid "Normal NINJAM"
+msgstr "Normales NINJAM"
+
+#: src/vbox_local_channel.cc:75
+msgid "Voice Chat"
+msgstr "Sprechmodus"
+
+#: src/vbox_local_channel.cc:77
+msgid "Session Mode"
+msgstr "Sitzungsmodus"
+
+#: src/vbox_remote_channel_glade.cc:56
+msgid "R"
+msgstr "R"
+
+#: src/vbox_remote_channel.cc:105
+msgid "[Voice Chat] "
+msgstr "[Sprache] "
+
+#: src/vbox_remote_channel.cc:107
+msgid "[Session] "
+msgstr "[Sitzung] "
