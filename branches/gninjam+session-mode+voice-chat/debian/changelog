@@ -1,9 +1,15 @@
-gninjam (0.01a-12~sessionmode) gutsy; urgency=low
+gninjam (0.01a-12ubuntu1~sessionmode) gutsy; urgency=low
 
   * add voice chat and session mode support
   * rearrange and add some more gui elements in the channel strips
 
- -- Tobias Gehrig <tobias@gehrignet.de>  Mon, 14 Feb 2008 02:40:02 +0100
+ -- Tobias Gehrig <tobias@gehrignet.de>  Mon, 14 Feb 2008 03:09:02 +0100
+
+gninjam (0.01a-12ubuntu1) gutsy; urgency=low
+
+  * start gui even if audio interface could not be successfully initialized.
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Mon, 11 Feb 2008 14:58:52 +0100
 
 gninjam (0.01a-12) gutsy; urgency=low
 
