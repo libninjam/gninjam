@@ -2649,26 +2649,6 @@ Session Mode
 	      </child>
 
 	      <child>
-		<widget class="GtkEntry" id="entry_remote_sessionstate">
-		  <property agent="glademm" name="cxx_visibility">protected</property>
-		  <property name="visible">True</property>
-		  <property name="can_focus">True</property>
-		  <property name="editable">False</property>
-		  <property name="visibility">True</property>
-		  <property name="max_length">0</property>
-		  <property name="text" translatable="yes"></property>
-		  <property name="has_frame">True</property>
-		  <property name="invisible_char">●</property>
-		  <property name="activates_default">False</property>
-		</widget>
-		<packing>
-		  <property name="padding">0</property>
-		  <property name="expand">True</property>
-		  <property name="fill">True</property>
-		</packing>
-	      </child>
-
-	      <child>
 		<widget class="GtkComboBox" id="combobox_remote_output">
 		  <property agent="glademm" name="cxx_visibility">protected</property>
 		  <property name="visible">True</property>
@@ -2923,7 +2903,7 @@ Session Mode
 			  <property name="can_focus">True</property>
 			  <property name="draw_value">True</property>
 			  <property name="value_pos">GTK_POS_LEFT</property>
-			  <property name="digits">1</property>
+			  <property name="digits">2</property>
 			  <property name="update_policy">GTK_UPDATE_CONTINUOUS</property>
 			  <property name="inverted">False</property>
 			  <property name="adjustment">0 -1 1 0.00999999977648 0.10000000149 0</property>
@@ -2950,6 +2930,28 @@ Session Mode
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">False</property>
 			  <signal name="toggled" handler="on_checkbutton_mute_toggled" last_modification_time="Sat, 25 Nov 2006 21:37:33 GMT"/>
+			</widget>
+			<packing>
+			  <property name="padding">0</property>
+			  <property name="expand">False</property>
+			  <property name="fill">False</property>
+			</packing>
+		      </child>
+
+		      <child>
+			<widget class="GtkEntry" id="entry_sessionstate">
+			  <property agent="glademm" name="cxx_visibility">protected</property>
+			  <property name="visible">True</property>
+			  <property name="tooltip" translatable="yes">Maximum available session length</property>
+			  <property name="can_focus">True</property>
+			  <property name="editable">False</property>
+			  <property name="visibility">True</property>
+			  <property name="max_length">0</property>
+			  <property name="text" translatable="yes"></property>
+			  <property name="has_frame">True</property>
+			  <property name="invisible_char">●</property>
+			  <property name="activates_default">False</property>
+			  <property name="width_chars">17</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
