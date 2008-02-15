@@ -26,6 +26,7 @@ public:
   void update(int useridx);
   void update_VUmeters();
   void update_outputLists();
+  void update_sessionState();
 private:
   void on_hscale_volume_value_changed();
   void on_hscale_pan_value_changed();

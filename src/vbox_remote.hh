@@ -27,5 +27,6 @@ public:
   void update();
   void update_VUmeters();
   void update_outputLists();
+  void update_sessionStates();
 };
 #endif
