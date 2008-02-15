@@ -35,6 +35,8 @@ public:
   void setChatTopic(Glib::ustring text);
   void update_inputLists();
   void update_outputLists();
+  void set_sessionmode(bool sessionmode);
+  bool get_sessionmode();
 private:
   bool on_timeout();
   bool on_timeout_gui();
@@ -60,6 +62,7 @@ private:
   void on_chat1_activate();
   void on_combobox_metronome_output_changed();
   void on_checkbutton_metronome_stereo_toggled();
+  void on_checkbutton_sessionmode_toggled();
   void connect_gui_status_update(unsigned timeout);
 
   dialog_connect *d_connect;

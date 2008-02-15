@@ -298,4 +298,6 @@ void vbox_local_channel::on_combobox_local_mode_changed()
 				false, 0, // outch
 				true, combobox_local_mode->get_active_row_number()<<1); // mode
   g_client->NotifyServerOfChannelChange();
+  if (combobox_local_mode->get_active_row_number() == 2)
+    window->set_sessionmode(true);
 }

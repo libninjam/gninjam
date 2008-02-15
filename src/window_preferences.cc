@@ -130,6 +130,7 @@ void window_preferences::on_button_apply_clicked()
       window->update_inputLists();
       window->update_outputLists();
       if (g_audio) {
+	g_audio->m_sessionmode = window->get_sessionmode();
 	g_audio_enable = 1;
       }
     }
@@ -148,6 +149,7 @@ void window_preferences::on_button_apply_clicked()
       window->update_inputLists();
       window->update_outputLists();
       if (g_audio) {
+	g_audio->m_sessionmode = window->get_sessionmode();
 	g_audio_enable = 1;
       }
     }

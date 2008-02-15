@@ -466,3 +466,19 @@ void gNinjamClient::on_checkbutton_metronome_stereo_toggled()
 {
   g_client->config_metronome_stereoout = checkbutton_metronome_stereo->get_active();
 }
+
+void gNinjamClient::set_sessionmode(bool sessionmode)
+{
+  if (g_audio) g_audio->m_sessionmode = sessionmode;
+  checkbutton_sessionmode->set_active(sessionmode);
+}
+
+bool gNinjamClient::get_sessionmode()
+{
+  return checkbutton_sessionmode->get_active();
+}
+
+void gNinjamClient::on_checkbutton_sessionmode_toggled()
+{
+  set_sessionmode(checkbutton_sessionmode->get_active());
+}
