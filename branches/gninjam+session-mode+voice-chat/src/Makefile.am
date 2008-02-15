@@ -47,7 +47,7 @@ noinst_HEADERS = \
 	RemoteUserFrame.hh \
 	common.hh
 
-AM_CXXFLAGS = @CXXFLAGS@ @GTKMM_CFLAGS@ @GCONF_CFLAGS@ @NINJAM_CFLAGS@
+AM_CXXFLAGS = @CXXFLAGS@ @GTKMM_CFLAGS@ @GCONF_CFLAGS@ @NINJAM_CFLAGS@ -malign-double
 
-gninjam_LDFLAGS = -s -malign-double
+gninjam_LDFLAGS = -s
 gninjam_LDADD = @LIBS@ @GTKMM_LIBS@ @GCONF_LIBS@ @NINJAM_LIBS@ -lpthread
