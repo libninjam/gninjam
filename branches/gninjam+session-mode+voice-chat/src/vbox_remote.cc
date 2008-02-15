@@ -68,3 +68,13 @@ void vbox_remote::update_outputLists()
     user->update_outputLists();
   }
 }
+
+void vbox_remote::update_sessionStates()
+{
+  std::list<Widget*> users = get_children();
+  std::list<Widget*>::iterator iter = users.begin();
+  while (iter != users.end()) {
+    RemoteUserFrame* user = (RemoteUserFrame*)*iter++;
+    user->update_sessionState();
+  }
+}

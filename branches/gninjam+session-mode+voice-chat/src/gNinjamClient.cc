@@ -230,6 +230,7 @@ bool gNinjamClient::on_timeout_gui()
     progressbar_master->set_text(output);
     vbox_local->update_VUmeters();
     vbox_remote->update_VUmeters();
+    vbox_remote->update_sessionStates();
     if (g_client->HasUserInfoChanged())
       vbox_remote->update();
   }

@@ -82,6 +82,40 @@ void RemoteUserFrame::update_outputLists()
   }
 }
 
+void RemoteUserFrame::update_sessionState()
+{
+  time_t lastupdatetime;
+  double lastsessionpos, maxlen;
+  lastsessionpos = g_client->GetUserSessionPos(_useridx, &lastupdatetime, &maxlen);
+  if (maxlen != -1.0) {
+    char str_last[9];
+    if (lastsessionpos != -1.0) {
+      unsigned ulastsessionpos = (unsigned)round(lastsessionpos);
+      unsigned sec_last, min_last, hour_last;
+      sec_last = ulastsessionpos % 60;
+      min_last = (ulastsessionpos / 60) % 60;
+      hour_last = (ulastsessionpos / 3600) % 3600;
+      snprintf(str_last, sizeof(str_last),
+	       "%0.2u:%0.2u:%0.2u",
+	       hour_last, min_last, sec_last);
+    } else {
+      snprintf(str_last, sizeof(str_last), "--:--:--");
+    }
+    char sessionstate[18];
+    unsigned umaxlen = (unsigned)round(maxlen);
+    unsigned sec_max, min_max, hour_max;
+    sec_max = umaxlen % 60;
+    min_max = (umaxlen / 60) % 60;
+    hour_max = (umaxlen / 3600) % 3600;
+    snprintf(sessionstate, sizeof(sessionstate),
+	     "%s/%0.2u:%0.2u:%0.2u", str_last,
+	     hour_max, min_max, sec_max);
+    entry_sessionstate->set_text(sessionstate);
+  } else {
+    entry_sessionstate->set_text("");
+  }
+}
+
 void RemoteUserFrame::on_hscale_volume_value_changed()
 {
   g_client->SetUserState(_useridx,
