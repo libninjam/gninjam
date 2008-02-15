@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-14 03:13+0100\n"
+"POT-Creation-Date: 2008-02-15 01:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid "Error opening audio!\n"
 msgstr ""
 
-#: src/gninjam.cc:255 src/gNinjamClient.cc:244
+#: src/gninjam.cc:255 src/gNinjamClient.cc:245
 msgid "new channel"
 msgstr ""
 
@@ -67,12 +67,12 @@ msgid "Metronome:"
 msgstr ""
 
 #: src/gNinjamClient_glade.cc:107 src/gNinjamClient_glade.cc:108
-#: src/vbox_local_channel_glade.cc:114 src/vbox_remote_channel_glade.cc:104
-#: src/RemoteUserFrame_glade.cc:94
+#: src/vbox_local_channel_glade.cc:114 src/vbox_remote_channel_glade.cc:95
+#: src/RemoteUserFrame_glade.cc:95
 msgid "Mute"
 msgstr ""
 
-#: src/gNinjamClient_glade.cc:113 src/vbox_remote_channel_glade.cc:98
+#: src/gNinjamClient_glade.cc:113 src/vbox_remote_channel_glade.cc:89
 msgid "Stereo"
 msgstr ""
 
@@ -168,20 +168,20 @@ msgstr ""
 msgid " BPM "
 msgstr ""
 
-#: src/gNinjamClient.cc:373
+#: src/gNinjamClient.cc:374
 msgid "*** error: /msg requires a username and a message."
 msgstr ""
 
-#: src/gNinjamClient.cc:376
+#: src/gNinjamClient.cc:377
 msgid "*** error: unknown command."
 msgstr ""
 
-#: src/gNinjamClient.cc:398
+#: src/gNinjamClient.cc:399
 msgid "<b>Chat</b>: "
 msgstr ""
 
-#: src/gNinjamClient.cc:422 src/vbox_local_channel.cc:105
-#: src/vbox_local_channel.cc:120 src/vbox_remote_channel.cc:87
+#: src/gNinjamClient.cc:423 src/vbox_local_channel.cc:105
+#: src/vbox_local_channel.cc:122 src/vbox_remote_channel.cc:89
 msgid "New channel"
 msgstr ""
 
@@ -298,16 +298,16 @@ msgid "T"
 msgstr ""
 
 #: src/vbox_local_channel_glade.cc:59 src/vbox_local_channel_glade.cc:61
-#: src/vbox_remote_channel_glade.cc:59
+#: src/vbox_remote_channel_glade.cc:58
 msgid "St"
 msgstr ""
 
-#: src/vbox_local_channel_glade.cc:62 src/vbox_remote_channel_glade.cc:60
+#: src/vbox_local_channel_glade.cc:62 src/vbox_remote_channel_glade.cc:59
 #: src/RemoteUserFrame_glade.cc:61
 msgid "M"
 msgstr ""
 
-#: src/vbox_local_channel_glade.cc:63 src/vbox_remote_channel_glade.cc:61
+#: src/vbox_local_channel_glade.cc:63 src/vbox_remote_channel_glade.cc:60
 msgid "S"
 msgstr ""
 
@@ -331,7 +331,7 @@ msgstr ""
 msgid "Stereo Output"
 msgstr ""
 
-#: src/vbox_local_channel_glade.cc:120 src/vbox_remote_channel_glade.cc:110
+#: src/vbox_local_channel_glade.cc:120 src/vbox_remote_channel_glade.cc:101
 msgid "Solo"
 msgstr ""
 
@@ -355,18 +355,22 @@ msgstr ""
 msgid "R"
 msgstr ""
 
-#: src/vbox_remote_channel_glade.cc:83
+#: src/vbox_remote_channel_glade.cc:82
 msgid "Receive"
 msgstr ""
 
-#: src/vbox_remote_channel.cc:105
+#: src/vbox_remote_channel.cc:107
 msgid "[Voice Chat] "
 msgstr ""
 
-#: src/vbox_remote_channel.cc:107
+#: src/vbox_remote_channel.cc:109
 msgid "[Session] "
 msgstr ""
 
 #: src/RemoteUserFrame_glade.cc:55
 msgid "User master:"
+msgstr ""
+
+#: src/RemoteUserFrame_glade.cc:101
+msgid "Maximum available session length"
 msgstr ""

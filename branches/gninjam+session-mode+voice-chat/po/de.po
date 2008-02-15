@@ -46,7 +46,7 @@ msgstr ""
 msgid "Error opening audio!\n"
 msgstr "Fehler beim öffnen des Audio!\n"
 
-#: src/gninjam.cc:255 src/gNinjamClient.cc:244
+#: src/gninjam.cc:255 src/gNinjamClient.cc:245
 msgid "new channel"
 msgstr "neuer Kanal"
 
@@ -68,12 +68,12 @@ msgid "Metronome:"
 msgstr "Metronom:"
 
 #: src/gNinjamClient_glade.cc:107 src/gNinjamClient_glade.cc:108
-#: src/vbox_local_channel_glade.cc:114 src/vbox_remote_channel_glade.cc:104
-#: src/RemoteUserFrame_glade.cc:94
+#: src/vbox_local_channel_glade.cc:114 src/vbox_remote_channel_glade.cc:95
+#: src/RemoteUserFrame_glade.cc:95
 msgid "Mute"
 msgstr "Stumm"
 
-#: src/gNinjamClient_glade.cc:113 src/vbox_remote_channel_glade.cc:98
+#: src/gNinjamClient_glade.cc:113 src/vbox_remote_channel_glade.cc:89
 msgid "Stereo"
 msgstr "Stereo"
 
@@ -161,20 +161,20 @@ msgstr ". Server gab Erklärung: "
 msgid " BPM "
 msgstr " BPM "
 
-#: src/gNinjamClient.cc:373
+#: src/gNinjamClient.cc:374
 msgid "*** error: /msg requires a username and a message."
 msgstr "*** Fehler: /msg benötigt einen Benutzernamen und eine Nachricht."
 
-#: src/gNinjamClient.cc:376
+#: src/gNinjamClient.cc:377
 msgid "*** error: unknown command."
 msgstr "*** Fehler: unbekannter Befehl."
 
-#: src/gNinjamClient.cc:398
+#: src/gNinjamClient.cc:399
 msgid "<b>Chat</b>: "
 msgstr "<b>Chat</b>: "
 
-#: src/gNinjamClient.cc:422 src/vbox_local_channel.cc:105
-#: src/vbox_local_channel.cc:120 src/vbox_remote_channel.cc:87
+#: src/gNinjamClient.cc:423 src/vbox_local_channel.cc:105
+#: src/vbox_local_channel.cc:122 src/vbox_remote_channel.cc:89
 msgid "New channel"
 msgstr "Neuer Kanal"
 
@@ -290,7 +290,7 @@ msgstr "Verbinden"
 msgid "Transmit"
 msgstr "Übertragen"
 
-#: src/vbox_local_channel_glade.cc:120 src/vbox_remote_channel_glade.cc:110
+#: src/vbox_local_channel_glade.cc:120 src/vbox_remote_channel_glade.cc:101
 msgid "Solo"
 msgstr "Solo"
 
@@ -302,7 +302,7 @@ msgstr "Entfernen"
 msgid "Bitrate"
 msgstr "Bitrate"
 
-#: src/vbox_remote_channel_glade.cc:83
+#: src/vbox_remote_channel_glade.cc:82
 msgid "Receive"
 msgstr "Empfangen"
 
@@ -327,16 +327,16 @@ msgid "T"
 msgstr "T"
 
 #: src/vbox_local_channel_glade.cc:59 src/vbox_local_channel_glade.cc:61
-#: src/vbox_remote_channel_glade.cc:59
+#: src/vbox_remote_channel_glade.cc:58
 msgid "St"
 msgstr "St"
 
-#: src/vbox_local_channel_glade.cc:62 src/vbox_remote_channel_glade.cc:60
+#: src/vbox_local_channel_glade.cc:62 src/vbox_remote_channel_glade.cc:59
 #: src/RemoteUserFrame_glade.cc:61
 msgid "M"
 msgstr "M"
 
-#: src/vbox_local_channel_glade.cc:63 src/vbox_remote_channel_glade.cc:61
+#: src/vbox_local_channel_glade.cc:63 src/vbox_remote_channel_glade.cc:60
 msgid "S"
 msgstr "S"
 
@@ -368,10 +368,14 @@ msgstr "Sitzungsmodus"
 msgid "R"
 msgstr "R"
 
-#: src/vbox_remote_channel.cc:105
+#: src/vbox_remote_channel.cc:107
 msgid "[Voice Chat] "
 msgstr "[Sprache] "
 
-#: src/vbox_remote_channel.cc:107
+#: src/vbox_remote_channel.cc:109
 msgid "[Session] "
 msgstr "[Sitzung] "
+
+#: src/RemoteUserFrame_glade.cc:101
+msgid "Maximum available session length"
+msgstr "Maximal verfügbare Sitzungslänge"
