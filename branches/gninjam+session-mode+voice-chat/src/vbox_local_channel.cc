@@ -112,9 +112,11 @@ void vbox_local_channel::update_outputList()
   int active = combobox_local_output->get_active_row_number();
   Glib::RefPtr<Gtk::ListStore> model = Gtk::ListStore::create(_column_model);
   Gtk::TreeModel::Row row;
-  for (int i=0; i < g_audio->m_outnch; i++) {
-    row = *(model->append());
-    row[_textcolumn] = g_audio->GetOutputChannelName(i);
+  if (g_audio) {
+    for (int i=0; i < g_audio->m_outnch; i++) {
+      row = *(model->append());
+      row[_textcolumn] = g_audio->GetOutputChannelName(i);
+    }
   }
   row = *(model->append());
   row[_textcolumn] = _("New channel");
