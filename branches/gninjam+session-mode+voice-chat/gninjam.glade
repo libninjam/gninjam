@@ -241,7 +241,7 @@
 	      <property name="border_width">4</property>
 	      <property name="visible">True</property>
 	      <property name="n_rows">2</property>
-	      <property name="n_columns">6</property>
+	      <property name="n_columns">7</property>
 	      <property name="homogeneous">False</property>
 	      <property name="row_spacing">4</property>
 	      <property name="column_spacing">4</property>
@@ -377,14 +377,15 @@
 		<widget class="GtkCheckButton" id="checkbutton_master_mute">
 		  <property agent="glademm" name="cxx_visibility">protected</property>
 		  <property name="visible">True</property>
+		  <property name="tooltip" translatable="yes">Mute</property>
 		  <property name="can_focus">True</property>
-		  <property name="label" translatable="yes">Mute</property>
+		  <property name="label" translatable="yes">M</property>
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">True</property>
 		  <property name="active">False</property>
 		  <property name="inconsistent">False</property>
-		  <property name="draw_indicator">True</property>
+		  <property name="draw_indicator">False</property>
 		  <signal name="toggled" handler="on_checkbutton_master_mute_toggled" last_modification_time="Tue, 14 Nov 2006 15:50:13 GMT"/>
 		</widget>
 		<packing>
@@ -401,14 +402,15 @@
 		<widget class="GtkCheckButton" id="checkbutton_metronome_mute">
 		  <property agent="glademm" name="cxx_visibility">protected</property>
 		  <property name="visible">True</property>
+		  <property name="tooltip" translatable="yes">Mute</property>
 		  <property name="can_focus">True</property>
-		  <property name="label" translatable="yes">Mute</property>
+		  <property name="label" translatable="yes">M</property>
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">True</property>
 		  <property name="active">False</property>
 		  <property name="inconsistent">False</property>
-		  <property name="draw_indicator">True</property>
+		  <property name="draw_indicator">False</property>
 		  <signal name="toggled" handler="on_checkbutton_metronome_mute_toggled" last_modification_time="Tue, 14 Nov 2006 15:50:20 GMT"/>
 		</widget>
 		<packing>
@@ -445,6 +447,31 @@
 	      </child>
 
 	      <child>
+		<widget class="GtkCheckButton" id="checkbutton_metronome_stereo">
+		  <property agent="glademm" name="cxx_visibility">protected</property>
+		  <property name="visible">True</property>
+		  <property name="tooltip" translatable="yes">Stereo</property>
+		  <property name="can_focus">True</property>
+		  <property name="label" translatable="yes">St</property>
+		  <property name="use_underline">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">True</property>
+		  <property name="active">False</property>
+		  <property name="inconsistent">False</property>
+		  <property name="draw_indicator">False</property>
+		  <signal name="toggled" handler="on_checkbutton_metronome_stereo_toggled" last_modification_time="Wed, 22 Nov 2006 13:39:21 GMT"/>
+		</widget>
+		<packing>
+		  <property name="left_attach">4</property>
+		  <property name="right_attach">5</property>
+		  <property name="top_attach">1</property>
+		  <property name="bottom_attach">2</property>
+		  <property name="x_options">fill</property>
+		  <property name="y_options"></property>
+		</packing>
+	      </child>
+
+	      <child>
 		<widget class="GtkProgressBar" id="progressbar_master">
 		  <property agent="glademm" name="cxx_visibility">protected</property>
 		  <property name="visible">True</property>
@@ -455,7 +482,7 @@
 		</widget>
 		<packing>
 		  <property name="left_attach">4</property>
-		  <property name="right_attach">6</property>
+		  <property name="right_attach">7</property>
 		  <property name="top_attach">0</property>
 		  <property name="bottom_attach">1</property>
 		  <property name="x_options">fill</property>
@@ -464,22 +491,23 @@
 	      </child>
 
 	      <child>
-		<widget class="GtkCheckButton" id="checkbutton_metronome_stereo">
+		<widget class="GtkCheckButton" id="checkbutton_sessionmode">
 		  <property agent="glademm" name="cxx_visibility">protected</property>
 		  <property name="visible">True</property>
+		  <property name="tooltip" translatable="yes">Session Mode</property>
 		  <property name="can_focus">True</property>
-		  <property name="label" translatable="yes">Stereo</property>
+		  <property name="label" translatable="yes">Session Mode</property>
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">True</property>
 		  <property name="active">False</property>
 		  <property name="inconsistent">False</property>
-		  <property name="draw_indicator">True</property>
-		  <signal name="toggled" handler="on_checkbutton_metronome_stereo_toggled" last_modification_time="Wed, 22 Nov 2006 13:39:21 GMT"/>
+		  <property name="draw_indicator">False</property>
+		  <signal name="toggled" handler="on_checkbutton_sessionmode_toggled" last_modification_time="Fri, 15 Feb 2008 00:29:36 GMT"/>
 		</widget>
 		<packing>
-		  <property name="left_attach">4</property>
-		  <property name="right_attach">5</property>
+		  <property name="left_attach">6</property>
+		  <property name="right_attach">7</property>
 		  <property name="top_attach">1</property>
 		  <property name="bottom_attach">2</property>
 		  <property name="x_options">fill</property>
@@ -501,6 +529,7 @@
 		  <property name="right_attach">6</property>
 		  <property name="top_attach">1</property>
 		  <property name="bottom_attach">2</property>
+		  <property name="x_options">fill</property>
 		  <property name="y_options">fill</property>
 		</packing>
 	      </child>
