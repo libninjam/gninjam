@@ -17,40 +17,40 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/gninjam.cc:75
+#: src/gninjam.cc:76
 msgid " sets topic to: "
 msgstr " setzt Thema auf: "
 
-#: src/gninjam.cc:77
+#: src/gninjam.cc:78
 msgid "Topic is: "
 msgstr "Thema ist: "
 
-#: src/gninjam.cc:103
+#: src/gninjam.cc:104
 msgid " has "
 msgstr " hat "
 
-#: src/gninjam.cc:104
+#: src/gninjam.cc:105
 msgid "left"
 msgstr "den Server verlassen"
 
-#: src/gninjam.cc:104
+#: src/gninjam.cc:105
 msgid "joined"
 msgstr "den Server betreten"
 
-#: src/gninjam.cc:105
+#: src/gninjam.cc:106
 msgid " the server"
 msgstr ""
 
-#: src/gninjam.cc:202
+#: src/gninjam.cc:203
 #, c-format
 msgid "Error opening audio!\n"
 msgstr "Fehler beim öffnen des Audio!\n"
 
-#: src/gninjam.cc:250 src/gNinjamClient.cc:244
+#: src/gninjam.cc:251 src/gNinjamClient.cc:244
 msgid "new channel"
 msgstr "neuer Kanal"
 
-#: src/gninjam.cc:279 src/window_preferences.cc:181
+#: src/gninjam.cc:280 src/window_preferences.cc:268
 #, c-format
 msgid "Error creating session directory\n"
 msgstr "Fehler beim Erstellen der Sitzungsverzeichnisses\n"
@@ -174,7 +174,7 @@ msgid "<b>Chat</b>: "
 msgstr "<b>Chat</b>: "
 
 #: src/gNinjamClient.cc:421 src/vbox_local_channel.cc:91
-#: src/vbox_remote_channel.cc:87
+#: src/vbox_remote_channel.cc:89
 msgid "New channel"
 msgstr "Neuer Kanal"
 
@@ -186,99 +186,99 @@ msgstr "Sie müssen der Lizenz zustimmen, um sich mit dem Server zu verbinden."
 msgid "License"
 msgstr "Lizenz"
 
-#: src/window_preferences_glade.cc:60
+#: src/window_preferences_glade.cc:61
 msgid "Audio driver:"
 msgstr "Audio Treiber:"
 
-#: src/window_preferences_glade.cc:64
+#: src/window_preferences_glade.cc:65
 msgid "Session directory:"
 msgstr "Sitzungsverzeichnis:"
 
-#: src/window_preferences_glade.cc:65
+#: src/window_preferences_glade.cc:66
 msgid "Save local audio:"
 msgstr "Speichere lokale Audiodateien:"
 
-#: src/window_preferences_glade.cc:71
+#: src/window_preferences_glade.cc:72
 msgid "Ogg bitrate:"
 msgstr "Ogg Bitrate"
 
-#: src/window_preferences_glade.cc:72
+#: src/window_preferences_glade.cc:73
 msgid "Save log files"
 msgstr "Speichere Log Dateien"
 
-#: src/window_preferences_glade.cc:75
+#: src/window_preferences_glade.cc:76
 msgid "General"
 msgstr "Allgemein"
 
-#: src/window_preferences_glade.cc:76
+#: src/window_preferences_glade.cc:77
 msgid "Client name:"
 msgstr "Klientennamen:"
 
-#: src/window_preferences_glade.cc:77
+#: src/window_preferences_glade.cc:78
 msgid "Number of input channels:"
 msgstr "Zahl der Eingangskanäle:"
 
-#: src/window_preferences_glade.cc:85
+#: src/window_preferences_glade.cc:86
 msgid "Number of output channels:"
 msgstr "Zahl der Ausgangskanäle:"
 
-#: src/window_preferences_glade.cc:87
+#: src/window_preferences_glade.cc:88
 msgid "Jack settings"
 msgstr "Jack Einstellungen"
 
-#: src/window_preferences_glade.cc:88
+#: src/window_preferences_glade.cc:89
 msgid "Config string:"
 msgstr "Konfigurationszeichenkette:"
 
-#: src/window_preferences_glade.cc:92
+#: src/window_preferences_glade.cc:93
 msgid "Alsa settings"
 msgstr "Alsa Einstellungen"
 
-#: src/window_preferences_glade.cc:93 src/dialog_connect_glade.cc:60
+#: src/window_preferences_glade.cc:94 src/dialog_connect_glade.cc:60
 msgid "Hostname:"
 msgstr "Servername:"
 
-#: src/window_preferences_glade.cc:94 src/dialog_connect_glade.cc:61
+#: src/window_preferences_glade.cc:95 src/dialog_connect_glade.cc:61
 msgid "Username:"
 msgstr "Benutzername:"
 
-#: src/window_preferences_glade.cc:98 src/dialog_connect_glade.cc:64
+#: src/window_preferences_glade.cc:99 src/dialog_connect_glade.cc:64
 msgid "Password:"
 msgstr "Passwort:"
 
-#: src/window_preferences_glade.cc:102
+#: src/window_preferences_glade.cc:103
 msgid "Default Connection"
 msgstr "Standard Verbindung"
 
-#: src/window_preferences_glade.cc:367
+#: src/window_preferences_glade.cc:418
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: src/window_preferences.cc:66
+#: src/window_preferences.cc:67
 msgid "Jack"
 msgstr "Jack"
 
-#: src/window_preferences.cc:68
+#: src/window_preferences.cc:69
 msgid "Alsa"
 msgstr "Alsa"
 
-#: src/window_preferences.cc:74
+#: src/window_preferences.cc:75
 msgid "None"
 msgstr "Keine"
 
-#: src/window_preferences.cc:76
+#: src/window_preferences.cc:77
 msgid "Ogg Files"
 msgstr "Ogg Dateien"
 
-#: src/window_preferences.cc:78
+#: src/window_preferences.cc:79
 msgid "Ogg+Wave Files"
 msgstr "Ogg+Wave Dateien"
 
-#: src/window_preferences.cc:80
+#: src/window_preferences.cc:81
 msgid "Delete Ogg Files as soon as possible"
 msgstr "Lösche Ogg Dateien so bald wie möglich"
 
-#: src/window_preferences_glade.cc:99 src/dialog_connect_glade.cc:66
+#: src/window_preferences_glade.cc:100 src/dialog_connect_glade.cc:66
 msgid "Connect _anonymously"
 msgstr "_Anonym verbinden"
 
@@ -321,3 +321,39 @@ msgstr "Tobias Gehrig <tobias@gehrignet.de>"
 #, c-format
 msgid "Falling back on alsa audio driver!\n"
 msgstr "Greife auf Alsa Audiotreiber zurück.\n"
+
+#: src/window_preferences_glade.cc:113
+msgid "Autosubscription"
+msgstr "Autosubskription"
+
+#: src/window_preferences.cc:87
+msgid "Disable autosubscription"
+msgstr "Deaktiviere Autosubskription"
+
+#: src/window_preferences.cc:89
+msgid "Enable autosubscription for all users"
+msgstr "Aktiviere Autosubskription für alle Benutzer"
+
+#: src/window_preferences.cc:91
+msgid "Enable autosubscription for all specified users"
+msgstr "Aktiviere Autosubskription für alle angegebenen Benutzer"
+
+#: src/window_preferences.cc:93
+msgid "Disable autosubscription for all specified users"
+msgstr "Deaktiviere Autosubskription für alle angegebenen Benutzer"
+
+#: src/window_preferences.cc:115
+msgid "Add user"
+msgstr "Füge Benutzer hinzu"
+
+#: src/window_preferences.cc:121
+msgid "Specify user to be added to the list."
+msgstr "Geben sie einen Benutzer an, der zur Liste hinzugefügt werden soll."
+
+#: src/window_preferences.cc:151
+msgid "User already in list."
+msgstr "Benutzer bereits in Liste."
+
+#: src/window_preferences.cc:155
+msgid "The user name you specified is already existing in the list."
+msgstr "Der Benutzername, den sie angegeben haben, existiert bereits in der Liste."
