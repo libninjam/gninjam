@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-11 22:56+0100\n"
+"POT-Creation-Date: 2008-02-19 01:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,40 +16,40 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/gninjam.cc:75
+#: src/gninjam.cc:76
 msgid " sets topic to: "
 msgstr ""
 
-#: src/gninjam.cc:77
+#: src/gninjam.cc:78
 msgid "Topic is: "
 msgstr ""
 
-#: src/gninjam.cc:103
+#: src/gninjam.cc:104
 msgid " has "
 msgstr ""
 
-#: src/gninjam.cc:104
+#: src/gninjam.cc:105
 msgid "left"
 msgstr ""
 
-#: src/gninjam.cc:104
+#: src/gninjam.cc:105
 msgid "joined"
 msgstr ""
 
-#: src/gninjam.cc:105
+#: src/gninjam.cc:106
 msgid " the server"
 msgstr ""
 
-#: src/gninjam.cc:202
+#: src/gninjam.cc:203
 #, c-format
 msgid "Error opening audio!\n"
 msgstr ""
 
-#: src/gninjam.cc:250 src/gNinjamClient.cc:244
+#: src/gninjam.cc:251 src/gNinjamClient.cc:244
 msgid "new channel"
 msgstr ""
 
-#: src/gninjam.cc:279 src/window_preferences.cc:181
+#: src/gninjam.cc:280 src/window_preferences.cc:268
 #, c-format
 msgid "Error creating session directory\n"
 msgstr ""
@@ -181,7 +181,7 @@ msgid "<b>Chat</b>: "
 msgstr ""
 
 #: src/gNinjamClient.cc:421 src/vbox_local_channel.cc:91
-#: src/vbox_remote_channel.cc:87
+#: src/vbox_remote_channel.cc:89
 msgid "New channel"
 msgstr ""
 
@@ -193,100 +193,136 @@ msgstr ""
 msgid "License"
 msgstr ""
 
-#: src/window_preferences_glade.cc:60
+#: src/window_preferences_glade.cc:61
 msgid "Audio driver:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:64
+#: src/window_preferences_glade.cc:65
 msgid "Session directory:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:65
+#: src/window_preferences_glade.cc:66
 msgid "Save local audio:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:71
+#: src/window_preferences_glade.cc:72
 msgid "Ogg bitrate:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:72
+#: src/window_preferences_glade.cc:73
 msgid "Save log files"
 msgstr ""
 
-#: src/window_preferences_glade.cc:75
+#: src/window_preferences_glade.cc:76
 msgid "General"
 msgstr ""
 
-#: src/window_preferences_glade.cc:76
+#: src/window_preferences_glade.cc:77
 msgid "Client name:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:77
+#: src/window_preferences_glade.cc:78
 msgid "Number of input channels:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:85
+#: src/window_preferences_glade.cc:86
 msgid "Number of output channels:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:87
+#: src/window_preferences_glade.cc:88
 msgid "Jack settings"
 msgstr ""
 
-#: src/window_preferences_glade.cc:88
+#: src/window_preferences_glade.cc:89
 msgid "Config string:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:92
+#: src/window_preferences_glade.cc:93
 msgid "Alsa settings"
 msgstr ""
 
-#: src/window_preferences_glade.cc:93 src/dialog_connect_glade.cc:60
+#: src/window_preferences_glade.cc:94 src/dialog_connect_glade.cc:60
 msgid "Hostname:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:94 src/dialog_connect_glade.cc:61
+#: src/window_preferences_glade.cc:95 src/dialog_connect_glade.cc:61
 msgid "Username:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:98 src/dialog_connect_glade.cc:64
+#: src/window_preferences_glade.cc:99 src/dialog_connect_glade.cc:64
 msgid "Password:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:99 src/dialog_connect_glade.cc:66
+#: src/window_preferences_glade.cc:100 src/dialog_connect_glade.cc:66
 msgid "Connect _anonymously"
 msgstr ""
 
-#: src/window_preferences_glade.cc:102
+#: src/window_preferences_glade.cc:103
 msgid "Default Connection"
 msgstr ""
 
-#: src/window_preferences_glade.cc:367
+#: src/window_preferences_glade.cc:113
+msgid "Autosubscription"
+msgstr ""
+
+#: src/window_preferences_glade.cc:418
 msgid "Preferences"
 msgstr ""
 
-#: src/window_preferences.cc:66
+#: src/window_preferences.cc:67
 msgid "Jack"
 msgstr ""
 
-#: src/window_preferences.cc:68
+#: src/window_preferences.cc:69
 msgid "Alsa"
 msgstr ""
 
-#: src/window_preferences.cc:74
+#: src/window_preferences.cc:75
 msgid "None"
 msgstr ""
 
-#: src/window_preferences.cc:76
+#: src/window_preferences.cc:77
 msgid "Ogg Files"
 msgstr ""
 
-#: src/window_preferences.cc:78
+#: src/window_preferences.cc:79
 msgid "Ogg+Wave Files"
 msgstr ""
 
-#: src/window_preferences.cc:80
+#: src/window_preferences.cc:81
 msgid "Delete Ogg Files as soon as possible"
+msgstr ""
+
+#: src/window_preferences.cc:87
+msgid "Disable autosubscription"
+msgstr ""
+
+#: src/window_preferences.cc:89
+msgid "Enable autosubscription for all users"
+msgstr ""
+
+#: src/window_preferences.cc:91
+msgid "Enable autosubscription for all specified users"
+msgstr ""
+
+#: src/window_preferences.cc:93
+msgid "Disable autosubscription for all specified users"
+msgstr ""
+
+#: src/window_preferences.cc:115
+msgid "Add user"
+msgstr ""
+
+#: src/window_preferences.cc:121
+msgid "Specify user to be added to the list."
+msgstr ""
+
+#: src/window_preferences.cc:151
+msgid "User already in list."
+msgstr ""
+
+#: src/window_preferences.cc:155
+msgid "The user name you specified is already existing in the list."
 msgstr ""
 
 #: src/dialog_connect_glade.cc:147
