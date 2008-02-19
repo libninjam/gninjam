@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-15 01:37+0100\n"
+"POT-Creation-Date: 2008-02-19 02:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,40 +16,40 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/gninjam.cc:75
+#: src/gninjam.cc:76
 msgid " sets topic to: "
 msgstr ""
 
-#: src/gninjam.cc:77
+#: src/gninjam.cc:78
 msgid "Topic is: "
 msgstr ""
 
-#: src/gninjam.cc:103
+#: src/gninjam.cc:104
 msgid " has "
 msgstr ""
 
-#: src/gninjam.cc:104
+#: src/gninjam.cc:105
 msgid "left"
 msgstr ""
 
-#: src/gninjam.cc:104
+#: src/gninjam.cc:105
 msgid "joined"
 msgstr ""
 
-#: src/gninjam.cc:105
+#: src/gninjam.cc:106
 msgid " the server"
 msgstr ""
 
-#: src/gninjam.cc:205
+#: src/gninjam.cc:206
 #, c-format
 msgid "Error opening audio!\n"
 msgstr ""
 
-#: src/gninjam.cc:255 src/gNinjamClient.cc:245
+#: src/gninjam.cc:256 src/gNinjamClient.cc:245
 msgid "new channel"
 msgstr ""
 
-#: src/gninjam.cc:284 src/window_preferences.cc:181
+#: src/gninjam.cc:285 src/window_preferences.cc:270
 #, c-format
 msgid "Error creating session directory\n"
 msgstr ""
@@ -67,56 +67,72 @@ msgid "Metronome:"
 msgstr ""
 
 #: src/gNinjamClient_glade.cc:107 src/gNinjamClient_glade.cc:108
+#: src/vbox_local_channel_glade.cc:62 src/vbox_remote_channel_glade.cc:59
+#: src/RemoteUserFrame_glade.cc:61
+msgid "M"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:112 src/vbox_local_channel_glade.cc:59
+#: src/vbox_local_channel_glade.cc:61 src/vbox_remote_channel_glade.cc:58
+msgid "St"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:114 src/gNinjamClient_glade.cc:292
+#: src/vbox_local_channel.cc:77
+msgid "Session Mode"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:124
+msgid "<b>Local</b>"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:131
+msgid "<b>Remote</b>"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:145
+msgid "<b>Chat</b>"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:194
+msgid "_Local channels"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:197
+msgid "_Remote channels"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:200
+msgid "_Chat"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:206
+msgid "_File"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:209
+msgid "_Edit"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:212
+msgid "_View"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:215
+msgid "_Help"
+msgstr ""
+
+#: src/gNinjamClient_glade.cc:265 src/gNinjamClient_glade.cc:271
 #: src/vbox_local_channel_glade.cc:114 src/vbox_remote_channel_glade.cc:95
 #: src/RemoteUserFrame_glade.cc:95
 msgid "Mute"
 msgstr ""
 
-#: src/gNinjamClient_glade.cc:113 src/vbox_remote_channel_glade.cc:89
+#: src/gNinjamClient_glade.cc:285 src/vbox_remote_channel_glade.cc:89
 msgid "Stereo"
 msgstr ""
 
-#: src/gNinjamClient_glade.cc:123
-msgid "<b>Local</b>"
-msgstr ""
-
-#: src/gNinjamClient_glade.cc:130
-msgid "<b>Remote</b>"
-msgstr ""
-
-#: src/gNinjamClient_glade.cc:144
-msgid "<b>Chat</b>"
-msgstr ""
-
-#: src/gNinjamClient_glade.cc:193
-msgid "_Local channels"
-msgstr ""
-
-#: src/gNinjamClient_glade.cc:196
-msgid "_Remote channels"
-msgstr ""
-
-#: src/gNinjamClient_glade.cc:199
-msgid "_Chat"
-msgstr ""
-
-#: src/gNinjamClient_glade.cc:205
-msgid "_File"
-msgstr ""
-
-#: src/gNinjamClient_glade.cc:208
-msgid "_Edit"
-msgstr ""
-
-#: src/gNinjamClient_glade.cc:211
-msgid "_View"
-msgstr ""
-
-#: src/gNinjamClient_glade.cc:214
-msgid "_Help"
-msgstr ""
-
-#: src/gNinjamClient_glade.cc:432
+#: src/gNinjamClient_glade.cc:443
 msgid "NINJAM"
 msgstr ""
 
@@ -193,100 +209,136 @@ msgstr ""
 msgid "License"
 msgstr ""
 
-#: src/window_preferences_glade.cc:60
+#: src/window_preferences_glade.cc:61
 msgid "Audio driver:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:64
+#: src/window_preferences_glade.cc:65
 msgid "Session directory:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:65
+#: src/window_preferences_glade.cc:66
 msgid "Save local audio:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:71
+#: src/window_preferences_glade.cc:72
 msgid "Ogg bitrate:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:72
+#: src/window_preferences_glade.cc:73
 msgid "Save log files"
 msgstr ""
 
-#: src/window_preferences_glade.cc:75
+#: src/window_preferences_glade.cc:76
 msgid "General"
 msgstr ""
 
-#: src/window_preferences_glade.cc:76
+#: src/window_preferences_glade.cc:77
 msgid "Client name:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:77
+#: src/window_preferences_glade.cc:78
 msgid "Number of input channels:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:85
+#: src/window_preferences_glade.cc:86
 msgid "Number of output channels:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:87
+#: src/window_preferences_glade.cc:88
 msgid "Jack settings"
 msgstr ""
 
-#: src/window_preferences_glade.cc:88
+#: src/window_preferences_glade.cc:89
 msgid "Config string:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:92
+#: src/window_preferences_glade.cc:93
 msgid "Alsa settings"
 msgstr ""
 
-#: src/window_preferences_glade.cc:93 src/dialog_connect_glade.cc:60
+#: src/window_preferences_glade.cc:94 src/dialog_connect_glade.cc:60
 msgid "Hostname:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:94 src/dialog_connect_glade.cc:61
+#: src/window_preferences_glade.cc:95 src/dialog_connect_glade.cc:61
 msgid "Username:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:98 src/dialog_connect_glade.cc:64
+#: src/window_preferences_glade.cc:99 src/dialog_connect_glade.cc:64
 msgid "Password:"
 msgstr ""
 
-#: src/window_preferences_glade.cc:99 src/dialog_connect_glade.cc:66
+#: src/window_preferences_glade.cc:100 src/dialog_connect_glade.cc:66
 msgid "Connect _anonymously"
 msgstr ""
 
-#: src/window_preferences_glade.cc:102
+#: src/window_preferences_glade.cc:103
 msgid "Default Connection"
 msgstr ""
 
-#: src/window_preferences_glade.cc:367
+#: src/window_preferences_glade.cc:113
+msgid "Autosubscription"
+msgstr ""
+
+#: src/window_preferences_glade.cc:418
 msgid "Preferences"
 msgstr ""
 
-#: src/window_preferences.cc:66
+#: src/window_preferences.cc:67
 msgid "Jack"
 msgstr ""
 
-#: src/window_preferences.cc:68
+#: src/window_preferences.cc:69
 msgid "Alsa"
 msgstr ""
 
-#: src/window_preferences.cc:74
+#: src/window_preferences.cc:75
 msgid "None"
 msgstr ""
 
-#: src/window_preferences.cc:76
+#: src/window_preferences.cc:77
 msgid "Ogg Files"
 msgstr ""
 
-#: src/window_preferences.cc:78
+#: src/window_preferences.cc:79
 msgid "Ogg+Wave Files"
 msgstr ""
 
-#: src/window_preferences.cc:80
+#: src/window_preferences.cc:81
 msgid "Delete Ogg Files as soon as possible"
+msgstr ""
+
+#: src/window_preferences.cc:87
+msgid "Disable autosubscription"
+msgstr ""
+
+#: src/window_preferences.cc:89
+msgid "Enable autosubscription for all users"
+msgstr ""
+
+#: src/window_preferences.cc:91
+msgid "Enable autosubscription for all specified users"
+msgstr ""
+
+#: src/window_preferences.cc:93
+msgid "Disable autosubscription for all specified users"
+msgstr ""
+
+#: src/window_preferences.cc:115
+msgid "Add user"
+msgstr ""
+
+#: src/window_preferences.cc:121
+msgid "Specify user to be added to the list."
+msgstr ""
+
+#: src/window_preferences.cc:151
+msgid "User already in list."
+msgstr ""
+
+#: src/window_preferences.cc:155
+msgid "The user name you specified is already existing in the list."
 msgstr ""
 
 #: src/dialog_connect_glade.cc:147
@@ -295,16 +347,6 @@ msgstr ""
 
 #: src/vbox_local_channel_glade.cc:57
 msgid "T"
-msgstr ""
-
-#: src/vbox_local_channel_glade.cc:59 src/vbox_local_channel_glade.cc:61
-#: src/vbox_remote_channel_glade.cc:58
-msgid "St"
-msgstr ""
-
-#: src/vbox_local_channel_glade.cc:62 src/vbox_remote_channel_glade.cc:59
-#: src/RemoteUserFrame_glade.cc:61
-msgid "M"
 msgstr ""
 
 #: src/vbox_local_channel_glade.cc:63 src/vbox_remote_channel_glade.cc:60
@@ -345,10 +387,6 @@ msgstr ""
 
 #: src/vbox_local_channel.cc:75
 msgid "Voice Chat"
-msgstr ""
-
-#: src/vbox_local_channel.cc:77
-msgid "Session Mode"
 msgstr ""
 
 #: src/vbox_remote_channel_glade.cc:56
