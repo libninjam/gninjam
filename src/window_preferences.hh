@@ -21,6 +21,7 @@
 #  define _WINDOW_PREFERENCES_HH
 
 #include <gconfmm.h>
+#include <gtkmm/liststore.h>
 
 class window_preferences : public window_preferences_glade
 {
@@ -28,11 +29,16 @@ public:
   window_preferences();
 private:
   void on_checkbutton_anonymous_toggled();
+  void on_button_autosubscription_add_clicked();
+  void on_button_autosubscription_delete_clicked();
+  void on_button_autosubscription_clear_clicked();
   void on_button_abort_clicked();
   void on_button_apply_clicked();
   void on_button_ok_clicked();
   void on_window_preferences_show();
   Glib::RefPtr<Gnome::Conf::Client> _gconf_client;
   Glib::ustring _gconf_dir;
+  Gtk::TreeModelColumn<Glib::ustring> _textcolumn;
+  Glib::RefPtr<Gtk::ListStore> _refListStoreAutosubscription;
 };
 #endif

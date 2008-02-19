@@ -42,7 +42,9 @@
 #include "window_preferences.hh"
 #include "gNinjamClient.hh"
 
+#include <gtkmm.h>
 #include <gtkmm/liststore.h>
+#include <list>
 
 #include <ninjam/audiostream.h>
 #include <ninjam/njclient.h>
@@ -58,27 +60,42 @@ window_preferences::window_preferences()
     _gconf_dir("/apps/gninjam/preferences")
 {
   Gtk::TreeModel::ColumnRecord column_model;
-  Gtk::TreeModelColumn<Glib::ustring> textcolumn;
-  column_model.add(textcolumn);
+  column_model.add(_textcolumn);
   Glib::RefPtr<Gtk::ListStore> model = Gtk::ListStore::create(column_model);
   combobox_audiodriver->set_model(model);
   Gtk::TreeModel::Row row = *(model->append());
-  row[textcolumn] = _("Jack");
+  row[_textcolumn] = _("Jack");
   row = *(model->append());
-  row[textcolumn] = _("Alsa");
-  combobox_audiodriver->pack_start(textcolumn);
+  row[_textcolumn] = _("Alsa");
+  combobox_audiodriver->pack_start(_textcolumn);
 
   model = Gtk::ListStore::create(column_model);
   combobox_savelocalaudio->set_model(model);
   row = *(model->append());
-  row[textcolumn] = _("None");
+  row[_textcolumn] = _("None");
   row = *(model->append());
-  row[textcolumn] = _("Ogg Files");
+  row[_textcolumn] = _("Ogg Files");
   row = *(model->append());
-  row[textcolumn] = _("Ogg+Wave Files");
+  row[_textcolumn] = _("Ogg+Wave Files");
   row = *(model->append());
-  row[textcolumn] = _("Delete Ogg Files as soon as possible");
-  combobox_savelocalaudio->pack_start(textcolumn);
+  row[_textcolumn] = _("Delete Ogg Files as soon as possible");
+  combobox_savelocalaudio->pack_start(_textcolumn);
+
+  model = Gtk::ListStore::create(column_model);
+  combobox_autosubscription->set_model(model);
+  row = *(model->append());
+  row[_textcolumn] = _("Disable autosubscription");
+  row = *(model->append());
+  row[_textcolumn] = _("Enable autosubscription for all users");
+  row = *(model->append());
+  row[_textcolumn] = _("Enable autosubscription for all specified users");
+  row = *(model->append());
+  row[_textcolumn] = _("Disable autosubscription for all specified users");
+  combobox_autosubscription->pack_start(_textcolumn);
+
+  _refListStoreAutosubscription = Gtk::ListStore::create(column_model);
+  treeview_autosubscription->set_model(_refListStoreAutosubscription);
+  treeview_autosubscription->append_column("Username", _textcolumn);
 }
 
 void window_preferences::on_checkbutton_anonymous_toggled()
@@ -91,6 +108,76 @@ void window_preferences::on_checkbutton_anonymous_toggled()
     label23->show();
     entry_password->show();
   }
+}
+
+void window_preferences::on_button_autosubscription_add_clicked()
+{
+  Gtk::Dialog dialog(_("Add user"));
+
+  // Add response buttons the the dialog:
+  dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+  dialog.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_OK);
+  Gtk::VBox *vbox = dialog.get_vbox();
+  Gtk::Label label(_("Specify user to be added to the list."));
+  vbox->pack_start(label);
+  label.show();
+  Gtk::Entry entry;
+  vbox->pack_start(entry);
+  entry.show();
+
+  // Show the dialog and wait for a user response:
+  int result = dialog.run();
+
+  // Handle the response:
+  switch(result)
+  {
+    case(Gtk::RESPONSE_OK):
+    {
+      Glib::ustring username = entry.get_text();
+      bool exists = false;
+      Gtk::TreeNodeChildren children = _refListStoreAutosubscription->children();
+      for (Gtk::TreeIter iter = children.begin(), end(children.end()); iter != end; ++iter) {
+	Gtk::TreeModel::Row row = *iter;
+	Glib::ustring s = row[_textcolumn];
+	if (s == username) {
+	  exists = true;
+	  break;
+	}
+      }
+      if (!exists) {
+	Gtk::TreeModel::Row row = *(_refListStoreAutosubscription->append());
+	row[_textcolumn] = username;
+      } else {
+	Gtk::MessageDialog warning(_("User already in list."),
+				   false /* use_markup */,
+				   Gtk::MESSAGE_WARNING,
+				   Gtk::BUTTONS_CLOSE);
+	warning.set_secondary_text(_("The user name you specified is already existing in the list."));
+	warning.run();
+
+      }
+      break;
+    }
+    default:
+    {
+      break;
+    }
+  }
+}
+
+void window_preferences::on_button_autosubscription_delete_clicked()
+{
+  Glib::RefPtr<Gtk::TreeSelection> selection = treeview_autosubscription->get_selection();
+  if (selection->count_selected_rows() == 1) {
+    Gtk::TreeIter iter = selection->get_selected();
+    //Gtk::TreeModel::Row row = *iter;
+    _refListStoreAutosubscription->erase(iter);
+  }
+}
+
+void window_preferences::on_button_autosubscription_clear_clicked()
+{
+  _refListStoreAutosubscription->clear();
 }
 
 void window_preferences::on_button_abort_clicked()
@@ -234,6 +321,20 @@ void window_preferences::on_button_apply_clicked()
       g_client->SetLogFile(NULL);
     }
   }
+
+  g_client->config_autosubscribe = combobox_autosubscription->get_active_row_number();
+  printf("%d\n", g_client->config_autosubscribe);
+  g_client->config_autosubscribe_userlist.clear();
+  std::list<Glib::ustring> autosubscribe_userlist;
+  Gtk::TreeNodeChildren children = _refListStoreAutosubscription->children();
+  for (Gtk::TreeIter iter = children.begin(), end(children.end()); iter != end; ++iter) {
+    Gtk::TreeModel::Row row = *iter;
+    Glib::ustring s = row[_textcolumn];
+    autosubscribe_userlist.push_back(s);
+    g_client->config_autosubscribe_userlist.insert(s);
+  }
+  _gconf_client->set_string_list(_gconf_dir+"/autosubscribe_userlist",
+				 autosubscribe_userlist);
   _gconf_client->set(_gconf_dir+"/audio_driver",
 		     audiodriver);
   _gconf_client->set(_gconf_dir+"/alsa_config_string",
@@ -260,6 +361,8 @@ void window_preferences::on_button_apply_clicked()
 		     checkbutton_anonymous->get_active());
   _gconf_client->set(_gconf_dir+"/password",
 		     entry_password->get_text());
+  _gconf_client->set(_gconf_dir+"/autosubscribe",
+		     g_client->config_autosubscribe);
 }
 
 void window_preferences::on_button_ok_clicked()
@@ -292,4 +395,11 @@ void window_preferences::on_window_preferences_show()
   entry_username->set_text(_gconf_client->get_string(_gconf_dir+"/username"));
   checkbutton_anonymous->set_active(_gconf_client->get_bool(_gconf_dir+"/anonymous_login"));
   entry_password->set_text(_gconf_client->get_string(_gconf_dir+"/password"));
+  combobox_autosubscription->set_active(g_client->config_autosubscribe);
+  _refListStoreAutosubscription->clear();
+  for (std::set<std::string>::iterator iter = g_client->config_autosubscribe_userlist.begin();
+       iter != g_client->config_autosubscribe_userlist.end(); ++iter) {
+    Gtk::TreeModel::Row row = *(_refListStoreAutosubscription->append());
+    row[_textcolumn] = *iter;
+  }
 }

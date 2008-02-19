@@ -20,6 +20,7 @@
 
 #include <gtkmm/main.h>
 #include <glib/gi18n.h>
+#include <list>
 
 #include "gNinjamClient.hh"
 
@@ -318,6 +319,13 @@ int main(int argc, char **argv)
   
   if (gconf_client->get_bool(gconf_prefdir+"/save_log")) {
     g_client->SetLogFile((sessiondir+"clipsort.log").c_str());
+  }
+
+  g_client->config_autosubscribe = gconf_client->get_int(gconf_prefdir+"/autosubscribe");
+  std::list<Glib::ustring> autosubscribe_userlist = gconf_client->get_string_list(gconf_prefdir+"/autosubscribe_userlist");
+  for (std::list<Glib::ustring>::iterator iter=autosubscribe_userlist.begin();
+       iter != autosubscribe_userlist.end(); ++iter) {
+    g_client->config_autosubscribe_userlist.insert(*iter);
   }
 
   if (g_audio) g_audio_enable=1;

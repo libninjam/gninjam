@@ -1,3 +1,9 @@
+gninjam (0.01a-13) gutsy; urgency=low
+
+  * add per-user autosubscribe option in preferences dialog
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Sat, 16 Feb 2008 16:18:58 +0100
+
 gninjam (0.01a-12ubuntu1) gutsy; urgency=low
 
   * start gui even if audio interface could not be successfully initialized.
