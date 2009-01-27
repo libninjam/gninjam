@@ -1,3 +1,9 @@
+gninjam (0.01a-13ubuntu1) jaunty; urgency=low
+
+  * fix compilation on intrepid
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Tue, 27 Jan 2009 22:42:20 +0100
+
 gninjam (0.01a-13) gutsy; urgency=low
 
   * add per-user autosubscribe option in preferences dialog
