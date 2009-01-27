@@ -19,6 +19,8 @@
 #include "config.h"
 #include "dialog_license.hh"
 
+#include <cstring>
+
 void dialog_license::set_text(char *text)
 {
   Glib::RefPtr<Gtk::TextBuffer> buffer = textview2->get_buffer();
