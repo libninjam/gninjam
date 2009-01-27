@@ -1,3 +1,9 @@
+gninjam (0.01a-13ubuntu1~sessionmode) jaunty; urgency=low
+
+  * fix compilation problem on intrepid
+
+ -- Tobias Gehrig <tobias@gehrignet.de>  Tue, 27 Jan 2009 22:42:51 +0100
+
 gninjam (0.01a-13~sessionmode) gutsy; urgency=low
 
   * add voice chat and session mode support
