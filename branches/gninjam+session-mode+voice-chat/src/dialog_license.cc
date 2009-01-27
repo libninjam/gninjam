@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2006 Tobias Gehrig <tobias@gehrignet.de>
+    Copyright (C) 2006-2009 Tobias Gehrig <tobias@gehrignet.de>
     
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

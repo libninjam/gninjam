@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2006 Tobias Gehrig <tobias@gehrignet.de>
+    Copyright (C) 2006-2009 Tobias Gehrig <tobias@gehrignet.de>
     
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -121,7 +121,7 @@ gNinjamClient::gNinjamClient()
   std::list<Glib::ustring> authors;
   _about_dialog.set_program_name("gNinjam");
   _about_dialog.set_version(PACKAGE_VERSION);
-  _about_dialog.set_copyright("(C) 2006-2008 Tobias Gehrig");
+  _about_dialog.set_copyright("(C) 2006-2009 Tobias Gehrig");
   _about_dialog.set_comments(_("Gtk client for NINJAM"));
   _about_dialog.set_website("http://gninjam.sf.net");
   authors.push_back("Tobias Gehrig <tobias@gehrignet.de>");
