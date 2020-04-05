@@ -35,7 +35,8 @@
 #  define N_(String) (String)
 #endif
 #include <gtkmmconfig.h>
-#if GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>2
+#if GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>10 // legacy switch
+#elif GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>2
 #include <sigc++/compatibility.h>
 #define GMM_GTKMM_22_24(a,b) b
 #else //gtkmm 2.2
@@ -150,15 +151,15 @@ vbox_local_channel_glade::vbox_local_channel_glade(GlademmData *gmm_data
    button_local_remove->show();
    hbox3->show();
    vbox_local_channel->show();
-   entry_local_channelname->signal_changed().connect(SigC::slot(*this, &vbox_local_channel_glade::on_entry_local_channelname_changed), false);
-   checkbutton_local_transmit->signal_toggled().connect(SigC::slot(*this, &vbox_local_channel_glade::on_checkbutton_local_transmit_toggled), false);
-   combobox_local_input->signal_changed().connect(SigC::slot(*this, &vbox_local_channel_glade::on_combobox_local_input_changed), false);
-   hscale_local_volume->signal_value_changed().connect(SigC::slot(*this, &vbox_local_channel_glade::on_hscale_local_volume_value_changed), false);
-   hscale_local_pan->signal_value_changed().connect(SigC::slot(*this, &vbox_local_channel_glade::on_hscale_local_pan_value_changed), false);
-   spinbutton_bitrate->signal_value_changed().connect(SigC::slot(*this, &vbox_local_channel_glade::on_spinbutton_bitrate_value_changed), false);
-   checkbutton_local_mute->signal_toggled().connect(SigC::slot(*this, &vbox_local_channel_glade::on_checkbutton_local_mute_toggled), false);
-   checkbutton_local_solo->signal_toggled().connect(SigC::slot(*this, &vbox_local_channel_glade::on_checkbutton_local_solo_toggled), false);
-   button_local_remove->signal_clicked().connect(SigC::slot(*this, &vbox_local_channel_glade::on_button_local_remove_clicked), false);
+   entry_local_channelname->signal_changed().connect(sigc::mem_fun(*this, &vbox_local_channel_glade::on_entry_local_channelname_changed));
+   checkbutton_local_transmit->signal_toggled().connect(sigc::mem_fun(*this, &vbox_local_channel_glade::on_checkbutton_local_transmit_toggled));
+   combobox_local_input->signal_changed().connect(sigc::mem_fun(*this, &vbox_local_channel_glade::on_combobox_local_input_changed));
+   hscale_local_volume->signal_value_changed().connect(sigc::mem_fun(*this, &vbox_local_channel_glade::on_hscale_local_volume_value_changed));
+   hscale_local_pan->signal_value_changed().connect(sigc::mem_fun(*this, &vbox_local_channel_glade::on_hscale_local_pan_value_changed));
+   spinbutton_bitrate->signal_value_changed().connect(sigc::mem_fun(*this, &vbox_local_channel_glade::on_spinbutton_bitrate_value_changed));
+   checkbutton_local_mute->signal_toggled().connect(sigc::mem_fun(*this, &vbox_local_channel_glade::on_checkbutton_local_mute_toggled));
+   checkbutton_local_solo->signal_toggled().connect(sigc::mem_fun(*this, &vbox_local_channel_glade::on_checkbutton_local_solo_toggled));
+   button_local_remove->signal_clicked().connect(sigc::mem_fun(*this, &vbox_local_channel_glade::on_button_local_remove_clicked));
 }
 
 vbox_local_channel_glade::~vbox_local_channel_glade()

@@ -35,7 +35,8 @@
 #  define N_(String) (String)
 #endif
 #include <gtkmmconfig.h>
-#if GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>2
+#if GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>10 // legacy switch
+#elif GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>2
 #include <sigc++/compatibility.h>
 #define GMM_GTKMM_22_24(a,b) b
 #else //gtkmm 2.2
@@ -128,9 +129,9 @@ RemoteUserFrame_glade::RemoteUserFrame_glade(GlademmData *gmm_data
    alignment4->show();
    label->show();
    RemoteUserFrame->show();
-   hscale_volume->signal_value_changed().connect(SigC::slot(*this, &RemoteUserFrame_glade::on_hscale_volume_value_changed), false);
-   hscale_pan->signal_value_changed().connect(SigC::slot(*this, &RemoteUserFrame_glade::on_hscale_pan_value_changed), false);
-   checkbutton_mute->signal_toggled().connect(SigC::slot(*this, &RemoteUserFrame_glade::on_checkbutton_mute_toggled), false);
+   hscale_volume->signal_value_changed().connect(sigc::mem_fun(*this, &RemoteUserFrame_glade::on_hscale_volume_value_changed));
+   hscale_pan->signal_value_changed().connect(sigc::mem_fun(*this, &RemoteUserFrame_glade::on_hscale_pan_value_changed));
+   checkbutton_mute->signal_toggled().connect(sigc::mem_fun(*this, &RemoteUserFrame_glade::on_checkbutton_mute_toggled));
 }
 
 RemoteUserFrame_glade::~RemoteUserFrame_glade()

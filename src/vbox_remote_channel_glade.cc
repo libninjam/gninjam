@@ -35,7 +35,8 @@
 #  define N_(String) (String)
 #endif
 #include <gtkmmconfig.h>
-#if GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>2
+#if GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>10 // legacy switch
+#elif GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>2
 #include <sigc++/compatibility.h>
 #define GMM_GTKMM_22_24(a,b) b
 #else //gtkmm 2.2
@@ -144,13 +145,13 @@ vbox_remote_channel_glade::vbox_remote_channel_glade(GlademmData *gmm_data
    checkbutton_remote_stereo->show();
    hbox5->show();
    vbox_remote_channel->show();
-   checkbutton_remote_receive->signal_toggled().connect(SigC::slot(*this, &vbox_remote_channel_glade::on_checkbutton_remote_receive_toggled), false);
-   combobox_remote_output->signal_changed().connect(SigC::slot(*this, &vbox_remote_channel_glade::on_combobox_remote_output_changed), false);
-   hscale_remote_volume->signal_value_changed().connect(SigC::slot(*this, &vbox_remote_channel_glade::on_hscale_remote_volume_value_changed), false);
-   hscale_remote_pan->signal_value_changed().connect(SigC::slot(*this, &vbox_remote_channel_glade::on_hscale_remote_pan_value_changed), false);
-   checkbutton_remote_mute->signal_toggled().connect(SigC::slot(*this, &vbox_remote_channel_glade::on_checkbutton_remote_mute_toggled), false);
-   checkbutton_remote_solo->signal_toggled().connect(SigC::slot(*this, &vbox_remote_channel_glade::on_checkbutton_remote_solo_toggled), false);
-   checkbutton_remote_stereo->signal_toggled().connect(SigC::slot(*this, &vbox_remote_channel_glade::on_checkbutton_remote_stereo_toggled), false);
+   checkbutton_remote_receive->signal_toggled().connect(sigc::mem_fun(*this, &vbox_remote_channel_glade::on_checkbutton_remote_receive_toggled));
+   combobox_remote_output->signal_changed().connect(sigc::mem_fun(*this, &vbox_remote_channel_glade::on_combobox_remote_output_changed));
+   hscale_remote_volume->signal_value_changed().connect(sigc::mem_fun(*this, &vbox_remote_channel_glade::on_hscale_remote_volume_value_changed));
+   hscale_remote_pan->signal_value_changed().connect(sigc::mem_fun(*this, &vbox_remote_channel_glade::on_hscale_remote_pan_value_changed));
+   checkbutton_remote_mute->signal_toggled().connect(sigc::mem_fun(*this, &vbox_remote_channel_glade::on_checkbutton_remote_mute_toggled));
+   checkbutton_remote_solo->signal_toggled().connect(sigc::mem_fun(*this, &vbox_remote_channel_glade::on_checkbutton_remote_solo_toggled));
+   checkbutton_remote_stereo->signal_toggled().connect(sigc::mem_fun(*this, &vbox_remote_channel_glade::on_checkbutton_remote_stereo_toggled));
 }
 
 vbox_remote_channel_glade::~vbox_remote_channel_glade()

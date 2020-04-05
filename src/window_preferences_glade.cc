@@ -35,7 +35,8 @@
 #  define N_(String) (String)
 #endif
 #include <gtkmmconfig.h>
-#if GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>2
+#if GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>10 // legacy switch
+#elif GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>2
 #include <sigc++/compatibility.h>
 #define GMM_GTKMM_22_24(a,b) b
 #else //gtkmm 2.2
@@ -468,14 +469,14 @@ window_preferences_glade::window_preferences_glade(
    button_ok->show();
    hbuttonbox1->show();
    vbox5->show();
-   checkbutton_anonymous->signal_toggled().connect(SigC::slot(*this, &window_preferences_glade::on_checkbutton_anonymous_toggled), false);
-   button_autosubscription_add->signal_clicked().connect(SigC::slot(*this, &window_preferences_glade::on_button_autosubscription_add_clicked), false);
-   button_autosubscription_delete->signal_clicked().connect(SigC::slot(*this, &window_preferences_glade::on_button_autosubscription_delete_clicked), false);
-   button_autosubscription_clear->signal_clicked().connect(SigC::slot(*this, &window_preferences_glade::on_button_autosubscription_clear_clicked), false);
-   button_abort->signal_clicked().connect(SigC::slot(*this, &window_preferences_glade::on_button_abort_clicked), false);
-   button_apply->signal_clicked().connect(SigC::slot(*this, &window_preferences_glade::on_button_apply_clicked), false);
-   button_ok->signal_clicked().connect(SigC::slot(*this, &window_preferences_glade::on_button_ok_clicked), false);
-   window_preferences->signal_show().connect(SigC::slot(*this, &window_preferences_glade::on_window_preferences_show), false);
+   checkbutton_anonymous->signal_toggled().connect(sigc::mem_fun(*this, &window_preferences_glade::on_checkbutton_anonymous_toggled));
+   button_autosubscription_add->signal_clicked().connect(sigc::mem_fun(*this, &window_preferences_glade::on_button_autosubscription_add_clicked));
+   button_autosubscription_delete->signal_clicked().connect(sigc::mem_fun(*this, &window_preferences_glade::on_button_autosubscription_delete_clicked));
+   button_autosubscription_clear->signal_clicked().connect(sigc::mem_fun(*this, &window_preferences_glade::on_button_autosubscription_clear_clicked));
+   button_abort->signal_clicked().connect(sigc::mem_fun(*this, &window_preferences_glade::on_button_abort_clicked));
+   button_apply->signal_clicked().connect(sigc::mem_fun(*this, &window_preferences_glade::on_button_apply_clicked));
+   button_ok->signal_clicked().connect(sigc::mem_fun(*this, &window_preferences_glade::on_button_ok_clicked));
+   window_preferences->signal_show().connect(sigc::mem_fun(*this, &window_preferences_glade::on_window_preferences_show));
 }
 
 window_preferences_glade::~window_preferences_glade()

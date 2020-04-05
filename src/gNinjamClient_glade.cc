@@ -35,7 +35,8 @@
 #  define N_(String) (String)
 #endif
 #include <gtkmmconfig.h>
-#if GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>2
+#if GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>10 // legacy switch
+#elif GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>2
 #include <sigc++/compatibility.h>
 #define GMM_GTKMM_22_24(a,b) b
 #else //gtkmm 2.2
@@ -496,28 +497,28 @@ gNinjamClient_glade::gNinjamClient_glade(
    hbox1->show();
    vbox1->show();
    gNinjamClient->show();
-   neu1->signal_activate().connect(SigC::slot(*this, &gNinjamClient_glade::on_neu1_activate), false);
-   verbinden1->signal_activate().connect(SigC::slot(*this, &gNinjamClient_glade::on_verbinden1_activate), false);
-   trennen1->signal_activate().connect(SigC::slot(*this, &gNinjamClient_glade::on_trennen1_activate), false);
-   beenden1->signal_activate().connect(SigC::slot(*this, &gNinjamClient_glade::on_beenden1_activate), false);
-   ausschneiden1->signal_activate().connect(SigC::slot(*this, &gNinjamClient_glade::on_ausschneiden1_activate), false);
-   kopieren1->signal_activate().connect(SigC::slot(*this, &gNinjamClient_glade::on_kopieren1_activate), false);
-   einf__gen1->signal_activate().connect(SigC::slot(*this, &gNinjamClient_glade::on_einf__gen1_activate), false);
-   l__schen1->signal_activate().connect(SigC::slot(*this, &gNinjamClient_glade::on_l__schen1_activate), false);
-   einstellungen1->signal_activate().connect(SigC::slot(*this, &gNinjamClient_glade::on_einstellungen1_activate), false);
-   local_channels1->signal_activate().connect(SigC::slot(*this, &gNinjamClient_glade::on_local_channels1_activate), false);
-   remote_channels1->signal_activate().connect(SigC::slot(*this, &gNinjamClient_glade::on_remote_channels1_activate), false);
-   chat1->signal_activate().connect(SigC::slot(*this, &gNinjamClient_glade::on_chat1_activate), false);
-   info1->signal_activate().connect(SigC::slot(*this, &gNinjamClient_glade::on_info1_activate), false);
-   hscale_metronome_volume->signal_value_changed().connect(SigC::slot(*this, &gNinjamClient_glade::on_hscale_metronome_volume_value_changed), false);
-   hscale_master_pan->signal_value_changed().connect(SigC::slot(*this, &gNinjamClient_glade::on_hscale_master_pan_value_changed), false);
-   hscale_metronome_pan->signal_value_changed().connect(SigC::slot(*this, &gNinjamClient_glade::on_hscale_metronome_pan_value_changed), false);
-   checkbutton_master_mute->signal_toggled().connect(SigC::slot(*this, &gNinjamClient_glade::on_checkbutton_master_mute_toggled), false);
-   checkbutton_metronome_mute->signal_toggled().connect(SigC::slot(*this, &gNinjamClient_glade::on_checkbutton_metronome_mute_toggled), false);
-   hscale_master_volume->signal_value_changed().connect(SigC::slot(*this, &gNinjamClient_glade::on_hscale_master_volume_value_changed), false);
-   checkbutton_metronome_stereo->signal_toggled().connect(SigC::slot(*this, &gNinjamClient_glade::on_checkbutton_metronome_stereo_toggled), false);
-   combobox_metronome_output->signal_changed().connect(SigC::slot(*this, &gNinjamClient_glade::on_combobox_metronome_output_changed), false);
-   chat_entry->signal_activate().connect(SigC::slot(*this, &gNinjamClient_glade::on_chat_entry_activate), false);
+   neu1->signal_activate().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_neu1_activate));
+   verbinden1->signal_activate().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_verbinden1_activate));
+   trennen1->signal_activate().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_trennen1_activate));
+   beenden1->signal_activate().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_beenden1_activate));
+   ausschneiden1->signal_activate().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_ausschneiden1_activate));
+   kopieren1->signal_activate().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_kopieren1_activate));
+   einf__gen1->signal_activate().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_einf__gen1_activate));
+   l__schen1->signal_activate().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_l__schen1_activate));
+   einstellungen1->signal_activate().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_einstellungen1_activate));
+   local_channels1->signal_activate().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_local_channels1_activate));
+   remote_channels1->signal_activate().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_remote_channels1_activate));
+   chat1->signal_activate().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_chat1_activate));
+   info1->signal_activate().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_info1_activate));
+   hscale_metronome_volume->signal_value_changed().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_hscale_metronome_volume_value_changed));
+   hscale_master_pan->signal_value_changed().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_hscale_master_pan_value_changed));
+   hscale_metronome_pan->signal_value_changed().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_hscale_metronome_pan_value_changed));
+   checkbutton_master_mute->signal_toggled().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_checkbutton_master_mute_toggled));
+   checkbutton_metronome_mute->signal_toggled().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_checkbutton_metronome_mute_toggled));
+   hscale_master_volume->signal_value_changed().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_hscale_master_volume_value_changed));
+   checkbutton_metronome_stereo->signal_toggled().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_checkbutton_metronome_stereo_toggled));
+   combobox_metronome_output->signal_changed().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_combobox_metronome_output_changed));
+   chat_entry->signal_activate().connect(sigc::mem_fun(*this, &gNinjamClient_glade::on_chat_entry_activate));
 }
 
 gNinjamClient_glade::~gNinjamClient_glade()

@@ -35,7 +35,8 @@
 #  define N_(String) (String)
 #endif
 #include <gtkmmconfig.h>
-#if GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>2
+#if GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>10 // legacy switch
+#elif GTKMM_MAJOR_VERSION==2 && GTKMM_MINOR_VERSION>2
 #include <sigc++/compatibility.h>
 #define GMM_GTKMM_22_24(a,b) b
 #else //gtkmm 2.2
@@ -162,7 +163,7 @@ dialog_connect_glade::dialog_connect_glade(
    entry_password->show();
    checkbutton_anonymous->show();
    table1->show();
-   checkbutton_anonymous->signal_toggled().connect(SigC::slot(*this, &dialog_connect_glade::on_checkbutton_anonymous_toggled), false);
+   checkbutton_anonymous->signal_toggled().connect(sigc::mem_fun(*this, &dialog_connect_glade::on_checkbutton_anonymous_toggled));
    okbutton1->grab_default();
 }
 
