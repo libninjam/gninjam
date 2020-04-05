@@ -4,9 +4,7 @@
 
 if test ! -f install-sh ; then touch install-sh ; fi
 
-MAKE=`which gnumake`
-if test ! -x "$MAKE" ; then MAKE=`which gmake` ; fi
-if test ! -x "$MAKE" ; then MAKE=`which make` ; fi
+MAKE=`which make`
 HAVE_GNU_MAKE=`$MAKE --version|grep -c "Free Software Foundation"`
 
 if test "$HAVE_GNU_MAKE" != "1"; then 
