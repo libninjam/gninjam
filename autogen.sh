@@ -4,9 +4,7 @@
 
 if test ! -f install-sh ; then touch install-sh ; fi
 
-MAKE=`which gnumake`
-if test ! -x "$MAKE" ; then MAKE=`which gmake` ; fi
-if test ! -x "$MAKE" ; then MAKE=`which make` ; fi
+MAKE=`which make`
 HAVE_GNU_MAKE=`$MAKE --version|grep -c "Free Software Foundation"`
 
 if test "$HAVE_GNU_MAKE" != "1"; then 
@@ -25,7 +23,9 @@ else
 fi
 echo `autoconf$AC_POSTFIX --version | head -1` found
 
-if which automake-1.9 >/dev/null 2>&1
+if which automake-1.16 >/dev/null 2>&1
+then AM_POSTFIX=-1.16
+elif which automake-1.9 >/dev/null 2>&1
 then AM_POSTFIX=-1.9
 elif which automake-1.8 >/dev/null 2>&1
 then AM_POSTFIX=-1.8
@@ -53,6 +53,6 @@ if test ! -e po/LINGUAS
 then touch po/LINGUAS
 fi
 autoheader$AC_POSTFIX
-automake$AM_POSTFIX --add-missing --copy --gnu
+automake$AM_POSTFIX --add-missing --copy --gnits
 autoconf$AC_POSTFIX
 # ./configure $* && $MAKE

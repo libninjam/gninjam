@@ -3,6 +3,7 @@
 
 SUBDIRS = po src 
 
+README: README.md
 EXTRA_DIST = m4/ChangeLog  config.rpath ChangeLog  AUTHORS TODO README configure 
 
 ACLOCAL_AMFLAGS = -I m4

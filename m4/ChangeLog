@@ -1,3 +1,16 @@
+2020-04-05  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* gettext.m4: Upgrade to gettext-0.20.1.
+	* host-cpu-c-abi.m4: New file, from gettext-0.20.1.
+	* iconv.m4: Upgrade to gettext-0.20.1.
+	* intlmacosx.m4: New file, from gettext-0.20.1.
+	* lib-ld.m4: Upgrade to gettext-0.20.1.
+	* lib-link.m4: Upgrade to gettext-0.20.1.
+	* lib-prefix.m4: Upgrade to gettext-0.20.1.
+	* nls.m4: Upgrade to gettext-0.20.1.
+	* po.m4: Upgrade to gettext-0.20.1.
+	* progtest.m4: Upgrade to gettext-0.20.1.
+
 2006-11-23  gettextize  <bug-gnu-gettext@gnu.org>
 
 	* codeset.m4: New file, from gettext-0.15.
