@@ -139,7 +139,7 @@ void vbox_local_channel::on_checkbutton_local_transmit_toggled()
 void vbox_local_channel::on_combobox_local_input_changed()
 {
   int channel = combobox_local_input->get_active_row_number();
-  if (g_audio && (channel == g_audio->m_innch)) {
+  if (g_audio && (channel == g_audio->getNInputChannels())) {
     if (g_audio->addInputChannel())
       window->update_inputLists();
   }

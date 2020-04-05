@@ -297,13 +297,13 @@ void window_preferences::on_button_apply_clicked()
       if (g_audio)
 	g_client->waveWrite = new WaveWriter((sessiondir+"output.wav").c_str(),
 					     24,
-					     g_audio->m_outnch>1?2:1,
-					     g_audio->m_srate);
+					     g_audio->getNOutputChannels()>1?2:1,
+					     g_audio->getSampleRate());
     case 1:
       if (g_audio)
 	g_client->SetOggOutFile(fopen((sessiondir+"output.ogg").c_str(),"ab"),
-				g_audio->m_srate,
-				g_audio->m_outnch>1?2:1,
+				g_audio->getSampleRate(),
+				g_audio->getNOutputChannels()>1?2:1,
 				oggbitrate);
     case 0:
       g_client->config_savelocalaudio = savelocalaudio;
@@ -385,8 +385,8 @@ void window_preferences::on_window_preferences_show()
   checkbutton_savelog->set_active(_gconf_client->get_bool(_gconf_dir+"/save_log"));
   entry_jack_client_name->set_text(_gconf_client->get_string(_gconf_dir+"/jack_client_name"));
   if (g_audio) {
-    spinbutton_jack_ninputchannels->set_value(g_audio->m_innch);
-    spinbutton_jack_noutputchannels->set_value(g_audio->m_outnch);
+    spinbutton_jack_ninputchannels->set_value(g_audio->getNInputChannels());
+    spinbutton_jack_noutputchannels->set_value(g_audio->getNOutputChannels());
   } else {
     spinbutton_jack_ninputchannels->set_value(_gconf_client->get_int(_gconf_dir+"/jack_ninput_channels"));
     spinbutton_jack_noutputchannels->set_value(_gconf_client->get_int(_gconf_dir+"/jack_noutput_channels"));

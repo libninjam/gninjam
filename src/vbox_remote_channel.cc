@@ -80,7 +80,7 @@ void vbox_remote_channel::update_outputList()
   Glib::RefPtr<Gtk::ListStore> model = Gtk::ListStore::create(_column_model);
   Gtk::TreeModel::Row row;
   if (g_audio) {
-    for (int i=0; i < g_audio->m_outnch; i++) {
+    for (int i=0; i < g_audio->getNOutputChannels(); i++) {
       row = *(model->append());
       row[_textcolumn] = g_audio->GetOutputChannelName(i);
     }
@@ -174,7 +174,7 @@ void vbox_remote_channel::on_checkbutton_remote_solo_toggled()
 void vbox_remote_channel::on_combobox_remote_output_changed()
 {
   int channel = combobox_remote_output->get_active_row_number();
-  if (g_audio && (channel == g_audio->m_outnch)) {
+  if (g_audio && (channel == g_audio->getNOutputChannels())) {
     if (g_audio->addOutputChannel())
       window->update_outputLists();
   }

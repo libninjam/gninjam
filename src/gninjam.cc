@@ -217,7 +217,7 @@ int main(int argc, char **argv)
       g_client->config_mastermute = gconf_client->get_bool(gconf_dir+"/master/master_mute");
       g_client->config_metronome_mute = gconf_client->get_bool(gconf_dir+"/master/metronome_mute");
       g_client->config_metronome_channel = gconf_client->get_int(gconf_dir+"/master/metronome_channel");
-      if (g_audio && (g_client->config_metronome_channel >= g_audio->m_outnch))
+      if (g_audio && (g_client->config_metronome_channel >= g_audio->getNOutputChannels()))
 	g_client->config_metronome_channel = 0;
       g_client->config_metronome_stereoout = gconf_client->get_bool(gconf_dir+"/master/metronome_stereo_output");
     }
@@ -235,7 +235,7 @@ int main(int argc, char **argv)
 					    true, gconf_client->get_bool(localpath+"/mute"),
 					    true, gconf_client->get_bool(localpath+"/solo"));
 	int source = gconf_client->get_int(localpath+"/source");
-	if (g_audio && (source >= g_audio->m_innch))
+	if (g_audio && (source >= g_audio->getNInputChannels()))
 	  source = 0;
 	g_client->SetLocalChannelInfo(a,
 				      gconf_client->get_string(localpath+"/name").c_str(),
@@ -301,13 +301,13 @@ int main(int argc, char **argv)
     if (g_audio)
       g_client->waveWrite = new WaveWriter((sessiondir+"output.wav").c_str(),
 					   24,
-					   g_audio->m_outnch>1?2:1,
-					   g_audio->m_srate);
+					   g_audio->getNOutputChannels()>1?2:1,
+					   g_audio->getSampleRate());
   case 1:
     if (g_audio)
       g_client->SetOggOutFile(fopen((sessiondir+"output.ogg").c_str(),"ab"),
-			      g_audio->m_srate,
-			      g_audio->m_outnch>1?2:1,
+			      g_audio->getSampleRate(),
+			      g_audio->getNOutputChannels()>1?2:1,
 			      gconf_client->get_int(gconf_prefdir+"/ogg_bitrate"));
   case 0:
     g_client->config_savelocalaudio = savelocalaudio;

@@ -194,16 +194,16 @@ bool gNinjamClient::on_timeout_gui()
   if (_audio_status_changed && g_audio) {
     _audio_status_changed = false;
     char output[16];
-    snprintf(output, sizeof(output), "%d", g_audio->m_srate);
+    snprintf(output, sizeof(output), "%d", g_audio->getSampleRate());
     Glib::ustring statusmsg = output;
     statusmsg += " Hz ";
-    snprintf(output, sizeof(output), "%d", g_audio->m_innch);
+    snprintf(output, sizeof(output), "%d", g_audio->getNInputChannels());
     statusmsg += output;
     statusmsg += "ch->";
-    snprintf(output, sizeof(output), "%d", g_audio->m_outnch);
+    snprintf(output, sizeof(output), "%d", g_audio->getNOutputChannels());
     statusmsg += output;
     statusmsg += "ch ";
-    snprintf(output, sizeof(output), "%d", g_audio->m_bps);
+    snprintf(output, sizeof(output), "%d", g_audio->getBitDepth());
     statusmsg += output;
     statusmsg += "bps";
     label_audio_info->set_text(statusmsg);
@@ -412,7 +412,7 @@ void gNinjamClient::update_outputLists()
   Glib::RefPtr<Gtk::ListStore> model = Gtk::ListStore::create(_column_model);
   Gtk::TreeModel::Row row;
   if (g_audio) {
-    for (int i=0; i < g_audio->m_outnch; i++) {
+    for (int i=0; i < g_audio->getNOutputChannels(); i++) {
       row = *(model->append());
       row[_textcolumn] = g_audio->GetOutputChannelName(i);
     }
@@ -452,7 +452,7 @@ void gNinjamClient::on_chat1_activate()
 void gNinjamClient::on_combobox_metronome_output_changed()
 {
   int channel = combobox_metronome_output->get_active_row_number();
-  if (g_audio && (channel == g_audio->m_outnch)) {
+  if (g_audio && (channel == g_audio->getNOutputChannels())) {
     if (g_audio->addOutputChannel()) {
       update_outputLists();
     }
