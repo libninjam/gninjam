@@ -1,7 +1,11 @@
-# gninjam
-clone of the original gninjam codebase
+# gNinjam
 
-this is the pristine state of the initial fork/conversion from sourceforge svn - it includes the full svn history of both the master and experimental branches - the two branches are significantly divergent and are mutually incompatible - this is the master branch with the canonical feature set
+gNinjam is a NINJAM client for GNU/Linux, utilizing the [libninjam library](https://github.com/libninjam/libninjam) and built upon the GTK framework.
 
-to be clear - all of the commit history to this point was initially the svn history which was automagically converted to git format via web-based import into github
-the original clone address used was ```http://svn.code.sf.net/p/gninjam/code```
+NINJAM is a network protocol for online live music collaboratiion. It allows people to jam in real-time over the internet, and collaborate on recording sessions.
+
+## Compiling
+
+```
+$ ./autogen.sh && ./configure && make && sudo make install
+```
