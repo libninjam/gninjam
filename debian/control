@@ -1,8 +1,10 @@
 Source: gninjam
-Section: unknown
+Section: web
 Priority: optional
 Maintainer: Tobias Gehrig <tobias@gehrignet.de>
-Build-Depends: debhelper (>= 5), autotools-dev, libninjam-common-dev (>= 0.02-7ubuntu2), libninjam-client-dev (>= 0.02-7ubuntu2), libgtkmm-2.4-dev, libgconfmm-2.6-dev
+Build-Depends: debhelper (>= 5), autotools-dev,
+  libninjam-common-dev (>= 0.02-7ubuntu2), libninjam-client-dev (>= 0.02-7ubuntu2), libgtkmm-2.4-dev, libgconfmm-2.6-dev,
+  libsigc++-2.0-dev, autoconf, automake
 Standards-Version: 3.7.2
 
 Package: gninjam

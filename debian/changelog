@@ -1,3 +1,70 @@
+gninjam (0.01a+svn121-1ubuntu0~quantal1) quantal; urgency=low
+
+  * Quantal build
+
+ -- falkTX <falktx@gmail.com>  Wed, 17 Oct 2012 17:22:42 +0100
+
+gninjam (0.01a+svn121-1ubuntu0~precise1) precise; urgency=low
+
+  * Precise build
+
+ -- falkTX <falktx@gmail.com>  Wed, 24 Aug 2011 16:48:11 +0100
+
+gninjam (0.01a+svn121-1ubuntu0~lucid1) lucid; urgency=low
+
+  * Upload to KXStudio Team PPA
+
+ -- falkTX <falktx@gmail.com>  Thu, 28 Apr 2011 15:38:37 +0100
+
+gninjam (0.01a+svn121-1~ppa4) lucid; urgency=low
+
+  * Moved to Lucid Main
+
+ -- falkTX <falktx@gmail.com>  Mon, 28 Jun 2010 16:25:59 +0100
+
+gninjam (0.01a+svn121-1~ppa3) lucid; urgency=low
+
+  * Miising build deps (autoconf & automake)
+
+ -- falkTX <falktx@gmail.com>  Wed, 16 Jun 2010 11:15:44 +0100
+
+gninjam (0.01a+svn121-1~ppa2) lucid; urgency=low
+
+  *  libsigc++-2.0-dev missing
+
+ -- falkTX <falktx@gmail.com>  Wed, 16 Jun 2010 11:04:31 +0100
+
+gninjam (0.01a+svn121-1~ppa1) lucid; urgency=low
+
+  * Fixed debian build rules
+  * Massive code hack! - Port code to sigc++2.0
+
+ -- falkTX <falktx@gmail.com>  Wed, 16 Jun 2010 10:58:51 +0100
+
+gninjam (0.01a+svn121-0~ppa4) lucid; urgency=low
+
+  * Fix
+
+ -- falkTX <falktx@gmail.com>  Wed, 02 Jun 2010 11:59:08 +0100
+
+gninjam (0.01a+svn121-0~ppa3) lucid; urgency=low
+
+  * Run autogen.sh before configure
+
+ -- falkTX <falktx@gmail.com>  Wed, 02 Jun 2010 10:25:28 +0100
+
+gninjam (0.01a+svn121-0~ppa2) lucid; urgency=low
+
+  * Don't run make if Makefile doesn't exist
+
+ -- falkTX <falktx@gmail.com>  Wed, 02 Jun 2010 10:01:18 +0100
+
+gninjam (0.01a+svn121-0~ppa1) lucid; urgency=low
+
+  * Upload to Lucid-Latest
+
+ -- falkTX <falktx@gmail.com>  Thu, 20 May 2010 16:33:13 +0100
+
 gninjam (0.01a-13ubuntu1) jaunty; urgency=low
 
   * fix compilation on intrepid

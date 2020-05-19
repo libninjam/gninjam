@@ -24,9 +24,11 @@ else
 	CFLAGS += -O2
 endif
 
-config.status: configure
+config.status:
 	dh_testdir
 	# Add here commands to configure the package.
+	chmod +x autogen.sh
+	./autogen.sh
 	./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs"
 
 
@@ -47,7 +49,7 @@ clean:
 	rm -f build-stamp 
 
 	# Add here commands to clean up after the build process.
-	-$(MAKE) distclean
+	if [ -f Makefile ]; then make distclean; fi
 ifneq "$(wildcard /usr/share/misc/config.sub)" ""
 	cp -f /usr/share/misc/config.sub config.sub
 endif
@@ -55,8 +57,7 @@ ifneq "$(wildcard /usr/share/misc/config.guess)" ""
 	cp -f /usr/share/misc/config.guess config.guess
 endif
 
-
-	dh_clean 
+	dh_clean || true
 
 install: build
 	dh_testdir
