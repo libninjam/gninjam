@@ -49,5 +49,4 @@ noinst_HEADERS = \
 
 AM_CXXFLAGS = @CXXFLAGS@ @GTKMM_CFLAGS@ @GCONF_CFLAGS@ @NINJAM_CFLAGS@ -malign-double
 
-gninjam_LDFLAGS = -s
 gninjam_LDADD = @LIBS@ @GTKMM_LIBS@ @GCONF_LIBS@ @NINJAM_LIBS@ -lpthread
