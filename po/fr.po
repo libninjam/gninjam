@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: gNinjam 0.1.2\n"
 "Report-Msgid-Bugs-To: https://github.com/libninjam/gninjam/\n"
 "POT-Creation-Date: 2008-02-19 01:58+0100\n"
-"PO-Revision-Date: 2020-09-01 20:57+0200\n"
+"PO-Revision-Date: 2020-09-02 13:49+0200\n"
 "Last-Translator: Olivier Humbert (trebmuh/olinuxx) <trebmuh@tuxfamily.org>\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -23,41 +23,41 @@ msgstr ""
 
 #: src/gninjam.cc:76
 msgid " sets topic to: "
-msgstr ""
+msgstr " a modifié le sujet pour : "
 
 #: src/gninjam.cc:78
 msgid "Topic is: "
-msgstr ""
+msgstr "Le sujet est : "
 
 #: src/gninjam.cc:104
 msgid " has "
-msgstr ""
+msgstr " a "
 
 #: src/gninjam.cc:105
 msgid "left"
-msgstr ""
+msgstr "gauche"
 
 #: src/gninjam.cc:105
 msgid "joined"
-msgstr ""
+msgstr "rejoint"
 
 #: src/gninjam.cc:106
 msgid " the server"
-msgstr ""
+msgstr " le serveur"
 
 #: src/gninjam.cc:203
 #, c-format
 msgid "Error opening audio!\n"
-msgstr ""
+msgstr "Erreur d'ouverture audio !\n"
 
 #: src/gninjam.cc:251 src/gNinjamClient.cc:244
 msgid "new channel"
-msgstr ""
+msgstr "nouveau canal"
 
 #: src/gninjam.cc:280 src/window_preferences.cc:268
 #, c-format
 msgid "Error creating session directory\n"
-msgstr ""
+msgstr "Erreur de création de répertoire de session !\n"
 
 #: src/common.cc:54
 msgid "center"
@@ -95,11 +95,11 @@ msgstr "<b>Tchate</b>"
 
 #: src/gNinjamClient_glade.cc:193
 msgid "_Local channels"
-msgstr ""
+msgstr "Canaux _locaux"
 
 #: src/gNinjamClient_glade.cc:196
 msgid "_Remote channels"
-msgstr ""
+msgstr "Canaux _distants"
 
 #: src/gNinjamClient_glade.cc:199
 msgid "_Chat"
@@ -143,23 +143,23 @@ msgstr "Connecté à "
 
 #: src/gNinjamClient.cc:165
 msgid " as "
-msgstr ""
+msgstr " en tant que "
 
 #: src/gNinjamClient.cc:169
 msgid "ERROR: invalid login/password"
-msgstr ""
+msgstr "ERREUR : indentifiant/mot-de-passe invalide"
 
 #: src/gNinjamClient.cc:172
 msgid "ERROR: failed connecting to host"
-msgstr ""
+msgstr "ERREUR : échec de la connexion à l'hôte"
 
 #: src/gNinjamClient.cc:175
 msgid "Not connected"
-msgstr ""
+msgstr "Non connecté"
 
 #: src/gNinjamClient.cc:178
 msgid "ERROR: disconnected from host"
-msgstr ""
+msgstr "ERREUR : déconnecté de l'hôte"
 
 #: src/gNinjamClient.cc:184
 msgid "CODE = "
@@ -167,7 +167,7 @@ msgstr ""
 
 #: src/gNinjamClient.cc:189
 msgid ". Server gave explanation: "
-msgstr ""
+msgstr ". Le serveur a donné l'explication : "
 
 #: src/gNinjamClient.cc:225
 msgid " BPM "
@@ -175,11 +175,11 @@ msgstr ""
 
 #: src/gNinjamClient.cc:373
 msgid "*** error: /msg requires a username and a message."
-msgstr ""
+msgstr "*** erreur : /msg nécessite un nom d'utilisateur et un message."
 
 #: src/gNinjamClient.cc:376
 msgid "*** error: unknown command."
-msgstr ""
+msgstr "*** erreur : commande inconnue."
 
 #: src/gNinjamClient.cc:398
 msgid "<b>Chat</b>: "
@@ -192,7 +192,7 @@ msgstr "Nouveau canal"
 
 #: src/dialog_license_glade.cc:63
 msgid "You must agree to this license to connect to this server."
-msgstr ""
+msgstr "Vous devez accepter cette licence pour vous connecter à ce serveur."
 
 #: src/dialog_license_glade.cc:105
 msgid "License"
@@ -204,19 +204,19 @@ msgstr "Pilote audio : "
 
 #: src/window_preferences_glade.cc:65
 msgid "Session directory:"
-msgstr ""
+msgstr "Répertoire de session : "
 
 #: src/window_preferences_glade.cc:66
 msgid "Save local audio:"
-msgstr ""
+msgstr "Sauvegarder l'audio locale : "
 
 #: src/window_preferences_glade.cc:72
 msgid "Ogg bitrate:"
-msgstr ""
+msgstr "Débit binaire Ogg : "
 
 #: src/window_preferences_glade.cc:73
 msgid "Save log files"
-msgstr ""
+msgstr "Sauvegarder les fichiers de logs"
 
 #: src/window_preferences_glade.cc:76
 msgid "General"
@@ -228,27 +228,27 @@ msgstr "Nom du client"
 
 #: src/window_preferences_glade.cc:78
 msgid "Number of input channels:"
-msgstr ""
+msgstr "Nombre de canaux d'entrée : "
 
 #: src/window_preferences_glade.cc:86
 msgid "Number of output channels:"
-msgstr ""
+msgstr "Nombre de canaux de sortie : "
 
 #: src/window_preferences_glade.cc:88
 msgid "Jack settings"
-msgstr ""
+msgstr "Paramètres Jack"
 
 #: src/window_preferences_glade.cc:89
 msgid "Config string:"
-msgstr ""
+msgstr "Chaîne de configuration : "
 
 #: src/window_preferences_glade.cc:93
 msgid "Alsa settings"
-msgstr ""
+msgstr "Paramètres Alsa"
 
 #: src/window_preferences_glade.cc:94 src/dialog_connect_glade.cc:60
 msgid "Hostname:"
-msgstr ""
+msgstr "Nom d'hôte : "
 
 #: src/window_preferences_glade.cc:95 src/dialog_connect_glade.cc:61
 msgid "Username:"
@@ -256,11 +256,11 @@ msgstr "Nom d'utilisateur : "
 
 #: src/window_preferences_glade.cc:99 src/dialog_connect_glade.cc:64
 msgid "Password:"
-msgstr "Mote de passe : "
+msgstr "Mot de passe : "
 
 #: src/window_preferences_glade.cc:100 src/dialog_connect_glade.cc:66
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "Se connecter _anonymement"
 
 #: src/window_preferences_glade.cc:103
 msgid "Default Connection"
@@ -268,7 +268,7 @@ msgstr "Connection par défaut"
 
 #: src/window_preferences_glade.cc:113
 msgid "Autosubscription"
-msgstr ""
+msgstr "Autosouscription"
 
 #: src/window_preferences_glade.cc:418
 msgid "Preferences"
@@ -296,39 +296,39 @@ msgstr "Fichiers Ogg+Wave"
 
 #: src/window_preferences.cc:81
 msgid "Delete Ogg Files as soon as possible"
-msgstr ""
+msgstr "Effacer les fichiers Ogg dès que possible"
 
 #: src/window_preferences.cc:87
 msgid "Disable autosubscription"
-msgstr ""
+msgstr "Désactiver l'autosouscription"
 
 #: src/window_preferences.cc:89
 msgid "Enable autosubscription for all users"
-msgstr ""
+msgstr "Activer l'autosouscription pour tous les utilisateurs"
 
 #: src/window_preferences.cc:91
 msgid "Enable autosubscription for all specified users"
-msgstr ""
+msgstr "Activer l'autosouscription pour tous les utilisateurs spécifiés"
 
 #: src/window_preferences.cc:93
 msgid "Disable autosubscription for all specified users"
-msgstr ""
+msgstr "Désactiver l'autosouscription pour tous les utilisateurs spécifiés"
 
 #: src/window_preferences.cc:115
 msgid "Add user"
-msgstr ""
+msgstr "Ajouter un utilisateur"
 
 #: src/window_preferences.cc:121
 msgid "Specify user to be added to the list."
-msgstr ""
+msgstr "Spécifier un utilisateur à être ajouté à la liste."
 
 #: src/window_preferences.cc:151
 msgid "User already in list."
-msgstr ""
+msgstr "Utilisateur déjà dans la liste."
 
 #: src/window_preferences.cc:155
 msgid "The user name you specified is already existing in the list."
-msgstr ""
+msgstr "Le nom d'utilisateur que vous avez indiqué existe déjà dans la liste."
 
 #: src/dialog_connect_glade.cc:147
 msgid "Connect"
@@ -348,12 +348,12 @@ msgstr "Enlever"
 
 #: src/vbox_local_channel_glade.cc:111
 msgid "Bitrate"
-msgstr ""
+msgstr "Débit binaire"
 
 #: src/vbox_remote_channel_glade.cc:56
 msgid "Receive"
-msgstr "Reevoir"
+msgstr "Recevoir"
 
 #: src/RemoteUserFrame_glade.cc:55
 msgid "User master:"
-msgstr ""
+msgstr "Master utilisateur : "
