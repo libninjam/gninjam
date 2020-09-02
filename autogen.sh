@@ -40,7 +40,7 @@ echo `automake$AM_POSTFIX --version | head -1` found
 
 # autoreconf$AC_POSTFIX -fim _might_ do the trick, too.
 #  chose to your taste
-aclocal$AM_POSTFIX -I m4
+aclocal$AM_POSTFIX --install -I m4
 libtoolize --force --copy
 glib-gettextize --force --copy
 if   test ! -e po/Makevars
