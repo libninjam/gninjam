@@ -40,6 +40,8 @@ GETTEXT_PACKAGE=gninjam
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",
 		[the gettext domain])
+dnl Add the languages which your application supports here.
+ALL_LINGUAS="de fr"
 AM_GLIB_GNU_GETTEXT
 
 dnl Set PACKAGE_LOCALE_DIR in config.h.

@@ -19,6 +19,7 @@ stamp-h1
 
 m4/
 
+po/*.gmo
 po/Makefile.in.in
 po/POTFILES
 
