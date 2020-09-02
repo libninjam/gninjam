@@ -131,7 +131,7 @@ msgstr "Client Gtk pour NINJAM"
 
 #: src/gNinjamClient.cc:129
 msgid "translator-credits"
-msgstr "crédit-traducteurs"
+msgstr "Olivier Humbert <trebmuh@tuxfamily.org>, 2020"
 
 #: src/gNinjamClient.cc:160
 msgid "Status: "
